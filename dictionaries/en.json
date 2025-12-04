@@ -1,0 +1,250 @@
+{
+  "metadata": {
+    "title": "Mongolia Economic Forum - MEF 2025",
+    "description": "The Mongolia Economic Forum is the country's premier discussion platform aimed at addressing economic and social development challenges and finding solutions."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "history": "History",
+    "board": "Board",
+    "whyParticipate": "Why Participate",
+    "gallery": "Gallery",
+    "partners": "Partners",
+    "faq": "FAQ",
+    "mongolia": "Mongolia",
+    "contact": "Contact",
+    "register": "Register"
+  },
+  "hero": {
+    "date": "July 8-9, 2026",
+    "title": "Mongolia Economic Forum",
+    "titleMn": "Монголын Эдийн Засгийн Форум",
+    "theme": "Together for Tomorrow",
+    "themeMn": "Маргаашийн төлөө хамтдаа",
+    "location": "Ulaanbaatar, Mongolia",
+    "participants": "2000+ Participants",
+    "countdown": "Time Until MEF 2026",
+    "registerNow": "Register Now",
+    "learnMore": "Learn More",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "about": {
+    "label": "About Us",
+    "title": "Mongolia's Premier Economic Platform",
+    "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create an independent platform for open, evidence-based dialogue on Mongolia's long-term development.",
+    "features": {
+      "missionDriven": {
+        "title": "Mission-Driven",
+        "description": "Creating an independent platform for open, evidence-based dialogue on Mongolia's long-term development."
+      },
+      "multiStakeholder": {
+        "title": "Multi-Stakeholder",
+        "description": "Convening leaders from government, business, academia, and civil society to discuss key priorities."
+      },
+      "international": {
+        "title": "International Reach",
+        "description": "Connecting Mongolian stakeholders with global institutions, investors, and development partners."
+      },
+      "actionOriented": {
+        "title": "Action-Oriented",
+        "description": "Aligning on practical solutions and policy recommendations that drive real change."
+      }
+    },
+    "vision": {
+      "title": "Our Vision",
+      "paragraph1": "Since its founding, the Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions.",
+      "paragraph2": "Held annually since 2010, MEF facilitates high-level, open discussions involving the Government of Mongolia, the private sector, civil society, academic institutions, and international representatives."
+    },
+    "missionMn": {
+      "title": "Зорилго",
+      "description": "Монголын Эдийн Засгийн Форум (МЭЗФ) нь 2010 онд байгуулагдсан ба төрийн бус, ашгийн төлөө бус, улс төрөөс хараат бус байгууллага бөгөөд Монгол Улсын урт хугацааны хөгжлийн бодлого, эдийн засаг, нийгмийн тулгамдсан асуудлаар нээлттэй, хэлэлцүүлэг өрнүүлэх бие даасан талбар байх зорилготой."
+    }
+  },
+  "stats": {
+    "government": "Government Officials",
+    "privateSector": "Private Sector Representatives",
+    "youth": "Youth",
+    "international": "International Organizations"
+  },
+  "timeline": {
+    "label": "History",
+    "title": "15 Years of Impact",
+    "description": "From our founding in 2010 to today, MEF has consistently brought together leaders to address Mongolia's most pressing economic challenges.",
+    "years": {
+      "2010": { "theme": "Together We Can" },
+      "2011": { "theme": "Together in Development" },
+      "2012": { "theme": "Economic Development" },
+      "2013": { "theme": "The Mongolian Brand" },
+      "2014": { "theme": "Made in Mongolia" },
+      "2015": { "theme": "Trust" },
+      "2016": { "theme": "Lessons, Challenges, Solutions" },
+      "2018": { "theme": "Let's Synergize" },
+      "2022": { "theme": "New Recovery" },
+      "2023": { "theme": "Welcome to Mongolia" },
+      "2024": { "theme": "Go Mongolia" },
+      "2025": { "theme": "Together for Tomorrow" }
+    }
+  },
+  "board": {
+    "label": "Board of Directors",
+    "title": "Leadership",
+    "description": "Meet the distinguished leaders guiding the Mongolia Economic Forum.",
+    "members": {
+      "ganhuyag": {
+        "name": "Ganhuyag Chuluun Hutagt",
+        "role": "Chairman of MEF",
+        "position": "Chairman of the Board, Ard Financial Group"
+      },
+      "battushig": {
+        "name": "Battushig Batbold",
+        "role": "Board Member",
+        "position": "President, Mongolian National Olympic Committee"
+      },
+      "byambasaikhan": {
+        "name": "Byambasaikhan Bayanjargal",
+        "role": "Board Member",
+        "position": "Vice Chair, Mongolia Business Chamber"
+      },
+      "ganzorig": {
+        "name": "Ganzorig Vanchig",
+        "role": "Board Member",
+        "position": "Founder, Bat Solution Partners"
+      }
+    }
+  },
+  "whyParticipate": {
+    "label": "Why Participate",
+    "title": "Why Join MEF?",
+    "description": "Discover the unique opportunities the Mongolia Economic Forum offers to participants.",
+    "reasons": {
+      "1": {
+        "title": "Engage with Decision-Makers",
+        "description": "The MEF provides a unique platform where business leaders, academics, civil society, and citizens can interact directly with the Prime Minister, government leaders, Parliament representatives, and policy makers."
+      },
+      "2": {
+        "title": "Solution-Driven Dialogues",
+        "description": "The Forum's agenda focuses on strategic priorities such as economic policy, investment climate, financial markets, green transition, digitalization, and infrastructure—creating a space for honest and outcome-oriented dialogue."
+      },
+      "3": {
+        "title": "International Connections",
+        "description": "With regular participation from the Asian Development Bank, World Economic Forum, global companies, and foreign investors, MEF offers exceptional opportunities to build regional and international partnerships."
+      },
+      "4": {
+        "title": "Latest Insights & Trends",
+        "description": "Plenary and side sessions deliver updated data, analysis, and perspectives on Mongolia's development policy, sustainable growth, green energy, mining, agriculture, innovation, and more."
+      },
+      "5": {
+        "title": "Policy Impact",
+        "description": "MEF does more than discuss—its outcomes are consolidated into practical recommendations and shared with government and stakeholders, ensuring participants influence real policy processes."
+      },
+      "6": {
+        "title": "Expand Your Network",
+        "description": "With over 2,000 participants, the Forum brings together leaders from diverse sectors, offering high-value networking and collaboration opportunities."
+      },
+      "7": {
+        "title": "Shape Mongolia's Future",
+        "description": "Your participation contributes directly to national dialogue on Mongolia's long-term development—with every voice playing a role in shaping a shared future."
+      }
+    }
+  },
+  "gallery": {
+    "label": "Gallery",
+    "title": "Moments from MEF",
+    "description": "Explore highlights from past Mongolia Economic Forum events.",
+    "viewPhotos": "View Photos",
+    "viewVideos": "View Videos"
+  },
+  "partners": {
+    "label": "Partners",
+    "title": "Our Partners & Sponsors",
+    "description": "We are grateful to our partners and sponsors who make the Mongolia Economic Forum possible.",
+    "current": "MEF 2025 Partners",
+    "previous": "Previous Years Partners"
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to common questions about the Mongolia Economic Forum.",
+    "questions": {
+      "what": {
+        "question": "What is MEF?",
+        "answer": "MEF is a national policy platform where government, private sector, academia, civil society, and international organizations openly discuss Mongolia's economy and development policy."
+      },
+      "who": {
+        "question": "Who can participate?",
+        "answer": "Government agencies, private sector leaders, entrepreneurs, researchers, university faculty and students, international organizations, investors—anyone who wants to share their views on Mongolia's development issues."
+      },
+      "fee": {
+        "question": "What is the registration fee?",
+        "answer": "Domestic participant fee is ₮1,000,000, foreign participant fee is $500. Payment details may be updated depending on the year's organization decisions."
+      },
+      "language": {
+        "question": "What languages are used at the Forum?",
+        "answer": "The main sessions are held in both Mongolian and English with simultaneous interpretation."
+      },
+      "where": {
+        "question": "Where is the Forum held?",
+        "answer": "The Forum is held at multiple locations in Ulaanbaatar, including the State Palace, Chinggis Khaan Museum, Shangri-La Hotel, and Galleria Ulaanbaatar."
+      },
+      "government": {
+        "question": "Is MEF a government event?",
+        "answer": "No. MEF is a politically independent, non-profit, non-governmental organization. The participation of the Prime Minister and policy makers has become a tradition to strengthen public-private cooperation."
+      },
+      "sponsor": {
+        "question": "How can I become a sponsor?",
+        "answer": "Sponsors and strategic partners can contact the MEF team directly to discuss partnership packages and opportunities."
+      },
+      "foreigners": {
+        "question": "How can foreign participants join?",
+        "answer": "Foreign delegates are welcome through invitations, diplomatic channels, organizational representation, and international partnerships."
+      },
+      "contribute": {
+        "question": "Can I contribute at the Forum?",
+        "answer": "Yes. Participants' opinions, statements, and positions are used through breakout sessions and Q&A segments to develop policy recommendations."
+      },
+      "nextYear": {
+        "question": "How can I get information about next year's forum?",
+        "answer": "Information is regularly updated through MEF's official website, social media pages, and news channels."
+      },
+      "results": {
+        "question": "Where are the Forum results published?",
+        "answer": "Summaries of plenary and breakout sessions, recommendations, policy proposals, photos, and videos are published on official channels after the forum."
+      }
+    }
+  },
+  "mongolia": {
+    "label": "Discover Mongolia",
+    "title": "About Mongolia",
+    "description": "Learn about the land of the eternal blue sky.",
+    "gdp": "GDP per capita (2024)",
+    "gdpGrowth": "GDP Growth Rate",
+    "population": "Population (2024)",
+    "workforce": "Workforce Participation",
+    "tourism": "Annual Tourist Arrivals",
+    "topPartners": "Top Trading Partners",
+    "exports": "Top Exports",
+    "imports": "Top Imports"
+  },
+  "contact": {
+    "label": "Contact Us",
+    "title": "Get in Touch",
+    "description": "Have questions? We'd love to hear from you.",
+    "email": "Email",
+    "registration": "Registration",
+    "followUs": "Follow Us",
+    "registrationClosed": "Registration is now closed"
+  },
+  "footer": {
+    "description": "The premier platform for dialogue on Mongolia's economic development, bringing together leaders from government, business, and civil society since 2010.",
+    "quickLinks": "Quick Links",
+    "aboutUs": "About Us",
+    "history": "History",
+    "whyParticipate": "Why Participate",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  }
+}
