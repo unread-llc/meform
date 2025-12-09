@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Mongolia Economic Forum - MEF 2025",
-    "description": "The Mongolia Economic Forum is the country's premier discussion platform aimed at addressing economic and social development challenges and finding solutions."
+    "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create a premier discussion platform for open, evidence-based dialogue on Mongolia's long-term development."
   },
   "nav": {
     "home": "Home",
@@ -57,7 +57,7 @@
     "vision": {
       "title": "Our Vision",
       "paragraph1": "Since its founding, the Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions.",
-      "paragraph2": "Held annually since 2010, MEF facilitates high-level, open discussions involving the Government of Mongolia, the private sector, civil society, academic institutions, and international representatives."
+      "paragraph2": "We bring together representatives from government, the private sector, research institutions, civil society, and international organizations to support policy-oriented dialogue and collaborative action."
     },
     "missionMn": {
       "title": "Зорилго",
@@ -65,10 +65,10 @@
     }
   },
   "stats": {
-    "government": "Government Officials",
-    "privateSector": "Private Sector Representatives",
+    "government": "Representatives of Government officials",
+    "privateSector": "Representatives of private sector",
     "youth": "Youth",
-    "international": "International Organizations"
+    "international": "Representatives of International organizations"
   },
   "timeline": {
     "label": "History",
@@ -178,17 +178,33 @@
         "question": "Who can participate?",
         "answer": "Government agencies, private sector leaders, entrepreneurs, researchers, university faculty and students, international organizations, investors—anyone who wants to share their views on Mongolia's development issues."
       },
+      "importance": {
+        "question": "What is the significance of participating?",
+        "answer": "Engage directly with decision-makers; participate in solution-driven dialogues; connect with international institutions and investors; access the latest insights and trends; contribute to actionable policy recommendations; expand your professional network; and help shape Mongolia's future."
+      },
+      "topics": {
+        "question": "What are the main topics discussed at the Forum?",
+        "answer": "Each year's forum focuses on different topics based on current policy priorities. Examples include: economic policy and development planning, green development and energy transition, digital transition and smart cities, investment climate, mining and agricultural diversification, financial markets and credit ratings, etc."
+      },
+      "where": {
+        "question": "Where is the Forum held?",
+        "answer": "The Forum is held at multiple locations in Ulaanbaatar depending on the annual program, topics discussed, and participant profiles. Main and side sessions have traditionally been held at the State Palace, city center conference halls, Chinggis Khaan Museum, Shangri-La Hotel Ulaanbaatar, and Galleria Ulaanbaatar."
+      },
+      "register": {
+        "question": "How to register?",
+        "answer": "Official registration takes place through the MEF website and open announcements. As seating is limited, advance registration is required."
+      },
       "fee": {
         "question": "What is the registration fee?",
         "answer": "Domestic participant fee is ₮1,000,000, foreign participant fee is $500. Payment details may be updated depending on the year's organization decisions."
       },
+      "foreigners": {
+        "question": "How can foreign participants join?",
+        "answer": "Foreign delegates are welcome through invitations, diplomatic channels, organizational representation, and international partnerships."
+      },
       "language": {
         "question": "What languages are used at the Forum?",
         "answer": "The main sessions are held in both Mongolian and English with simultaneous interpretation."
-      },
-      "where": {
-        "question": "Where is the Forum held?",
-        "answer": "The Forum is held at multiple locations in Ulaanbaatar, including the State Palace, Chinggis Khaan Museum, Shangri-La Hotel, and Galleria Ulaanbaatar."
       },
       "government": {
         "question": "Is MEF a government event?",
@@ -197,10 +213,6 @@
       "sponsor": {
         "question": "How can I become a sponsor?",
         "answer": "Sponsors and strategic partners can contact the MEF team directly to discuss partnership packages and opportunities."
-      },
-      "foreigners": {
-        "question": "How can foreign participants join?",
-        "answer": "Foreign delegates are welcome through invitations, diplomatic channels, organizational representation, and international partnerships."
       },
       "contribute": {
         "question": "Can I contribute at the Forum?",
