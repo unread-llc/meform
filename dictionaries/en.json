@@ -97,22 +97,26 @@
       "ganhuyag": {
         "name": "Ganhuyag Chuluun Hutagt",
         "role": "Chairman of MEF",
-        "position": "Chairman of the Board, Ard Financial Group"
+        "position": "Chairman of the Board, Ard Financial Group",
+        "photo": "https://placehold.co/400x400?text=Ganhuyag"
       },
       "battushig": {
         "name": "Battushig Batbold",
         "role": "Board Member",
-        "position": "President, Mongolian National Olympic Committee"
+        "position": "President, Mongolian National Olympic Committee",
+        "photo": "https://placehold.co/400x400?text=Battushig"
       },
       "byambasaikhan": {
         "name": "Byambasaikhan Bayanjargal",
         "role": "Board Member",
-        "position": "Vice Chair, Mongolia Business Chamber"
+        "position": "Vice Chair, Mongolia Business Chamber",
+        "photo": "https://placehold.co/400x400?text=Byambasaikhan"
       },
       "ganzorig": {
         "name": "Ganzorig Vanchig",
         "role": "Board Member",
-        "position": "Founder, Bat Solution Partners"
+        "position": "Founder, Bat Solution Partners",
+        "photo": "https://placehold.co/400x400?text=Ganzorig"
       }
     }
   },

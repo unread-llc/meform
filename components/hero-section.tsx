@@ -62,13 +62,15 @@ interface HeroSectionProps {
   locale: Locale
 }
 
+const heroBackground = "/1,2 .jpg"
+
 export function HeroSection({ dict, locale }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/ulaanbaatar-mongolia-cityscape-panorama-with-moder.jpg')`,
+          backgroundImage: `url('${heroBackground}')`,
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d6efd]/90 via-[#0d6efd]/80 to-[#0a58ca]/90" />

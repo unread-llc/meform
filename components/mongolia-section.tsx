@@ -1,4 +1,4 @@
-import { ExternalLink, Play } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 interface MongoliaSectionProps {
@@ -12,6 +12,19 @@ const exports = [
   { name: "Gold", percentage: 5.7 },
   { name: "Iron ore & concentrate", percentage: 3.8 },
   { name: "Other", percentage: 15.4 },
+]
+
+const videoEmbedUrl = "https://www.youtube.com/embed/videoseries?list=PLF1ZFusRHmEnWxd_bOtxDirgTuGQXXJFL" // Replace with final playlist/video URL
+const videoPoster = "/3,4.jpg"
+
+const videoPlaylist = [
+  { title: "MEF 2025 \"Стратегийн нөөц ба нийлүүлэлтийн гинжин хэлхээ\"", duration: "2:53:55", url: "https://youtu.be/jUUeA4WLfn8" },
+  { title: "MEF 2025 \"ДИЖИТАЛ ЭРИН: Хиймэл оюун ба дэд бүтэц\"", duration: "1:33:18", url: "https://youtu.be/D4JdyhvW2-o" },
+  { title: "MEF 2025 \"Тогтвортой хөгжил ба шинэ эдийн засаг (COP17)\"", duration: "36:56", url: "https://youtu.be/-Ik8zL1suYg" },
+  { title: "MEF 2025 \"Урт хугацааны баялгийн удирдлага\"", duration: "1:33:48", url: "https://youtu.be/LmZ0bQu3X0s" },
+  { title: "MEF 2025 \"Бизнест ээлтэй Монгол\"", duration: "1:22:47", url: "https://youtu.be/3ReCADY6Bbk" },
+  { title: "MEF 2025 \"Хот төлөвлөлт, хотын эдийн засаг\"", duration: "1:24:21", url: "https://youtu.be/9oO8fZYfOJk" },
+  { title: "MEF 2025 \"Хөрөнгө оруулагчдын итгэлийг даах нь\"", duration: "49:09", url: "https://youtu.be/tmDMLRM-vSA" },
 ]
 
 export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
@@ -37,18 +50,35 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
-            <div className="relative rounded-2xl overflow-hidden aspect-video mb-8">
-              <img src="/mongolia-landscape-with-traditional-ger-and-mounta.jpg" alt="Mongolia landscape" className="w-full h-full object-cover" />
-              <Link
-                href="https://www.youtube.com/watch?v=27J9Np5103E"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
-              >
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play className="w-6 h-6 text-primary ml-1" />
-                </div>
-              </Link>
+            <div className="relative rounded-2xl overflow-hidden aspect-video mb-6 bg-black">
+              <div className="absolute inset-0">
+                <img src={videoPoster} alt="Mongolia landscape" className="w-full h-full object-cover opacity-30" />
+              </div>
+              <iframe
+                title="Mongolia Economic Forum video"
+                src={videoEmbedUrl}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="relative z-10 w-full h-full"
+              />
+            </div>
+
+            <div className="space-y-3">
+              {videoPlaylist.map((video) => (
+                <Link
+                  key={video.url}
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-4 bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex-1">
+                    <p className="font-semibold text-foreground">{video.title}</p>
+                    <p className="text-sm text-muted-foreground">{video.duration}</p>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                </Link>
+              ))}
             </div>
 
             <div className="grid grid-cols-2 gap-4">

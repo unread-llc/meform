@@ -31,18 +31,27 @@ export function BoardSection({ dict }: BoardSectionProps) {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {memberKeys.map((key) => {
             const member = dict.board.members[key]
+            const photo = member?.photo
             return (
               <div
                 key={key}
                 className="bg-secondary/30 rounded-2xl p-6 text-center hover:bg-secondary/50 transition-colors group"
               >
-                <div className="w-24 h-24 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-3xl font-bold text-primary">
-                    {member.name
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")}
-                  </span>
+                <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border border-primary/10">
+                  {photo ? (
+                    <img
+                      src={photo}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-4xl font-bold text-primary">
+                      {member.name
+                        .split(" ")
+                        .map((n: string) => n[0])
+                        .join("")}
+                    </span>
+                  )}
                 </div>
                 <h3 className="font-semibold text-foreground text-lg">{member.name}</h3>
                 <p className="text-primary text-sm font-medium mb-1">{member.role}</p>
@@ -51,10 +60,10 @@ export function BoardSection({ dict }: BoardSectionProps) {
                   href={linkedinUrls[key]}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                  className="inline-flex items-center justify-center text-primary hover:text-primary/80 transition-colors"
+                  aria-label={`Open ${member.name}'s LinkedIn profile`}
                 >
-                  <Linkedin className="w-5 h-5" />
-                  <span className="text-sm">LinkedIn</span>
+                  <Linkedin className="w-6 h-6" />
                 </Link>
               </div>
             )
