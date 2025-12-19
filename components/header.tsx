@@ -17,6 +17,7 @@ export function Header({ locale, dict }: HeaderProps) {
 
   const navItems = [
     { label: dict.nav.about, href: `/${locale}/about` },
+    { label: dict.nav.agenda, href: `/${locale}/agenda` },
     { label: dict.nav.history, href: `/${locale}/history` },
     { label: dict.nav.whyParticipate, href: `/${locale}#why-participate` },
     { label: dict.nav.gallery, href: `/${locale}/gallery` },

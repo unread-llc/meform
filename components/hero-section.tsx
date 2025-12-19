@@ -114,7 +114,7 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
             className="border-white text-white hover:bg-white/10 bg-transparent font-semibold px-8"
             asChild
           >
-            <Link href={`/${locale}/about`}>{dict.hero.learnMore}</Link>
+            {/* <Link href={`/${locale}/about`}>{dict.hero.learnMore}</Link> */}
           </Button>
         </div>
       </div>

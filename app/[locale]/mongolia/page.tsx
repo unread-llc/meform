@@ -15,9 +15,7 @@ export default async function MongoliaPage({
     return (
         <main className="min-h-screen">
             <Header locale={locale} dict={dict} />
-            <div className="pt-16">
-                <MongoliaSection dict={dict} expanded />
-            </div>
+            <MongoliaSection dict={dict} expanded />
             <Footer dict={dict} locale={locale} />
         </main>
     )

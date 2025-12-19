@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "agenda": "Agenda",
     "history": "History",
     "board": "Board",
     "whyParticipate": "Why Participate",
@@ -17,7 +18,7 @@
     "register": "Register"
   },
   "hero": {
-    "date": "July 8-9, 2026",
+    "date": "July 8, 2026",
     "title": "Mongolia Economic Forum",
     "titleMn": "Монголын Эдийн Засгийн Форум",
     "theme": "Together for Tomorrow",
@@ -35,7 +36,7 @@
   "about": {
     "label": "About Us",
     "title": "Mongolia's Premier Economic Platform",
-    "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create an independent platform for open, evidence-based dialogue on Mongolia's long-term development.",
+    "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create a premier discussion platform for open, evidence-based dialogue on Mongolia’s long-term development. Since its founding, the Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions.",
     "features": {
       "missionDriven": {
         "title": "Mission-Driven",
@@ -56,12 +57,12 @@
     },
     "vision": {
       "title": "Our Vision",
-      "paragraph1": "Since its founding, the Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions.",
-      "paragraph2": "We bring together representatives from government, the private sector, research institutions, civil society, and international organizations to support policy-oriented dialogue and collaborative action."
+      "paragraph1": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create a premier discussion platform for open, evidence-based dialogue on Mongolia’s long-term development.",
+      "paragraph2": "Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions."
     },
     "missionMn": {
       "title": "Зорилго",
-      "description": "Монголын Эдийн Засгийн Форум (МЭЗФ) нь 2010 онд байгуулагдсан ба төрийн бус, ашгийн төлөө бус, улс төрөөс хараат бус байгууллага бөгөөд Монгол Улсын урт хугацааны хөгжлийн бодлого, эдийн засаг, нийгмийн тулгамдсан асуудлаар нээлттэй, хэлэлцүүлэг өрнүүлэх бие даасан талбар байх зорилготой."
+      "description": "Монголын Эдийн Засгийн Форум (МЭЗФ) нь 2010 онд байгуулагдсан ба  төрийн бус, ашгийн төлөө бус, улс төрөөс хараат бус байгууллага бөгөөд Монгол Улсын урт хугацааны хөгжлийн бодлого, эдийн засаг, нийгмийн тулгамдсан асуудлаар нээлттэй, хэлэлцүүлэг өрнүүлэх бие даасан талбар байх зорилготой. Бид төр, хувийн хэвшил, эрдэм шинжилгээний байгууллага, иргэний нийгэм, олон улсын байгууллагын төлөөллийг нэгтгэн, бодлого, шийдэлд чиглэсэн харилцан ойлголцол, хамтын ажиллагааг дэмжиж ирсэн."
     }
   },
   "stats": {
@@ -75,18 +76,54 @@
     "title": "15 Years of Impact",
     "description": "From our founding in 2010 to today, MEF has consistently brought together leaders to address Mongolia's most pressing economic challenges.",
     "years": {
-      "2010": { "theme": "Together We Can" },
-      "2011": { "theme": "Together in Development" },
-      "2012": { "theme": "Economic Development" },
-      "2013": { "theme": "The Mongolian Brand" },
-      "2014": { "theme": "Made in Mongolia" },
-      "2015": { "theme": "Trust" },
-      "2016": { "theme": "Lessons, Challenges, Solutions" },
-      "2018": { "theme": "Let's Synergize" },
-      "2022": { "theme": "New Recovery" },
-      "2023": { "theme": "Welcome to Mongolia" },
-      "2024": { "theme": "Go Mongolia" },
-      "2025": { "theme": "Together for Tomorrow" }
+      "2010": {
+        "theme": "Together We Can",
+        "description": "The inaugural Mongolia Economic Forum was held on 8–9 February 2010 under the auspices of Prime Minister S. Batbold with the slogan \"Together we can.\" Discussions focused on budgetary reform, development of the mining sector, the environment and green economy, state registration reforms, capital market reforms, and competitiveness.\n\nDuring this first Forum, an independent, non-governmental organization was founded under the name Mongolia Economic Forum with the mandate to organize an annual national economic forum."
+      },
+      "2011": {
+        "theme": "Together in Development",
+        "description": "The 2011 Forum took place on 2–4 March 2011, again under the auspices of Prime Minister S. Batbold, with the slogan \"Together in Development.\" The program centered on four core themes: human development, development policy, governance, and infrastructure, across 15 sessions.\n\nA key highlight was a roundtable with delegates from the World Economic Forum in the Civil Chamber of the Presidential Office, focusing on responsible mining, transparency in extractive industries, and joint efforts against corruption. The Invest Mongolia forum was also held alongside MEF, broadening investor dialogue."
+      },
+      "2012": {
+        "theme": "Economic Development",
+        "description": "Held on 2–6 March 2012, the Forum focused on \"Economic Development: Inclusive Growth,\" \"Social Policy: Equitable Growth,\" and \"Competitiveness: Innovation and Green Growth.\" Eleven discussions explored how to ensure that economic growth translates into social progress and competitive advantage.\n\nIn preparation, a series of pre-forum debates were conducted with scientists, business leaders, and the wider public, and their feedback was reflected in the year's main themes."
+      },
+      "2013": {
+        "theme": "The Mongolian Brand",
+        "description": "The 2013 Forum convened on 4–5 March 2013 under the auspices of Prime Minister N. Altankhuyag, with the slogan \"Mongolian Brand.\" Discussions explored how Mongolia can diversify beyond mining, develop a national brand, and address the challenges of being landlocked.\n\nPlenary sessions covered national branding and development, development financing, the labor market and human resources, the legal environment, economic diversification, and the business environment, complemented by special sessions under the annual theme."
+      },
+      "2014": {
+        "theme": "Made in Mongolia",
+        "description": "On 24–25 March 2014, the Forum was held under the auspices of Prime Minister N. Altankhuyag with the slogan \"Made in Mongolia.\" With 34 breakout sessions, the agenda focused on \"Scenarios for Mongolia\" and \"Development Policy and Planning.\"\n\nDelegates from the World Economic Forum introduced scenario materials and a dedicated video, highlighting possible development pathways for Mongolia and encouraging long-term strategic thinking."
+      },
+      "2015": {
+        "theme": "Trust",
+        "description": "The 2015 Forum took place on 2–3 April 2015 with the support of Prime Minister Ch. Saikhanbileg under the slogan \"Trust.\" Over two days, 18 subject discussions were held on Mongolia's long-term vision and the macroeconomic situation.\n\nA central theme was how to improve Mongolia's credit rating and credibility in international financial markets, emphasizing fiscal discipline, policy stability, and investor confidence."
+      },
+      "2016": {
+        "theme": "Lessons, Challenges, Solutions",
+        "description": "Held on 30–31 March 2016 with the support of Prime Minister Ch. Saikhanbileg, the Forum adopted the slogan \"Lessons, Challenges, and Solutions.\" The first day focused on global and regional economic trends and Mongolia's economic trajectory, while the second day centered on the business environment.\n\nAn important segment addressed Mongolia's long-term development policy, bringing together representatives of the five parliamentary parties. The event also marked the 25th anniversary of Mongolia's membership in the Asian Development Bank, with participation from ADB's Southeast Asia Director."
+      },
+      "2018": {
+        "theme": "Let's Synergize",
+        "description": "The \"Mongolia Economic Forum 2018\" was held on 21–22 May 2018 under the theme \"Let's Synergize.\" The Forum opened with the plenary session \"Integrated Investment Policy and Implementation Programs of Mongolia,\" followed by discussions focused on attracting development financing and promoting investment into Mongolia.\n\nDuring the Forum, the Government introduced its \"Three Pillared Development Strategy\" to the public."
+      },
+      "2022": {
+        "theme": "New Recovery",
+        "description": "After a pause, the Forum returned on 7–8 April 2022 under the theme \"New Recovery.\" Supported by the Mongolia Economic Forum NGO, the event focused on Mongolia's New Revival Policy and how to address post-crisis economic and social challenges.\n\nTwelve side sessions examined revival in key sectors, seeking a shared understanding and practical policy directions. Participants included representatives from government, business, universities, research institutions, and international organizations."
+      },
+      "2023": {
+        "theme": "Welcome to Mongolia",
+        "description": "The 2023 Forum was held on 9–10 July 2023 with the theme \"Welcome to Mongolia.\" Around 1,500 participants gathered across five locations. Plenary sessions discussed the sustainable development policy of Mongolia, the economy and sustainability, \"New Future – New Opportunities,\" and infrastructure.\n\nPrime Minister Luvsannamsrain Oyun-Erdene inaugurated the Forum, while Chairman of the State Great Khural G. Zandanshatar delivered the main address. Senior executives from the Asian Development Bank and Rio Tinto Group joined as honored guests."
+      },
+      "2024": {
+        "theme": "Go Mongolia",
+        "description": "On 8–9 July 2024, the Forum convened under the theme \"Go Mongolia.\" The event brought together around 2,000 participants, featuring four plenary sessions and 12 side sessions over two days. Plenaries focused on \"What's next – Development policy,\" \"Green energy and energy transition,\" \"Smart city,\" and \"FDI in the banking sector.\"\n\nSide sessions explored tourism, mining, intensive agriculture, the energy transition, and other priority sectors. Prime Minister Luvsannamsrain Oyun-Erdene inaugurated the Forum, and Chairman of the State Great Khural Amarbayasgalan Dashzeveg delivered the main speech."
+      },
+      "2025": {
+        "theme": "Together for Tomorrow",
+        "description": "The 2025 Mongolia Economic Forum took place on 8–9 July 2025 under the theme \"Together for Tomorrow.\" The Forum continued MEF's mission of convening high-level dialogue on Mongolia's future development path, focusing on collaboration across government, business, and civil society to address emerging challenges and opportunities.\n\nThe event was inaugurated by Prime Minister Gombojavyn Zandanshatar."
+      }
     }
   },
   "board": {
@@ -243,7 +280,39 @@
     "tourism": "Annual Tourist Arrivals",
     "topPartners": "Top Trading Partners",
     "exports": "Top Exports",
-    "imports": "Top Imports"
+    "imports": "Top Imports",
+    "geographyLabel": "Geography & Culture",
+    "geographyTitle": "Land of the Eternal Blue Sky",
+    "geographyP1": "Mongolia is a landlocked country in East Asia, bordered by Russia to the north and China to the south. With an area of 1,564,116 square kilometers, it is the world's 18th-largest country and the most sparsely populated sovereign nation.",
+    "geographyP2": "Known for its vast steppes, the Gobi Desert, and nomadic culture, Mongolia offers a unique blend of ancient traditions and modern development. The country experiences over 260 sunny days per year, earning its nickname 'The Land of the Eternal Blue Sky.'",
+    "economyLabel": "Economy",
+    "economyTitle": "A Growing Economy",
+    "economyDescription": "Mongolia's economy is driven by mining, agriculture, and an emerging services sector, with strong growth potential.",
+    "videosTitle": "Watch MEF Sessions",
+    "ctaTitle": "Discover Mongolia",
+    "ctaDescription": "Experience the beauty, culture, and opportunities of Mongolia firsthand."
+  },
+  "agenda": {
+    "label": "Forum Agenda",
+    "title": "MEF 2025 Agenda",
+    "description": "Explore the comprehensive program featuring plenary sessions, sub-sessions, and networking opportunities across two days of impactful discussions.",
+    "day": "Day",
+    "plenarySessions": "Plenary Sessions",
+    "subSessions": "Sub-Sessions",
+    "importance": "Importance",
+    "purpose": "Purpose",
+    "expectedOutcome": "Expected Outcome",
+    "infoTitle": "Join the Discussion",
+    "infoDescription": "Each session offers unique opportunities to engage with experts, policymakers, and industry leaders shaping Mongolia's future.",
+    "twodays": "2 Days of Sessions",
+    "plenaryCount": "4 Plenary Sessions",
+    "subCount": "15 Sub-Sessions",
+    "interactive": "Interactive",
+    "download": "Download",
+    "fullscreen": "Fullscreen",
+    "pdfTitle": "MEF Agenda",
+    "pdfNote": "Can't see the PDF? ",
+    "openNewTab": "Open in new tab"
   },
   "contact": {
     "label": "Contact Us",
