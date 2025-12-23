@@ -63,6 +63,17 @@
     "missionMn": {
       "title": "Зорилго",
       "description": "Монголын Эдийн Засгийн Форум (МЭЗФ) нь 2010 онд байгуулагдсан ба  төрийн бус, ашгийн төлөө бус, улс төрөөс хараат бус байгууллага бөгөөд Монгол Улсын урт хугацааны хөгжлийн бодлого, эдийн засаг, нийгмийн тулгамдсан асуудлаар нээлттэй, хэлэлцүүлэг өрнүүлэх бие даасан талбар байх зорилготой. Бид төр, хувийн хэвшил, эрдэм шинжилгээний байгууллага, иргэний нийгэм, олон улсын байгууллагын төлөөллийг нэгтгэн, бодлого, шийдэлд чиглэсэн харилцан ойлголцол, хамтын ажиллагааг дэмжиж ирсэн."
+    },
+    "orgChart": {
+      "title": "Organizational Structure",
+      "boardOfDirectors": "Board of Directors",
+      "researchTeam": "Research and Policy Advisory Team (Think Tank)",
+      "director": "Director",
+      "finance": "Finance Department",
+      "projects": "Projects and Programs Department",
+      "partnerships": "Partnerships and Cooperation Department",
+      "communications": "Communications and Public Relations Department",
+      "volunteer": "Volunteer Program"
     }
   },
   "stats": {

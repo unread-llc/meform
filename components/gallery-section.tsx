@@ -7,12 +7,13 @@ interface GallerySectionProps {
 }
 
 const galleryYears = [
-  { year: 2024, image: "/3,4.jpg" },
-  { year: 2023, image: "/5,6.jpg" },
-  { year: 2022, image: "/1,2 .jpg" },
-  { year: 2018, image: "/3,4.jpg" },
-  { year: 2016, image: "/5,6.jpg" },
-  { year: 2012, image: "/1,2 .jpg" },
+  { year: 2025, image: "/Gallery/2025/516240243_1089178199942479_5869937902651617405_n.jpg", isLocal: true },
+  { year: 2024, image: "/3,4.jpg", isLocal: false },
+  { year: 2023, image: "/5,6.jpg", isLocal: false },
+  { year: 2022, image: "/1,2 .jpg", isLocal: false },
+  { year: 2018, image: "/3,4.jpg", isLocal: false },
+  { year: 2016, image: "/5,6.jpg", isLocal: false },
+  { year: 2012, image: "/1,2 .jpg", isLocal: false },
 ]
 
 const playlistEmbedUrl = "https://www.youtube.com/embed/videoseries?list=PLF1ZFusRHmEnWxd_bOtxDirgTuGQXXJFL" // 2025 playlist embed
@@ -73,9 +74,9 @@ export function GallerySection({ dict, expanded }: GallerySectionProps) {
           {galleryYears.map((item) => (
             <Link
               key={item.year}
-              href={`https://www.meforum.mn/pictures/${item.year}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={item.isLocal ? `/gallery/${item.year}` : `https://www.meforum.mn/pictures/${item.year}`}
+              target={item.isLocal ? undefined : "_blank"}
+              rel={item.isLocal ? undefined : "noopener noreferrer"}
               className="group relative overflow-hidden rounded-2xl aspect-[3/2]"
             >
               <img
@@ -87,7 +88,7 @@ export function GallerySection({ dict, expanded }: GallerySectionProps) {
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="flex items-center justify-between">
                   <span className="text-white font-bold text-2xl">MEF {item.year}</span>
-                  <ExternalLink className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {!item.isLocal && <ExternalLink className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />}
                 </div>
               </div>
             </Link>

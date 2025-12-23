@@ -63,6 +63,17 @@
     "missionMn": {
       "title": "Mission",
       "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create an independent platform for open, evidence-based dialogue on Mongolia's long-term development."
+    },
+    "orgChart": {
+      "title": "Байгууллагын бүтэц",
+      "boardOfDirectors": "Удирдах зөвлөл",
+      "researchTeam": "Судалгаа, бодлогын зөвлөх баг (Think Tank)",
+      "director": "Захирал",
+      "finance": "Санхүүгийн хэлтэс",
+      "projects": "Төсөл, хөтөлбөрийн хэлтэс",
+      "partnerships": "Түншлэл, хамтын ажиллагааны хэлтэс",
+      "communications": "Харилцаа холбоо, олон нийттэй харилцах хэлтэс",
+      "volunteer": "Сайн дурын хөтөлбөр"
     }
   },
   "stats": {
