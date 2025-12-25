@@ -20,7 +20,7 @@
   "hero": {
     "date": "July 8, 2026",
     "title": "Mongolia Economic Forum",
-    "titleMn": "Монголын Эдийн Засгийн Форум",
+    "titleMn": "Mongolia Economic Forum",
     "theme": "Together for Tomorrow",
     "themeMn": "Маргаашийн төлөө хамтдаа",
     "location": "Ulaanbaatar, Mongolia",
@@ -61,8 +61,8 @@
       "paragraph2": "Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions."
     },
     "missionMn": {
-      "title": "Зорилго",
-      "description": "Монголын Эдийн Засгийн Форум (МЭЗФ) нь 2010 онд байгуулагдсан ба  төрийн бус, ашгийн төлөө бус, улс төрөөс хараат бус байгууллага бөгөөд Монгол Улсын урт хугацааны хөгжлийн бодлого, эдийн засаг, нийгмийн тулгамдсан асуудлаар нээлттэй, хэлэлцүүлэг өрнүүлэх бие даасан талбар байх зорилготой. Бид төр, хувийн хэвшил, эрдэм шинжилгээний байгууллага, иргэний нийгэм, олон улсын байгууллагын төлөөллийг нэгтгэн, бодлого, шийдэлд чиглэсэн харилцан ойлголцол, хамтын ажиллагааг дэмжиж ирсэн."
+      "title": "Mission",
+      "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create an independent platform for open, evidence-based dialogue on Mongolia's long-term development."
     },
     "orgChart": {
       "title": "Organizational Structure",
@@ -77,10 +77,16 @@
     }
   },
   "stats": {
-    "government": "Representatives of Government officials",
-    "privateSector": "Representatives of private sector",
+    "title": "Participant Statistics",
+    "description": "Expected 2,000+ participants from diverse sectors",
+    "chartTitle": "Participant Distribution",
+    "chartDesc": "Breakdown by sector",
+    "government": "Government",
+    "privateSector": "Private Sector, NGOs, Academia",
     "youth": "Youth",
-    "international": "Representatives of International organizations"
+    "international": "International Guests",
+    "percent": "Percentage",
+    "participants": "Participants"
   },
   "timeline": {
     "label": "History",
@@ -171,44 +177,17 @@
     "label": "Structure",
     "title": "Organizational Structure",
     "description": "How the Mongolia Economic Forum team is organized to deliver programs and partnerships.",
-    "forum": {
-      "en": "Mongolia Economic Forum",
-      "mn": "Монголын Эдийн Засгийн Форум"
-    },
-    "board": {
-      "en": "Board of Directors",
-      "mn": "Удирдах зөвлөл"
-    },
-    "director": {
-      "en": "Director",
-      "mn": "Захирал"
-    },
-    "thinkTank": {
-      "en": "Research and Policy Advisory Team (Think Tank)",
-      "mn": "Судалгаа, бодлогын зөвлөх баг (Think Tank)"
-    },
+    "forum": "Mongolia Economic Forum",
+    "board": "Board of Directors",
+    "director": "Director",
+    "thinkTank": "Research and Policy Advisory Team (Think Tank)",
     "departments": {
-      "finance": {
-        "en": "Finance Department",
-        "mn": "Санхүүгийн алба"
-      },
-      "projects": {
-        "en": "Projects and Programs Department",
-        "mn": "Төсөл, хөтөлбөр хариуцсан алба"
-      },
-      "partnerships": {
-        "en": "Partnerships and Cooperation Department",
-        "mn": "Түншлэл, хамтын ажиллагааны алба"
-      },
-      "communications": {
-        "en": "Communications and Public Relations Department",
-        "mn": "Харилцаа холбоо, олон нийттэй харилцах алба"
-      }
+      "finance": "Finance & Administration",
+      "projects": "Projects & Programs",
+      "partnerships": "Partnerships & Marketing",
+      "communications": "Media & Communications"
     },
-    "volunteer": {
-      "en": "Volunteer Program",
-      "mn": "Сайн дурын хөтөлбөр"
-    }
+    "volunteer": "Volunteer"
   },
   "whyParticipate": {
     "label": "Why Participate",

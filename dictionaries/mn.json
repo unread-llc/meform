@@ -20,9 +20,7 @@
   "hero": {
     "date": "2026 оны 7-р сарын 8",
     "title": "Монголын Эдийн Засгийн Форум",
-    "titleMn": "Mongolia Economic Forum",
     "theme": "Маргаашийн төлөө хамтдаа",
-    "themeMn": "Together for Tomorrow",
     "location": "Улаанбаатар, Монгол",
     "participants": "2000+ Оролцогчид",
     "countdown": "МЭЗФ 2026 хүртэл",
@@ -61,8 +59,8 @@
       "paragraph2": "Бид төр, хувийн хэвшил, эрдэм шинжилгээний байгууллага, иргэний нийгэм, олон улсын байгууллагын төлөөллийг нэгтгэн, бодлого, шийдэлд чиглэсэн харилцан ойлголцол, хамтын ажиллагааг дэмжиж ирсэн."
     },
     "missionMn": {
-      "title": "Mission",
-      "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create an independent platform for open, evidence-based dialogue on Mongolia's long-term development."
+      "title": "Зорилго",
+      "description": "Монголын Эдийн Засгийн Форум (МЭЗФ) нь 2010 онд байгуулагдсан ба  төрийн бус, ашгийн төлөө бус, улс төрөөс хараат бус байгууллага бөгөөд Монгол Улсын урт хугацааны хөгжлийн бодлого, эдийн засаг, нийгмийн тулгамдсан асуудлаар нээлттэй, хэлэлцүүлэг өрнүүлэх бие даасан талбар байх зорилготой. Бид төр, хувийн хэвшил, эрдэм шинжилгээний байгууллага, иргэний нийгэм, олон улсын байгууллагын төлөөллийг нэгтгэн, бодлого, шийдэлд чиглэсэн харилцан ойлголцол, хамтын ажиллагааг дэмжиж ирсэн."
     },
     "orgChart": {
       "title": "Байгууллагын бүтэц",
@@ -77,10 +75,16 @@
     }
   },
   "stats": {
+    "title": "Оролцогчдын статистик",
+    "description": "Олон салбарын 2,000 гаруй оролцогч",
+    "chartTitle": "Оролцогчдын тархалт",
+    "chartDesc": "Салбарын тархалт",
     "government": "Төр, засгийн төлөөлөгчид",
     "privateSector": "Хувийн хэвшил, ТББ, Эрдэмтэн",
     "youth": "Залуучууд",
-    "international": "Олон улсын зочид"
+    "international": "Олон улсын зочид",
+    "percent": "Хувь",
+    "participants": "Оролцогчид"
   },
   "timeline": {
     "label": "Түүх",
@@ -172,44 +176,17 @@
     "label": "Байгуулалтын бүтэц",
     "title": "МЭЗФ хэрхэн зохион байгуулагддаг вэ",
     "description": "Хөтөлбөр, түншлэл, бодлогын ажлуудыг хэрэгжүүлэхэд МЭЗФ-ын баг хэрхэн бүтэцлэгдсэнийг нэг дор харна уу.",
-    "forum": {
-      "en": "Mongolia Economic Forum",
-      "mn": "Монголын Эдийн Засгийн Форум"
-    },
-    "board": {
-      "en": "Board of Directors",
-      "mn": "Удирдах зөвлөл"
-    },
-    "director": {
-      "en": "Director",
-      "mn": "Захирал"
-    },
-    "thinkTank": {
-      "en": "Research and Policy Advisory Team (Think Tank)",
-      "mn": "Судалгаа, бодлогын зөвлөх баг (Think Tank)"
-    },
+    "forum": "Монголын Эдийн Засгийн Форум",
+    "board": "Удирдах зөвлөл",
+    "director": "Захирал",
+    "thinkTank": "Судалгаа, бодлогын зөвлөх баг (Think Tank)",
     "departments": {
-      "finance": {
-        "en": "Finance Department",
-        "mn": "Санхүүгийн алба"
-      },
-      "projects": {
-        "en": "Projects and Programs Department",
-        "mn": "Төсөл, хөтөлбөр хариуцсан алба"
-      },
-      "partnerships": {
-        "en": "Partnerships and Cooperation Department",
-        "mn": "Түншлэл, хамтын ажиллагааны алба"
-      },
-      "communications": {
-        "en": "Communications and Public Relations Department",
-        "mn": "Харилцаа холбоо, олон нийттэй харилцах алба"
-      }
+      "finance": "Санхүүгийн алба",
+      "projects": "Төсөл, хөтөлбөр хариуцсан алба",
+      "partnerships": "Түншлэл, хамтын ажиллагааны алба",
+      "communications": "Харилцаа холбоо, олон нийттэй харилцах алба"
     },
-    "volunteer": {
-      "en": "Volunteer Program",
-      "mn": "Сайн дурын хөтөлбөр"
-    }
+    "volunteer": "Сайн дурын хөтөлбөр"
   },
   "whyParticipate": {
     "label": "Яагаад оролцох",
