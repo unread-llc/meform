@@ -8,12 +8,14 @@ interface GallerySectionProps {
 
 const galleryYears = [
   { year: 2025, image: "/Gallery/2025/516240243_1089178199942479_5869937902651617405_n.jpg", isLocal: true },
-  { year: 2024, image: "/3,4.jpg", isLocal: false },
-  { year: 2023, image: "/5,6.jpg", isLocal: false },
-  { year: 2022, image: "/1,2 .jpg", isLocal: false },
-  { year: 2018, image: "/3,4.jpg", isLocal: false },
-  { year: 2016, image: "/5,6.jpg", isLocal: false },
-  { year: 2012, image: "/1,2 .jpg", isLocal: false },
+  { year: 2024, image: "/Gallery/2024/phpUNu3ul-1723361660.jpg", isLocal: true },
+  { year: 2023, image: "/Gallery/2023/phpD7GrWW-1703233863.jpg", isLocal: true },
+  { year: 2022, image: "/Gallery/2022/phpdMgqvC-1703487647.jpg", isLocal: true },
+  { year: 2018, image: "/Gallery/2018/phpCePUwy-1718771911.jpg", isLocal: true },
+  { year: 2016, image: "/Gallery/2016/phpliKtoL-1703233460.jpeg", isLocal: true },
+  { year: 2012, image: "/Gallery/2012/phpD3ipkU-1703235594.jpeg", isLocal: true },
+  { year: 2011, image: "/Gallery/2011/phpJCWq63-1703233213.jpeg", isLocal: true },
+  { year: 2010, image: "/Gallery/2010/phpV2R3y6-1703235742.jpeg", isLocal: true },
 ]
 
 const playlistEmbedUrl = "https://www.youtube.com/embed/videoseries?list=PLF1ZFusRHmEnWxd_bOtxDirgTuGQXXJFL" // 2025 playlist embed
