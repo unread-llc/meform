@@ -114,28 +114,28 @@ export function AboutSection({ dict }: AboutSectionProps) {
 
               {/* Departments */}
               <div className="w-full px-[5%]">
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm">
+                <div className="grid grid-cols-4 gap-4 items-start">
+                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm h-fit">
                     {dict.about.orgChart.finance}
                   </div>
-                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm">
+                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm h-fit">
                     {dict.about.orgChart.projects}
                   </div>
-                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm">
+                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm h-fit">
                     {dict.about.orgChart.partnerships}
                   </div>
-                  <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm">
-                    {dict.about.orgChart.communications}
+                  <div className="flex flex-col items-center">
+                    <div className="bg-[#38bdf8] text-white px-3 py-3 rounded-lg font-medium text-center text-sm w-full">
+                      {dict.about.orgChart.communications}
+                    </div>
+                    {/* Line to Volunteer */}
+                    <div className="w-0.5 h-8 bg-[#2dd4bf]" />
+                    {/* Volunteer Program */}
+                    <div className="bg-[#2dd4bf] text-white px-3 py-2 rounded-lg font-medium text-center text-sm">
+                      {dict.about.orgChart.volunteer}
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Line to Volunteer */}
-              <div className="w-0.5 h-10 bg-[#2dd4bf]" />
-
-              {/* Volunteer Program */}
-              <div className="bg-[#2dd4bf] text-white px-6 py-3 rounded-lg font-medium text-center text-sm">
-                {dict.about.orgChart.volunteer}
               </div>
             </div>
           </div>
