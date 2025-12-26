@@ -145,7 +145,7 @@ export function PartnersSection({ dict, expanded = true }: PartnersSectionProps)
                 {dict?.partners?.previousTitle ?? "Previous years sponsors and partners"}
               </h3>
               <p className="text-muted-foreground">
-                {dict?.partners?.previousDesc ?? "Selected partners from earlier MEF editions"}
+                {dict?.partners?.previousDesc ?? ""}
               </p>
             </div>
 

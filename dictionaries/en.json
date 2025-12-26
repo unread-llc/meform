@@ -235,8 +235,8 @@
     "label": "Partners",
     "title": "Our Partners & Sponsors",
     "description": "We are grateful to our partners and sponsors who make the Mongolia Economic Forum possible.",
-    "current": "MEF 2025 Partners",
-    "previous": "Previous Years Partners"
+    "currentTitle": "MEF 2025 Partners",
+    "previousTitle": "Previous Years Partners"
   },
   "faq": {
     "label": "FAQ",
