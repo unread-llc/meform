@@ -244,60 +244,76 @@
     "description": "Find answers to common questions about the Mongolia Economic Forum.",
     "questions": {
       "what": {
-        "question": "What is MEF?",
-        "answer": "MEF is a national policy platform where government, private sector, academia, civil society, and international organizations openly discuss Mongolia's economy and development policy."
+        "question": "What is the Mongolia Economic Forum (MEF)?",
+        "answer": "The Mongolia Economic Forum (MEF) is a national premier discussion platform where the government, private sector, academia, civil society, and international organizations openly discuss Mongolia’s economic and development policies."
       },
       "who": {
         "question": "Who can participate?",
-        "answer": "Government agencies, private sector leaders, entrepreneurs, researchers, university faculty and students, international organizations, investors—anyone who wants to share their views on Mongolia's development issues."
+        "answer": "Participation is open to government institutions, private sector leaders, entrepreneurs, researchers, university faculty and students, international organizations, investors, and anyone interested in Mongolia’s development issues."
       },
       "importance": {
-        "question": "What is the significance of participating?",
-        "answer": "Engage directly with decision-makers; participate in solution-driven dialogues; connect with international institutions and investors; access the latest insights and trends; contribute to actionable policy recommendations; expand your professional network; and help shape Mongolia's future."
+        "question": "What are the benefits of participating?",
+        "answer": [
+          "Engage directly with national decision-makers",
+          "Take part in solution-driven public–private dialogues",
+          "Connect with international institutions and investors",
+          "Access the latest insights and trends in key sectors",
+          "Contribute to actionable policy recommendations",
+          "Expand your professional network",
+          "Help shape Mongolia’s future"
+        ]
       },
       "topics": {
         "question": "What are the main topics discussed at the Forum?",
-        "answer": "Each year's forum focuses on different topics based on current policy priorities. Examples include: economic policy and development planning, green development and energy transition, digital transition and smart cities, investment climate, mining and agricultural diversification, financial markets and credit ratings, etc."
+        "answerIntro": "The topics vary each year depending on national policy priorities. Examples include:",
+        "answer": [
+          "Economic policy and development planning",
+          "Green development and energy transition",
+          "Digital transformation and smart cities",
+          "Investment policy",
+          "Mining and agricultural diversification",
+          "Financial markets and credit ratings, etc."
+        ]
       },
       "where": {
         "question": "Where is the Forum held?",
-        "answer": "The Forum is held at multiple locations in Ulaanbaatar depending on the annual program, topics discussed, and participant profiles. Main and side sessions have traditionally been held at the State Palace, city center conference halls, Chinggis Khaan Museum, Shangri-La Hotel Ulaanbaatar, and Galleria Ulaanbaatar."
+        "answer": "The MEF is organized across multiple locations each year depending on the program and participant needs. Plenary and sub-sessions have traditionally been held at locations such as the Government Palace, central conference halls, the Chinggis Khaan Museum, Shangri-La Hotel Ulaanbaatar, and Galleria Ulaanbaatar."
       },
       "register": {
-        "question": "How to register?",
-        "answer": "Official registration takes place through the MEF website and open announcements. As seating is limited, advance registration is required."
+        "question": "How can I register?",
+        "answer": "Official registration is conducted through the MEF website and public announcements. As seating is limited, advance registration is required."
       },
       "fee": {
-        "question": "What is the registration fee?",
-        "answer": "Domestic participant fee is ₮1,000,000, foreign participant fee is $500. Payment details may be updated depending on the year's organization decisions."
+        "question": "Is there a registration fee?",
+        "answer": "Yes. The participation fee is MNT 1,000,000 for domestic participants and USD 500 for international participants. Fees may vary depending on that year’s organizational arrangements."
       },
       "foreigners": {
-        "question": "How can foreign participants join?",
-        "answer": "Foreign delegates are welcome through invitations, diplomatic channels, organizational representation, and international partnerships."
+        "question": "How can international participants join?",
+        "answer": "International attendees may register through the online registration form or participate through invitations, diplomatic channels, institutional representation, or international partnerships."
       },
       "language": {
-        "question": "What languages are used at the Forum?",
-        "answer": "The main sessions are held in both Mongolian and English with simultaneous interpretation."
-      },
-      "government": {
-        "question": "Is MEF a government event?",
-        "answer": "No. MEF is a politically independent, non-profit, non-governmental organization. The participation of the Prime Minister and policy makers has become a tradition to strengthen public-private cooperation."
-      },
-      "sponsor": {
-        "question": "How can I become a sponsor?",
-        "answer": "Sponsors and strategic partners can contact the MEF team directly to discuss partnership packages and opportunities."
+        "question": "In what language is the Forum conducted?",
+        "answer": "The main sessions are conducted with interpretation in Mongolian and English."
       },
       "contribute": {
-        "question": "Can I contribute at the Forum?",
-        "answer": "Yes. Participants' opinions, statements, and positions are used through breakout sessions and Q&A segments to develop policy recommendations."
+        "question": "Can participants provide comments or feedback during the Forum?",
+        "answer": "Yes. Participant insights and questions shared during sub-sessions and Q&A segments contribute to the formulation of policy recommendations."
+      },
+      "sponsor": {
+        "question": "How can an organization become a sponsor or partner?",
+        "answer": "Organizations interested in sponsorship or strategic partnerships may contact the MEF team directly to discuss collaboration packages and opportunities."
       },
       "nextYear": {
-        "question": "How can I get information about next year's forum?",
-        "answer": "Information is regularly updated through MEF's official website, social media pages, and news channels."
+        "question": "How can I receive information about next year’s Forum?",
+        "answer": "Updates are regularly posted on the MEF’s official website, social media channels, and news platforms."
       },
       "results": {
-        "question": "Where are the Forum results published?",
-        "answer": "Summaries of plenary and breakout sessions, recommendations, policy proposals, photos, and videos are published on official channels after the forum."
+        "question": "Where are the Forum’s outcomes published?",
+        "answer": "Summary reports, recommendations, policy briefs, photos, and video archives are published through the Forum’s official channels after the event."
+      },
+      "government": {
+        "question": "Is the MEF a government event?",
+        "answer": "No. The MEF is an independent, non-governmental, non-profit organization. Its purpose is to strengthen collaboration between the government and the private sector, and the participation of the Prime Minister and key policymakers has become a tradition due to the Forum’s significance."
       }
     }
   },

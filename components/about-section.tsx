@@ -43,7 +43,7 @@ export function AboutSection({ dict }: AboutSectionProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        {/* <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {features.map((feature) => (
             <div
               key={feature.title}
@@ -56,25 +56,27 @@ export function AboutSection({ dict }: AboutSectionProps) {
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </div>
           ))}
-        </div>
+        </div> */}
 
-        <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-3xl p-8 lg:p-12">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">{dict.about.vision.title}</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                {dict.about.vision.paragraph1}
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                {dict.about.vision.paragraph2}
-              </p>
+        <div className="flex flex-col gap-8">
+          <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-3xl p-8 lg:p-12 shadow-sm">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{dict.about.vision.title}</h3>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  {dict.about.vision.paragraph1}
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {dict.about.vision.paragraph2}
+                </p>
+              </div>
             </div>
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h4 className="font-semibold text-foreground mb-4">{dict.about.missionMn.title}</h4>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {dict.about.missionMn.description}
-              </p>
-            </div>
+          </div>
+          <div className="bg-white rounded-2xl p-6 shadow-[0_12px_24px_rgba(0,0,0,0.12),0_6px_10px_rgba(0,0,0,0.08),0_-2px_6px_rgba(0,0,0,0.05)]">
+            <h4 className="font-semibold text-foreground mb-4">{dict.about.missionMn.title}</h4>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {dict.about.missionMn.description}
+            </p>
           </div>
         </div>
 

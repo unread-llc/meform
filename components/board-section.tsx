@@ -42,7 +42,11 @@ export function BoardSection({ dict }: BoardSectionProps) {
                     <img
                       src={photo}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className={[
+                        "w-full h-full object-cover",
+                        // 2 дахь member-ийн image дээр нүүрийг дээш/доош нь тааруулах
+                        key === memberKeys[1] ? "object-[center_15%]" : "object-center",
+                      ].join(" ")}
                     />
                   ) : (
                     <span className="text-4xl font-bold text-primary">
