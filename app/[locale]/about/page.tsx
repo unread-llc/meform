@@ -19,6 +19,7 @@ export default async function AboutPage({
             <div className="pt-16">
                 <AboutSection dict={dict} />
                 <BoardSection dict={dict} />
+                {/* <StructureDiagram dict={dict} /> */}
             </div>
             <Footer dict={dict} locale={locale} />
         </main>

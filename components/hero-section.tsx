@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Users } from "lucide-react"
+import { Users } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n"
 
@@ -62,7 +62,8 @@ interface HeroSectionProps {
   locale: Locale
 }
 
-const heroBackground = "/1,2 .jpg"
+// Use fresh 2025 hero visual from downloaded gallery assets
+const heroBackground = "/Gallery/Menu%20option%202.jpg"
 
 export function HeroSection({ dict, locale }: HeroSectionProps) {
   return (
@@ -76,23 +77,12 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d6efd]/90 via-[#0d6efd]/80 to-[#0a58ca]/90" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-          <Calendar className="w-4 h-4 text-white" />
-          <span className="text-white text-sm font-medium">{dict.hero.date}</span>
-        </div>
-
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 text-balance">
           {dict.hero.title}
         </h1>
         <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-2">{dict.hero.titleMn}</p>
-        <p className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mt-6 mb-8">{dict.hero.theme}</p>
-        <p className="text-lg text-white/80 mb-4">{dict.hero.themeMn}</p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 text-white/80 text-sm mb-8">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4" />
-            <span>{dict.hero.location}</span>
-          </div>
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4" />
             <span>{dict.hero.participants}</span>
@@ -104,7 +94,7 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
           <CountdownTimer dict={dict} />
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex justify-center">
           <Button size="lg" className="bg-white text-[#0d6efd] hover:bg-white/90 font-semibold px-8" asChild>
             <Link href={`/${locale}/contact`}>{dict.hero.registerNow}</Link>
           </Button>

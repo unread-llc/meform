@@ -32,14 +32,12 @@ export function Header({ locale, dict }: HeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href={`/${locale}`} className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">M</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="font-bold text-foreground">MEF</span>
-              <span className="text-muted-foreground text-sm ml-1">2025</span>
-            </div>
+          <Link href={`/${locale}`} className="flex items-center gap-2" aria-label="Mongolia Economic Forum home">
+            <img
+              src="/Logo/logo.png"
+              alt="Mongolia Economic Forum"
+              className="h-10 w-auto"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
@@ -68,7 +66,7 @@ export function Header({ locale, dict }: HeaderProps) {
             </button>
           </div>
         </div>
-      </div>
+      </div >
 
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-border">
@@ -88,7 +86,8 @@ export function Header({ locale, dict }: HeaderProps) {
             </Button>
           </nav>
         </div>
-      )}
-    </header>
+      )
+      }
+    </header >
   )
 }

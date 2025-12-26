@@ -8,6 +8,11 @@ const icons = [Users, MessageSquare, Globe, TrendingUp, FileText, Network, Targe
 
 export function WhyParticipateSection({ dict }: WhyParticipateSectionProps) {
   const reasonKeys = ["1", "2", "3", "4", "5", "6", "7"]
+  const photos = [
+    "/Gallery/Why%20participate/1,2%20.jpg",
+    "/Gallery/Why%20participate/3,4.jpg",
+    "/Gallery/Why%20participate/5,6.jpg",
+  ]
 
   return (
     <section id="why-participate" className="py-20 lg:py-32 bg-gradient-to-b from-white to-secondary/30">
@@ -20,6 +25,14 @@ export function WhyParticipateSection({ dict }: WhyParticipateSectionProps) {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {dict.whyParticipate.description}
           </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+          {photos.map((src, idx) => (
+            <div key={src} className="overflow-hidden rounded-2xl border border-secondary/50 bg-white shadow-sm">
+              <img src={src} alt={`Why participate ${idx + 1}`} className="w-full h-48 object-cover" />
+            </div>
+          ))}
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

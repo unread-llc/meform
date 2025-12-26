@@ -42,7 +42,11 @@ export function BoardSection({ dict }: BoardSectionProps) {
                     <img
                       src={photo}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className={[
+                        "w-full h-full object-cover",
+                        // 2 дахь member-ийн image дээр нүүрийг дээш/доош нь тааруулах
+                        key === memberKeys[1] ? "object-[center_15%]" : "object-center",
+                      ].join(" ")}
                     />
                   ) : (
                     <span className="text-4xl font-bold text-primary">
@@ -53,7 +57,7 @@ export function BoardSection({ dict }: BoardSectionProps) {
                     </span>
                   )}
                 </div>
-                <h3 className="font-semibold text-foreground text-lg">{member.name}</h3>
+                <h3 className="font-semibold text-foreground text-lg whitespace-nowrap overflow-hidden text-ellipsis">{member.name}</h3>
                 <p className="text-primary text-sm font-medium mb-1">{member.role}</p>
                 <p className="text-muted-foreground text-xs mb-4">{member.position}</p>
                 <Link
@@ -63,7 +67,7 @@ export function BoardSection({ dict }: BoardSectionProps) {
                   className="inline-flex items-center justify-center text-primary hover:text-primary/80 transition-colors"
                   aria-label={`Open ${member.name}'s LinkedIn profile`}
                 >
-                  <Linkedin className="w-6 h-6" />
+                  <Linkedin className="w-5 h-5" />
                 </Link>
               </div>
             )
