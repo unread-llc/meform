@@ -18,31 +18,22 @@ export function AboutSection({ dict }: AboutSectionProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-8 text-white">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary/90 to-primary/80 p-10 lg:p-14">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+          <div className="relative z-10 max-w-3xl mx-auto text-center text-white">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/15 rounded-2xl mb-8">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold mb-4">{dict.about.vision.title}</h3>
-            <p className="text-white/90 leading-relaxed mb-4">
+            <h3 className="text-3xl lg:text-4xl font-bold mb-6">{dict.about.vision.title}</h3>
+            <p className="text-lg text-white/90 leading-relaxed mb-5">
               {dict.about.vision.paragraph1}
             </p>
-            <p className="text-white/90 leading-relaxed">
+            <p className="text-lg text-white/90 leading-relaxed">
               {dict.about.vision.paragraph2}
-            </p>
-          </div>
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 text-white">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold mb-4">{dict.about.missionMn.title}</h3>
-            <p className="text-white/90 leading-relaxed">
-              {dict.about.missionMn.description}
             </p>
           </div>
         </div>
