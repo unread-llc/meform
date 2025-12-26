@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
 
 interface GallerySectionProps {
   dict: any
@@ -7,55 +6,15 @@ interface GallerySectionProps {
 }
 
 const galleryYears = [
-  { year: 2025, image: "/Gallery/2025/516240243_1089178199942479_5869937902651617405_n.jpg", isLocal: true },
-  { year: 2024, image: "/Gallery/2024/phpUNu3ul-1723361660.jpg", isLocal: true },
-  { year: 2023, image: "/Gallery/2023/phpD7GrWW-1703233863.jpg", isLocal: true },
-  { year: 2022, image: "/Gallery/2022/phpdMgqvC-1703487647.jpg", isLocal: true },
-  { year: 2018, image: "/Gallery/2018/phpCePUwy-1718771911.jpg", isLocal: true },
-  { year: 2016, image: "/Gallery/2016/phpliKtoL-1703233460.jpeg", isLocal: true },
-  { year: 2012, image: "/Gallery/2012/phpD3ipkU-1703235594.jpeg", isLocal: true },
-  { year: 2011, image: "/Gallery/2011/phpJCWq63-1703233213.jpeg", isLocal: true },
-  { year: 2010, image: "/Gallery/2010/phpV2R3y6-1703235742.jpeg", isLocal: true },
-]
-
-const playlistEmbedUrl = "https://www.youtube.com/embed/videoseries?list=PLF1ZFusRHmEnWxd_bOtxDirgTuGQXXJFL" // 2025 playlist embed
-
-const videos2025 = [
-  {
-    title: "MEF 2025 \"Стратегийн нөөц ба нийлүүлэлтийн гинжин хэлхээ\"",
-    duration: "2:53:55",
-    url: "https://youtu.be/jUUeA4WLfn8",
-  },
-  {
-    title: "MEF 2025 \"ДИЖИТАЛ ЭРИН: Хиймэл оюун ба дэд бүтэц\"",
-    duration: "1:33:18",
-    url: "https://youtu.be/D4JdyhvW2-o",
-  },
-  {
-    title: "MEF 2025 \"Тогтвортой хөгжил ба шинэ эдийн засаг (COP17)\"",
-    duration: "36:56",
-    url: "https://youtu.be/-Ik8zL1suYg",
-  },
-  {
-    title: "MEF 2025 \"Урт хугацааны баялгийн удирдлага\"",
-    duration: "1:33:48",
-    url: "https://youtu.be/LmZ0bQu3X0s",
-  },
-  {
-    title: "MEF 2025 \"Бизнест ээлтэй Монгол\"",
-    duration: "1:22:47",
-    url: "https://youtu.be/3ReCADY6Bbk",
-  },
-  {
-    title: "MEF 2025 \"Хот төлөвлөлт, хотын эдийн засаг\"",
-    duration: "1:24:21",
-    url: "https://youtu.be/9oO8fZYfOJk",
-  },
-  {
-    title: "MEF 2025 \"Хөрөнгө оруулагчдын итгэлийг даах нь\"",
-    duration: "49:09",
-    url: "https://youtu.be/tmDMLRM-vSA",
-  },
+  { year: 2025, image: "/Gallery/2025/516240243_1089178199942479_5869937902651617405_n.jpg" },
+  { year: 2024, image: "/Gallery/2024/phpUNu3ul-1723361660.jpg" },
+  { year: 2023, image: "/Gallery/2023/phpD7GrWW-1703233863.jpg" },
+  { year: 2022, image: "/Gallery/2022/phpdMgqvC-1703487647.jpg" },
+  { year: 2018, image: "/Gallery/2018/phpCePUwy-1718771911.jpg" },
+  { year: 2016, image: "/Gallery/2016/phpliKtoL-1703233460.jpeg" },
+  { year: 2012, image: "/Gallery/2012/phpD3ipkU-1703235594.jpeg" },
+  { year: 2011, image: "/Gallery/2011/phpJCWq63-1703233213.jpeg" },
+  { year: 2010, image: "/Gallery/2010/phpV2R3y6-1703235742.jpeg" },
 ]
 
 export function GallerySection({ dict, expanded }: GallerySectionProps) {
@@ -76,104 +35,20 @@ export function GallerySection({ dict, expanded }: GallerySectionProps) {
           {galleryYears.map((item) => (
             <Link
               key={item.year}
-              href={item.isLocal ? `/gallery/${item.year}` : `https://www.meforum.mn/pictures/${item.year}`}
-              target={item.isLocal ? undefined : "_blank"}
-              rel={item.isLocal ? undefined : "noopener noreferrer"}
+              href={`/gallery/${item.year}`}
               className="group relative overflow-hidden rounded-2xl aspect-[3/2]"
             >
               <img
-                src={item.image || "/placeholder.svg"}
+                src={item.image}
                 alt={`MEF ${item.year} Gallery`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="flex items-center justify-between">
-                  <span className="text-white font-bold text-2xl">MEF {item.year}</span>
-                  {!item.isLocal && <ExternalLink className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />}
-                </div>
+                <span className="text-white font-bold text-2xl">MEF {item.year}</span>
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="mt-12 space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary/80">Videos 2025</p>
-              <p className="text-xl font-bold text-foreground">MEF 2025 Playlist</p>
-              <p className="text-sm text-muted-foreground">Watch all seven sessions on this page or open on YouTube.</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link
-                href="https://youtube.com/playlist?list=PLF1ZFusRHmEnWxd_bOtxDirgTuGQXXJFL"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-primary font-semibold hover:border-primary/60 hover:text-primary/80 transition-colors"
-              >
-                Open playlist
-                <ExternalLink className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="rounded-2xl overflow-hidden bg-white border border-secondary/60 shadow-sm">
-            <div className="aspect-video bg-black">
-              <iframe
-                title="MEF 2025 playlist"
-                src={playlistEmbedUrl}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-            <div className="p-4 border-t border-secondary/40 text-sm text-muted-foreground">
-              Tip: Play inline here, or open individual sessions below.
-            </div>
-          </div>
-
-          <div className="grid gap-6">
-            {videos2025.map((video) => {
-              const embedUrl = video.url.replace("https://youtu.be/", "https://www.youtube.com/embed/")
-              return (
-                <div
-                  key={video.url}
-                  className="rounded-2xl border border-secondary/60 bg-white shadow-sm overflow-hidden"
-                >
-                  <div className="aspect-video bg-black">
-                    <iframe
-                      title={video.title}
-                      src={embedUrl}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-3 px-4 py-3">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-foreground leading-snug line-clamp-2">{video.title}</p>
-                      <p className="text-xs text-muted-foreground">YouTube • TenGer TV</p>
-                    </div>
-                    <span className="text-xs font-semibold text-primary/90 bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap">
-                      {video.duration}
-                    </span>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          <div className="flex items-center justify-center gap-2 pt-4 border-t border-secondary/40">
-            <Link
-              href="https://www.meforum.mn/videos/2024"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold transition-colors"
-            >
-              {dict.gallery.viewVideos}
-              <ExternalLink className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </div>
     </section>
