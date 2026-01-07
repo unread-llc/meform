@@ -1,3 +1,14 @@
+# Ignore large pdf.js runtime assets; we load these from CDN.
+public/cmaps/
+public/standard_fonts/
+public/pdf.worker.*
+public/openjpeg*.wasm
+public/openjpeg*.js
+public/qcms_bg.wasm
+public/LICENSE_OPENJPEG
+public/LICENSE_PDFJS_OPENJPEG
+public/LICENSE_PDFJS_QCMS
+public/LICENSE_QCMS
 node_modules/
 .next/
 <<<<<<< HEAD

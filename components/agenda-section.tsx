@@ -3,6 +3,13 @@
 import { useState } from "react"
 import { Calendar, FileText, Download, Maximize2, X } from "lucide-react"
 import dynamic from "next/dynamic"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const AgendaPdfViewerClient = dynamic(() => import("@/components/agenda-pdf-viewer-client"), {
   ssr: false,
@@ -16,10 +23,23 @@ interface AgendaSectionProps {
 
 export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [year, setYear] = useState("2025")
 
-  const pdfUrl = locale === "mn"
-    ? "/Meforum 2023 Agenda mon.pdf"
-    : "/Meforum 2023 Agenda eng.pdf"
+  const getPdfUrl = (selectedYear: string, currentLocale: string) => {
+    if (selectedYear === "2025") {
+      return "/booklet_mef2025.pdf"
+    }
+    if (selectedYear === "2024") {
+      return currentLocale === "mn" ? "/mef-mon-4.pdf" : "/mef-eng-4.pdf"
+    }
+    // Fallback to 2023
+    return currentLocale === "mn"
+      ? "/Meforum 2023 Agenda mon.pdf"
+      : "/Meforum 2023 Agenda eng.pdf"
+  }
+
+  const pdfUrl = getPdfUrl(year, locale)
+  const title = `MEF ${year} Agenda`
 
   return (
     <section id="agenda" className="min-h-screen">
@@ -28,7 +48,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
         <div className="fixed inset-0 z-[100] bg-black/90 flex flex-col">
           <div className="flex items-center justify-between p-4 bg-black/50">
             <h3 className="text-white font-medium">
-              {dict.agenda?.pdfTitle || "MEF 2025 Agenda"} - {locale === "mn" ? "Монгол" : "English"}
+              {title} - {locale === "mn" ? "Монгол" : "English"}
             </h3>
             <div className="flex items-center gap-2">
               <a
@@ -86,9 +106,21 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
       <section className="sticky top-16 z-40 bg-white border-b border-secondary shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
-            <div className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <FileText className="w-4 h-4 text-primary" />
-              <span>PDF</span>
+            <div className="flex items-center gap-4">
+              <div className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <FileText className="w-4 h-4 text-primary" />
+                <span>PDF</span>
+              </div>
+              <Select value={year} onValueChange={setYear}>
+                <SelectTrigger className="w-[100px] h-9 text-xs">
+                  <SelectValue placeholder="Year" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2025">2025</SelectItem>
+                  <SelectItem value="2024">2024</SelectItem>
+                  <SelectItem value="2023">2023</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="flex items-center gap-2">
@@ -121,7 +153,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
                 <FileText className="w-5 h-5 text-primary" />
                 <div>
                   <h3 className="font-semibold text-foreground">
-                    {dict.agenda?.pdfTitle || "MEF 2025 Agenda"}
+                    {title}
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     {locale === "mn" ? "Монгол хэл дээр" : "English version"}

@@ -11,6 +11,13 @@ import { Loader2 } from "lucide-react"
 // Ensure worker version matches the bundled pdfjs version.
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
+const PDF_OPTIONS = {
+  cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
+  cMapPacked: true,
+  standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts/`,
+  wasmUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/wasm/`,
+}
+
 type Variant = "inline" | "fullscreen"
 
 export default function AgendaPdfViewerClient({
@@ -209,6 +216,7 @@ export default function AgendaPdfViewerClient({
       >
         <Document
           file={pdfFile}
+          options={PDF_OPTIONS}
           onLoadSuccess={async (pdf) => {
             setNumPages(pdf.numPages)
             try {
