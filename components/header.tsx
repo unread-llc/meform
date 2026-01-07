@@ -16,16 +16,16 @@ export function Header({ locale, dict }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { label: dict.nav.about, href: `/${locale}/about` },
-    { label: dict.nav.agenda, href: `/${locale}/agenda` },
-    { label: dict.nav.history, href: `/${locale}/history` },
+    { label: dict.nav.about, href: `/${locale}#about` },
+    { label: dict.nav.agenda, href: `/${locale}#agenda` },
+    { label: dict.nav.history, href: `/${locale}#timeline` },
     { label: dict.nav.whyParticipate, href: `/${locale}#why-participate` },
-    { label: dict.nav.gallery, href: `/${locale}/gallery` },
+    { label: dict.nav.gallery, href: `/${locale}#gallery` },
     { label: dict.nav.videos, href: `/${locale}/videos` },
-    { label: dict.nav.partners, href: `/${locale}/partners` },
-    { label: dict.nav.faq, href: `/${locale}/faq` },
+    { label: dict.nav.partners, href: `/${locale}#partners` },
+    { label: dict.nav.faq, href: `/${locale}#faq` },
     { label: dict.nav.mongolia, href: `/${locale}/mongolia` },
-    { label: dict.nav.contact, href: `/${locale}/contact` },
+    { label: dict.nav.contact, href: `/${locale}#contact` },
   ]
 
   return (
@@ -55,7 +55,7 @@ export function Header({ locale, dict }: HeaderProps) {
           <div className="flex items-center gap-2">
             <LanguageSwitcher currentLocale={locale} />
             <Button asChild className="hidden sm:inline-flex">
-              <Link href={`/${locale}/contact`}>{dict.nav.register}</Link>
+              <Link href={`/${locale}#contact`}>{dict.nav.register}</Link>
             </Button>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -82,7 +82,7 @@ export function Header({ locale, dict }: HeaderProps) {
               </Link>
             ))}
             <Button asChild className="mt-4">
-              <Link href={`/${locale}/contact`}>{dict.nav.register}</Link>
+              <Link href={`/${locale}#contact`}>{dict.nav.register}</Link>
             </Button>
           </nav>
         </div>

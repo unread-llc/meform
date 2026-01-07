@@ -16,7 +16,7 @@ export default async function GalleryPage({
         <main className="min-h-screen">
             <Header locale={locale} dict={dict} />
             <div className="pt-16">
-                <GallerySection dict={dict} expanded />
+                <GallerySection dict={dict} expanded locale={locale} />
             </div>
             <Footer dict={dict} locale={locale} />
         </main>

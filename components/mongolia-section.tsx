@@ -10,28 +10,38 @@ interface MongoliaSectionProps {
   expanded?: boolean
 }
 
-const exports = [
-  { name: "Coal", percentage: 54.1, color: "from-amber-500 to-amber-600" },
-  { name: "Copper ore & concentrate", percentage: 21.0, color: "from-orange-500 to-orange-600" },
-  { name: "Gold", percentage: 5.7, color: "from-yellow-400 to-yellow-500" },
-  { name: "Iron ore & concentrate", percentage: 3.8, color: "from-red-500 to-red-600" },
-  { name: "Other", percentage: 15.4, color: "from-gray-400 to-gray-500" },
+const exportItems = [
+  { key: "coal", fallbackName: "Coal", percentage: 54.1, color: "from-amber-500 to-amber-600" },
+  {
+    key: "copperOreConcentrate",
+    fallbackName: "Copper ore & concentrate",
+    percentage: 21.0,
+    color: "from-orange-500 to-orange-600",
+  },
+  { key: "gold", fallbackName: "Gold", percentage: 5.7, color: "from-yellow-400 to-yellow-500" },
+  {
+    key: "ironOreConcentrate",
+    fallbackName: "Iron ore & concentrate",
+    percentage: 3.8,
+    color: "from-red-500 to-red-600",
+  },
+  { key: "other", fallbackName: "Other", percentage: 15.4, color: "from-gray-400 to-gray-500" },
 ]
 
-const tradingPartners = [
-  { name: "China", percentage: 40.2, flag: "🇨🇳" },
-  { name: "Russia", percentage: 24.3, flag: "🇷🇺" },
-  { name: "Japan", percentage: 10.1, flag: "🇯🇵" },
-  { name: "United States", percentage: 4.6, flag: "🇺🇸" },
-  { name: "South Korea", percentage: 4.2, flag: "🇰🇷" },
-  { name: "Germany", percentage: 2.2, flag: "🇩🇪" },
+const tradingPartnerItems = [
+  { key: "china", fallbackName: "China", percentage: 40.2, flag: "🇨🇳" },
+  { key: "russia", fallbackName: "Russia", percentage: 24.3, flag: "🇷🇺" },
+  { key: "japan", fallbackName: "Japan", percentage: 10.1, flag: "🇯🇵" },
+  { key: "unitedStates", fallbackName: "United States", percentage: 4.6, flag: "🇺🇸" },
+  { key: "southKorea", fallbackName: "South Korea", percentage: 4.2, flag: "🇰🇷" },
+  { key: "germany", fallbackName: "Germany", percentage: 2.2, flag: "🇩🇪" },
 ]
 
-const quickFacts = [
-  { icon: MapPin, label: "Capital", value: "Ulaanbaatar" },
-  { icon: Mountain, label: "Area", value: "1.56M km²" },
-  { icon: Users, label: "Population", value: "3.54M" },
-  { icon: Sun, label: "Sunny Days", value: "260/year" },
+const quickFactItems = [
+  { key: "capital", icon: MapPin },
+  { key: "area", icon: Mountain },
+  { key: "population", icon: Users },
+  { key: "sunnyDays", icon: Sun },
 ]
 
 const galleryImages = [
@@ -43,10 +53,34 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
   const [activeImage, setActiveImage] = useState(0)
 
   const stats = [
-    { label: dict.mongolia.gdp, value: "$4,615", icon: TrendingUp, description: "Ranked 127th globally" },
-    { label: dict.mongolia.gdpGrowth, value: "4.9%", icon: Landmark, description: "Strong recovery" },
-    { label: dict.mongolia.population, value: "3.54M", icon: Users, description: "Youngest in Asia" },
-    { label: dict.mongolia.workforce, value: "62.7%", icon: Globe, description: "Growing workforce" },
+    {
+      key: "gdp",
+      label: dict.mongolia.gdp,
+      value: "$4,615",
+      icon: TrendingUp,
+      description: dict.mongolia.statsDescriptions?.gdp,
+    },
+    {
+      key: "gdpGrowth",
+      label: dict.mongolia.gdpGrowth,
+      value: "4.9%",
+      icon: Landmark,
+      description: dict.mongolia.statsDescriptions?.gdpGrowth,
+    },
+    {
+      key: "population",
+      label: dict.mongolia.population,
+      value: "3.54M",
+      icon: Users,
+      description: dict.mongolia.statsDescriptions?.population,
+    },
+    {
+      key: "workforce",
+      label: dict.mongolia.workforce,
+      value: "62.7%",
+      icon: Globe,
+      description: dict.mongolia.statsDescriptions?.workforce,
+    },
   ]
 
   return (
@@ -71,24 +105,29 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
             {dict.mongolia.title}
           </h1>
-          <p className="text-xl sm:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          {/* <p className="text-xl sm:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             {dict.mongolia.description}
-          </p>
+          </p> */}
 
           {/* Quick Facts */}
           <div className="flex flex-wrap justify-center gap-4 mt-12">
-            {quickFacts.map((fact) => (
+            {quickFactItems.map((fact) => {
+              const label = dict.mongolia.quickFacts?.[fact.key]?.label ?? fact.key
+              const value = dict.mongolia.quickFacts?.[fact.key]?.value ?? ""
+
+              return (
               <div
-                key={fact.label}
+                key={fact.key}
                 className="flex items-center gap-3 px-5 py-3 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:bg-white/20 transition-all"
               >
                 <fact.icon className="w-5 h-5 text-primary" />
                 <div className="text-left">
-                  <p className="text-white/60 text-xs">{fact.label}</p>
-                  <p className="text-white font-semibold">{fact.value}</p>
+                  <p className="text-white/60 text-xs">{label}</p>
+                  <p className="text-white font-semibold">{value}</p>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -100,20 +139,37 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
         </div>
       </section>
 
+      {/* Video */}
+      <section className="py-16 bg-secondary/30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative aspect-video overflow-hidden rounded-2xl border border-secondary/50 bg-black shadow-sm">
+            <iframe
+              title="Mongolia video"
+              src="https://www.youtube-nocookie.com/embed/-abbVknuz4E?rel=0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-b from-secondary/50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
               <div
-                key={stat.label}
+                key={stat.key}
                 className="group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-secondary/50 overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-full" />
                 <stat.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
                 <p className="text-3xl lg:text-4xl font-bold text-foreground mb-1">{stat.value}</p>
                 <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
-                <p className="text-xs text-muted-foreground/70 mt-1">{stat.description}</p>
+                {stat.description ? <p className="text-xs text-muted-foreground/70 mt-1">{stat.description}</p> : null}
               </div>
             ))}
           </div>
@@ -121,7 +177,7 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
       </section>
 
       {/* Geography & Culture */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -185,7 +241,7 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Economy Section */}
       <section className="py-20 bg-gradient-to-b from-secondary/30 to-white">
@@ -198,7 +254,7 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
               {dict.mongolia.economyTitle || "A Growing Economy"}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {dict.mongolia.economyDescription || "Mongolia's economy is driven by mining, agriculture, and an emerging services sector, with strong growth potential."}
+              {dict.mongolia.economyDescription || ""}
             </p>
           </div>
 
@@ -210,10 +266,12 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
                 {dict.mongolia.exports}
               </h3>
               <div className="space-y-5">
-                {exports.map((item) => (
-                  <div key={item.name}>
+                {exportItems.map((item) => (
+                  <div key={item.key}>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-foreground font-medium">{item.name}</span>
+                      <span className="text-foreground font-medium">
+                        {dict.mongolia.exportItems?.[item.key] ?? item.fallbackName}
+                      </span>
                       <span className="text-primary font-semibold">{item.percentage}%</span>
                     </div>
                     <div className="h-4 bg-secondary rounded-full overflow-hidden">
@@ -234,14 +292,16 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
                 {dict.mongolia.topPartners}
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {tradingPartners.map((partner) => (
+                {tradingPartnerItems.map((partner) => (
                   <div
-                    key={partner.name}
+                    key={partner.key}
                     className="flex items-center gap-3 p-4 bg-secondary/30 rounded-xl hover:bg-secondary/50 transition-colors"
                   >
                     <span className="text-2xl">{partner.flag}</span>
                     <div className="flex-1">
-                      <p className="font-medium text-foreground">{partner.name}</p>
+                      <p className="font-medium text-foreground">
+                        {dict.mongolia.partnerCountries?.[partner.key] ?? partner.fallbackName}
+                      </p>
                       <p className="text-sm text-primary font-semibold">{partner.percentage}%</p>
                     </div>
                   </div>
@@ -253,7 +313,7 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
       </section>
 
       {/* Video Section */}
-      <section className="py-20 bg-foreground text-white">
+      {/* <section className="py-20 bg-foreground text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
@@ -306,18 +366,18 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* <section className="py-13 bg-gradient-to-r from-primary to-primary/80">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             {dict.mongolia.ctaTitle || "Discover Mongolia"}
           </h2>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             {dict.mongolia.ctaDescription || "Experience the beauty, culture, and opportunities of Mongolia firsthand."}
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          </p> */}
+          {/* <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="https://www.mongoliatravel.guide/en"
               target="_blank"
@@ -334,9 +394,9 @@ export function MongoliaSection({ dict, expanded }: MongoliaSectionProps) {
             >
               Investment Opportunities <ChevronRight className="w-5 h-5" />
             </Link>
-          </div>
-        </div>
-      </section>
+          </div> */}
+        {/* </div>
+      </section> */}
     </div>
   )
 }

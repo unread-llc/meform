@@ -25,10 +25,12 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
         segments[1] = newLocale
         const newPath = segments.join("/")
 
+        const hash = typeof window !== "undefined" ? window.location.hash : ""
+
         // Set cookie for locale preference
         document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`
 
-        router.push(newPath)
+        router.push(`${newPath}${hash}`)
     }
 
     return (

@@ -30,12 +30,12 @@ export function Footer({ dict, locale }: FooterProps) {
             <h4 className="font-semibold text-white mb-4">{dict.footer.quickLinks}</h4>
             <ul className="space-y-2">
               <li>
-                <Link href={`/${locale}/about`} className="text-white/60 hover:text-white text-sm transition-colors">
+                <Link href={`/${locale}#about`} className="text-white/60 hover:text-white text-sm transition-colors">
                   {dict.footer.aboutUs}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/history`} className="text-white/60 hover:text-white text-sm transition-colors">
+                <Link href={`/${locale}#timeline`} className="text-white/60 hover:text-white text-sm transition-colors">
                   {dict.footer.history}
                 </Link>
               </li>
@@ -45,7 +45,7 @@ export function Footer({ dict, locale }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/faq`} className="text-white/60 hover:text-white text-sm transition-colors">
+                <Link href={`/${locale}#faq`} className="text-white/60 hover:text-white text-sm transition-colors">
                   FAQ
                 </Link>
               </li>

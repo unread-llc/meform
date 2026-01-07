@@ -96,7 +96,7 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
 
         <div className="flex justify-center">
           <Button size="lg" className="bg-white text-[#0d6efd] hover:bg-white/90 font-semibold px-8" asChild>
-            <Link href={`/${locale}/contact`}>{dict.hero.registerNow}</Link>
+            <Link href={`/${locale}#contact`}>{dict.hero.registerNow}</Link>
           </Button>
           <Button
             size="lg"

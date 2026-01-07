@@ -236,6 +236,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   }
 
   return (
+    <section id="agenda">
     <div className="min-h-screen">
       {/* Fullscreen PDF Modal */}
       {isFullscreen && (
@@ -502,6 +503,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
         </>
       )}
     </div>
+    </section>
   )
 }
 

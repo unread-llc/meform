@@ -7,6 +7,7 @@ type Partner = {
   name: string
   logo?: string
   url?: string // empty string allowed
+  logoClassName?: string
 }
 
 const partners: Partner[] = [
@@ -57,7 +58,7 @@ const previousPartners: Partner[] = [
   { name: "Ulaanbaatar Securities Exchange", logo: "/Logo/Previous%20years%20partners%20logo/UBX.svg", url: "https://www.ubx.mn/" },
   { name: "MCS Group", logo: "/Logo/Previous%20years%20partners%20logo/MCS%20Group_id9wPPwFOI_0.png", url: "https://mcs.mn/mn/" },
   { name: "TDB", logo: "/Logo/Previous%20years%20partners%20logo/TDB.avif", url: "https://www.tdbm.mn/" },
-  { name: "Tavan Bogd", logo: "/Logo/Previous%20years%20partners%20logo/TAVANBOGD.png", url: "https://tavanbogd.com/" },
+  { name: "Tavan Bogd", logo: "/Logo/Previous%20years%20partners%20logo/TAVANBOGD.png", url: "https://tavanbogd.com/", logoClassName: "max-h-20 max-w-56" },
   { name: "Global Trading Network (GTN)", logo: "/Logo/Previous%20years%20partners%20logo/GTN_idkNTJ3cDK_2.jpeg", url: "https://gtngroup.com/global/home/" },
   { name: "Envision", logo: "/Logo/Previous%20years%20partners%20logo/envision-group-seeklogo.png", url: "https://www.envision-group.com/" },
   { name: "Rio Tinto", logo: "/Logo/Previous%20years%20partners%20logo/Rio_Tinto_(corporation)-Logo.wine.svg", url: "https://www.riotinto.com/" },
@@ -66,7 +67,7 @@ const previousPartners: Partner[] = [
   { name: "Newcom Group", logo: "/Logo/Previous%20years%20partners%20logo/NEWCOM.png", url: "https://newcom.mn/?lang=mn" },
   { name: "Trafigura", logo: "/Logo/Previous%20years%20partners%20logo/Trafigura_company_logo.svg.png", url: "https://www.trafigura.com/" },
   { name: "Gobi Cashmere", logo: "/Logo/Previous%20years%20partners%20logo/GOBI%20Cashmere_Logo_1.png", url: "https://www.gobicashmere.com/" },
-  { name: "Bodi International", logo: "/Logo/Previous%20years%20partners%20logo/BODI.avif", url: "https://bodigroup.mn/bodi-group/" },
+  { name: "Bodi International", logo: "/Logo/Previous%20years%20partners%20logo/bodilogo.avif", url: "https://www.bodigroup.mn/bodi-group", logoClassName: "max-h-20 max-w-56" },
 ]
 
 function PartnerCard({ partner }: { partner: Partner }) {
@@ -76,7 +77,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
         <img
           src={partner.logo}
           alt={partner.name}
-          className="max-h-16 max-w-[160px] object-contain"
+          className={`object-contain ${partner.logoClassName ?? "max-h-16 max-w-40"}`}
         />
       ) : (
         <span className="text-muted-foreground font-medium text-center text-sm">

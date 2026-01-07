@@ -226,8 +226,7 @@
   },
   "gallery": {
     "label": "Gallery",
-    "title": "Moments from MEF",
-    "description": "Explore highlights from past Mongolia Economic Forum events.",
+    "title": "Explore highlights from past MEF events.",
     "viewPhotos": "View Photos",
     "viewVideos": "View Videos"
   },
@@ -321,13 +320,40 @@
     "label": "Discover Mongolia",
     "title": "About Mongolia",
     "description": "Learn about the land of the eternal blue sky.",
+    "quickFacts": {
+      "capital": { "label": "Capital", "value": "Ulaanbaatar" },
+      "area": { "label": "Area", "value": "1.56M km²" },
+      "population": { "label": "Population", "value": "3.54M" },
+      "sunnyDays": { "label": "Sunny Days", "value": "260/year" }
+    },
     "gdp": "GDP per capita (2024)",
     "gdpGrowth": "GDP Growth Rate",
     "population": "Population (2024)",
     "workforce": "Workforce Participation",
+    "statsDescriptions": {
+      "gdp": "Ranked 127th globally",
+      "gdpGrowth": "Strong recovery",
+      "population": "Youngest in Asia",
+      "workforce": "Growing workforce"
+    },
     "tourism": "Annual Tourist Arrivals",
     "topPartners": "Top Trading Partners",
     "exports": "Top Exports",
+    "exportItems": {
+      "coal": "Coal",
+      "copperOreConcentrate": "Copper ore & concentrate",
+      "gold": "Gold",
+      "ironOreConcentrate": "Iron ore & concentrate",
+      "other": "Other"
+    },
+    "partnerCountries": {
+      "china": "China",
+      "russia": "Russia",
+      "japan": "Japan",
+      "unitedStates": "United States",
+      "southKorea": "South Korea",
+      "germany": "Germany"
+    },
     "imports": "Top Imports",
     "geographyLabel": "Geography & Culture",
     "geographyTitle": "Land of the Eternal Blue Sky",
@@ -335,7 +361,6 @@
     "geographyP2": "Known for its vast steppes, the Gobi Desert, and nomadic culture, Mongolia offers a unique blend of ancient traditions and modern development. The country experiences over 260 sunny days per year, earning its nickname 'The Land of the Eternal Blue Sky.'",
     "economyLabel": "Economy",
     "economyTitle": "A Growing Economy",
-    "economyDescription": "Mongolia's economy is driven by mining, agriculture, and an emerging services sector, with strong growth potential.",
     "videosTitle": "Watch MEF Sessions",
     "ctaTitle": "Discover Mongolia",
     "ctaDescription": "Experience the beauty, culture, and opportunities of Mongolia firsthand."
@@ -367,6 +392,7 @@
     "title": "Get in Touch",
     "description": "Have questions? We'd love to hear from you.",
     "email": "Email",
+    "location": "Location",
     "registration": "Registration",
     "followUs": "Follow Us",
     "registrationClosed": "Registration is now closed"
