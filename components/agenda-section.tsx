@@ -25,19 +25,21 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [year, setYear] = useState("2025")
 
+  const pdfApiUrl = (fileName: string) => `/api/pdf/${encodeURIComponent(fileName)}`
+
   const getPdfUrl = (selectedYear: string, currentLocale: string) => {
     if (selectedYear === "2025") {
-      return "/api/pdf/booklet_mef2025.pdf"
+      return pdfApiUrl("booklet_mef2025.pdf")
     }
     if (selectedYear === "2024") {
       return currentLocale === "mn"
-        ? "/api/pdf/mef-mon-4.pdf"
-        : "/api/pdf/mef-eng-4.pdf"
+        ? pdfApiUrl("mef-mon-4.pdf")
+        : pdfApiUrl("mef-eng-4.pdf")
     }
     // Fallback to 2023
     return currentLocale === "mn"
-      ? "/api/pdf/Meforum 2023 Agenda mon.pdf"
-      : "/api/pdf/Meforum 2023 Agenda eng.pdf"
+      ? pdfApiUrl("Meforum 2023 Agenda mon.pdf")
+      : pdfApiUrl("Meforum 2023 Agenda eng.pdf")
   }
 
   const pdfUrl = getPdfUrl(year, locale)
