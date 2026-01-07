@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { getDictionary } from "@/lib/dictionary"
 import type { Locale } from "@/lib/i18n"
+import { fetchLegacyVideosByYear, LEGACY_VIDEO_YEARS, youtubeIdToEmbedUrl, youtubeIdToUrl } from "@/lib/meforum-videos"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink } from "lucide-react"
@@ -117,7 +118,23 @@ export default async function VideosYearPage({
     notFound()
   }
 
-  const videos = videosByYear[year] || []
+  const videos = await (async () => {
+    // Keep 2025 as the curated list currently used on the site.
+    if (year === "2025") return videosByYear[year] || []
+
+    if (LEGACY_VIDEO_YEARS.includes(year as (typeof LEGACY_VIDEO_YEARS)[number])) {
+      try {
+        const legacy = await fetchLegacyVideosByYear(year)
+        if (legacy.length > 0) {
+          return legacy.map((v) => ({ title: v.title, url: youtubeIdToUrl(v.youtubeId) }))
+        }
+      } catch {
+        // fall back below
+      }
+    }
+
+    return videosByYear[year] || []
+  })()
 
   return (
     <main className="min-h-screen">
@@ -145,7 +162,9 @@ export default async function VideosYearPage({
 
           <div className="space-y-6">
             {videos.map((video) => {
-              const embedUrl = video.url.replace("https://youtu.be/", "https://www.youtube.com/embed/")
+              const idMatch = /youtu\.be\/([^?&/]+)/.exec(video.url)
+              const youtubeId = idMatch?.[1]
+              const embedUrl = youtubeId ? youtubeIdToEmbedUrl(youtubeId) : video.url
               return (
                 <div
                   key={video.url}
