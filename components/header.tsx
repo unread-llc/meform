@@ -1,11 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import type { Locale } from "@/lib/i18n"
+import { cn } from "@/lib/utils"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface HeaderProps {
   locale: Locale
@@ -14,14 +22,25 @@ interface HeaderProps {
 
 export function Header({ locale, dict }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 8)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  const galleryYears = [2025, 2024, 2023, 2022, 2018, 2016, 2012, 2011, 2010]
+  const videoYears = [2025, 2024, 2023, 2022, 2019, 2018, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
 
   const navItems = [
     { label: dict.nav.about, href: `/${locale}#about` },
     { label: dict.nav.agenda, href: `/${locale}#agenda` },
     { label: dict.nav.history, href: `/${locale}#timeline` },
     { label: dict.nav.whyParticipate, href: `/${locale}#why-participate` },
-    { label: dict.nav.gallery, href: `/${locale}#gallery` },
-    { label: dict.nav.videos, href: `/${locale}/videos` },
     { label: dict.nav.press, href: `/${locale}/press` },
     { label: dict.nav.partners, href: `/${locale}#partners` },
     { label: dict.nav.faq, href: `/${locale}#faq` },
@@ -30,7 +49,14 @@ export function Header({ locale, dict }: HeaderProps) {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-colors",
+        isScrolled
+          ? "bg-white/95 border-border shadow-lg"
+          : "bg-white/70 border-transparent shadow-none"
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href={`/${locale}`} className="flex items-center gap-2" aria-label="Mongolia Economic Forum home">
@@ -42,7 +68,57 @@ export function Header({ locale, dict }: HeaderProps) {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
-            {navItems.map((item) => (
+            {navItems.slice(0, 4).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1">
+                  {dict.nav.gallery}
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem asChild>
+                  <Link href={`/${locale}/gallery`}>{locale === "mn" ? "Бүх он" : "All years"}</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                {galleryYears.map((year) => (
+                  <DropdownMenuItem key={year} asChild>
+                    <Link href={`/${locale}/gallery/${year}`}>MEF {year}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1">
+                  {dict.nav.videos}
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem asChild>
+                  <Link href={`/${locale}/videos`}>{locale === "mn" ? "Бүх бичлэг" : "All videos"}</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                {videoYears.map((year) => (
+                  <DropdownMenuItem key={year} asChild>
+                    <Link href={`/${locale}/videos/${year}`}>MEF {year}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {navItems.slice(4).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -72,7 +148,64 @@ export function Header({ locale, dict }: HeaderProps) {
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-border">
           <nav className="flex flex-col py-4 px-4">
-            {navItems.map((item) => (
+            {navItems.slice(0, 4).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="py-3 text-foreground hover:text-primary transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <div className="py-2">
+              <div className="text-sm font-medium text-muted-foreground py-2">{dict.nav.gallery}</div>
+              <div className="pl-4 flex flex-col">
+                <Link
+                  href={`/${locale}/gallery`}
+                  onClick={() => setIsOpen(false)}
+                  className="py-2 text-foreground hover:text-primary transition-colors"
+                >
+                  {locale === "mn" ? "Бүх он" : "All years"}
+                </Link>
+                {galleryYears.map((year) => (
+                  <Link
+                    key={year}
+                    href={`/${locale}/gallery/${year}`}
+                    onClick={() => setIsOpen(false)}
+                    className="py-2 text-foreground hover:text-primary transition-colors"
+                  >
+                    MEF {year}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="py-2">
+              <div className="text-sm font-medium text-muted-foreground py-2">{dict.nav.videos}</div>
+              <div className="pl-4 flex flex-col">
+                <Link
+                  href={`/${locale}/videos`}
+                  onClick={() => setIsOpen(false)}
+                  className="py-2 text-foreground hover:text-primary transition-colors"
+                >
+                  {locale === "mn" ? "Бүх бичлэг" : "All videos"}
+                </Link>
+                {videoYears.map((year) => (
+                  <Link
+                    key={year}
+                    href={`/${locale}/videos/${year}`}
+                    onClick={() => setIsOpen(false)}
+                    className="py-2 text-foreground hover:text-primary transition-colors"
+                  >
+                    MEF {year}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {navItems.slice(4).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

@@ -86,7 +86,7 @@ export function TimelineSection({ dict, fullHistory }: TimelineSectionProps) {
                 </div>
 
                 <div className="hidden lg:flex w-12 h-12 bg-primary rounded-full items-center justify-center flex-shrink-0 relative z-10 mx-auto mt-3">
-                  <span className="text-primary-foreground text-xs font-bold">{item.year.toString().slice(-2)}</span>
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary-foreground/90" />
                 </div>
 
                 <div className="lg:w-1/2" />
