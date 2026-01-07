@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "postbuild": "node scripts/copy-public-pdfs-to-next.mjs",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start"
