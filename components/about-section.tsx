@@ -1,3 +1,5 @@
+import { BoardSection } from "./board-section"
+
 interface AboutSectionProps {
   dict: any
 }
@@ -7,17 +9,17 @@ export function AboutSection({ dict }: AboutSectionProps) {
     <section id="about" className="py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
+          <span className="inline-block text-primary font-semibold text-bold text-6xl uppercase tracking-wider mb-4">
             {dict.about.label}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl  text-foreground mb-6 text-balance">
             {dict.about.title}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {dict.about.description}
           </p>
         </div>
-
+        {/* 
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary/90 to-primary/80 p-10 lg:p-14">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -36,7 +38,8 @@ export function AboutSection({ dict }: AboutSectionProps) {
               {dict.about.vision.paragraph2}
             </p>
           </div>
-        </div>
+        </div> */}
+        <BoardSection dict={dict} />
 
         {/* Organizational Chart */}
         <div className="mt-16">

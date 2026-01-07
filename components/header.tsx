@@ -22,6 +22,7 @@ export function Header({ locale, dict }: HeaderProps) {
     { label: dict.nav.whyParticipate, href: `/${locale}#why-participate` },
     { label: dict.nav.gallery, href: `/${locale}#gallery` },
     { label: dict.nav.videos, href: `/${locale}/videos` },
+    { label: dict.nav.press, href: `/${locale}/press` },
     { label: dict.nav.partners, href: `/${locale}#partners` },
     { label: dict.nav.faq, href: `/${locale}#faq` },
     { label: dict.nav.mongolia, href: `/${locale}/mongolia` },

@@ -71,7 +71,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
             className="w-full bg-primary/95 text-base py-4 px-4"
           />
 
-          <div className={`h-8 w-0.5 ${lineColor}`} />
+          <div className={`h-8 w-[2px] ${lineColor}`} />
 
           {/* Board */}
           <OrgCard
@@ -80,11 +80,11 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
             className="w-full text-base py-4 px-4"
           />
 
-          <div className={`h-8 w-0.5 ${lineColor}`} />
+          <div className={`h-8 w-[2px] ${lineColor}`} />
 
           {/* Think Tank (Advisory) */}
           <div className="relative w-full">
-            <div className={`absolute top-0 bottom-0 left-1/2 w-0.5 ${lineColor} -translate-x-1/2 z-0`} />
+            <div className={`absolute top-0 bottom-0 left-1/2 w-[2px] ${lineColor} -translate-x-1/2 z-0`} />
             <OrgCard
               text={dict.structure.thinkTank}
               variant="muted"
@@ -92,7 +92,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
             />
           </div>
 
-          <div className={`h-8 w-0.5 ${lineColor}`} />
+          <div className={`h-8 w-[2px] ${lineColor}`} />
 
           {/* Director */}
           <OrgCard
@@ -101,17 +101,17 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
             className="w-full border-primary/40 text-base py-4 px-4 relative z-10 bg-background"
           />
 
-          <div className={`h-10 w-0.5 ${lineColor}`} />
+          <div className={`h-10 w-[2px] ${lineColor}`} />
 
           {/* Departments Stack */}
           <div className="w-full flex flex-col gap-5 relative">
             {/* Main Spine */}
-            <div className={`absolute top-0 bottom-8 left-6 w-0.5 ${lineColor}`} />
+            <div className={`absolute top-0 bottom-8 left-6 w-[2px] ${lineColor}`} />
 
             {departments.map((dept: string, index: number) => (
               <div key={index} className="relative pl-14">
                 {/* Horizontal branch */}
-                <div className={`absolute top-1/2 left-6 w-8 h-0.5 ${lineColor} -translate-y-1/2`} />
+                <div className={`absolute top-1/2 left-6 w-8 h-[2px] ${lineColor} -translate-y-1/2`} />
                 <OrgCard
                   text={dept}
                   variant="outline"
@@ -121,7 +121,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
                 {/* Volunteer for last item */}
                 {index === 3 && (
                   <div className="mt-5 relative -ml-8">
-                    <div className="absolute top-[-28px] left-[32px] w-0.5 h-7 border-l-2 border-dashed border-border/50" />
+                    <div className="absolute top-[-28px] left-[32px] h-7 border-l-2 border-dashed border-border/50" />
                     <OrgCard
                       text={dict.structure.volunteer}
                       variant="muted"
@@ -147,7 +147,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
               <span className="text-lg font-bold text-center leading-tight">{dict.structure.forum}</span>
             </div>
             {/* Main vertical line from Forum */}
-            <div className={`absolute top-full left-1/2 w-0.5 h-12 ${lineColor} -translate-x-1/2`} />
+            <div className={`absolute top-full left-1/2 w-[2px] h-12 ${lineColor} -translate-x-1/2`} />
           </motion.div>
 
           {/* Spacer for the line */}
@@ -161,14 +161,14 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.4 }}
-              className={`absolute top-0 left-[20%] right-[20%] h-0.5 ${lineColor}`}
+              className={`absolute top-0 left-[20%] right-[20%] h-[2px] ${lineColor}`}
             />
 
             <div className="grid grid-cols-2 gap-16 relative">
               {/* Board */}
               <div className="flex flex-col items-center relative">
                 {/* Vertical connector to top */}
-                <div className={`absolute bottom-full left-1/2 w-0.5 h-8 ${lineColor} -translate-x-1/2`} />
+                <div className={`absolute bottom-full left-1/2 w-[2px] h-8 ${lineColor} -translate-x-1/2`} />
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -184,7 +184,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
               {/* Think Tank */}
               <div className="flex flex-col items-center relative">
                 {/* Vertical connector to top */}
-                <div className={`absolute bottom-full left-1/2 w-0.5 h-8 ${lineColor} -translate-x-1/2`} />
+                <div className={`absolute bottom-full left-1/2 w-[2px] h-8 ${lineColor} -translate-x-1/2`} />
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -205,7 +205,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
             whileInView={{ height: 48 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className={`w-0.5 ${lineColor} h-12`}
+            className={`w-[2px] ${lineColor} h-12`}
             aria-hidden
           />
 
@@ -227,7 +227,7 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
             whileInView={{ height: 48 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className={`w-0.5 ${lineColor} h-12`}
+            className={`w-[2px] ${lineColor} h-12`}
             aria-hidden
           />
 
@@ -239,14 +239,14 @@ export function StructureDiagram({ dict }: StructureDiagramProps) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className={`absolute top-0 left-[12.5%] right-[12.5%] h-0.5 ${lineColor}`}
+              className={`absolute top-0 left-[12.5%] right-[12.5%] h-[2px] ${lineColor}`}
             />
 
             <div className="grid grid-cols-4 gap-6 pt-8">
               {departments.map((dept: string, index: number) => (
                 <div key={index} className="flex flex-col items-center relative">
                   {/* Vertical line from top horizontal bar */}
-                  <div className={`absolute bottom-full left-1/2 w-0.5 h-8 ${lineColor} -translate-x-1/2`} />
+                  <div className={`absolute bottom-full left-1/2 w-[2px] h-8 ${lineColor} -translate-x-1/2`} />
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}

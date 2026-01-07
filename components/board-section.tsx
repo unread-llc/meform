@@ -44,6 +44,8 @@ export function BoardSection({ dict }: BoardSectionProps) {
                       alt={member.name}
                       className={[
                         "w-full h-full object-cover",
+                        // Ганхуяг-ийн зургийг томруулах
+                        key === "ganhuyag" ? "scale-125" : "",
                         // 2 дахь member-ийн image дээр нүүрийг дээш/доош нь тааруулах
                         key === memberKeys[1] ? "object-[center_15%]" : "object-center",
                       ].join(" ")}

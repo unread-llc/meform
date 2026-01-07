@@ -11,6 +11,8 @@
     "board": "Board",
     "whyParticipate": "Why Participate",
     "gallery": "Gallery",
+    "videos": "Videos",
+    "press": "Press",
     "partners": "Partners",
     "faq": "FAQ",
     "mongolia": "Mongolia",
@@ -35,7 +37,7 @@
   },
   "about": {
     "label": "About Us",
-    "title": "Mongolia's Premier Economic Platform",
+    "title": "Our Misson",
     "description": "The Mongolia Economic Forum (MEF) was established in 2010 as a non-governmental, non-profit organization to create a premier discussion platform for open, evidence-based dialogue on Mongolia’s long-term development. Since its founding, the Forum has convened leaders from government, business, academia, and civil society to discuss key economic and social priorities and to align on practical solutions.",
     "features": {
       "missionDriven": {
@@ -150,7 +152,7 @@
       "ganhuyag": {
         "name": "Ganhuyag Chuluun Hutagt",
         "role": "Chairman of MEF",
-        "position": "Chairman of the Board, Ard Financial Group",
+        "position": "Chairman of the Board",
         "photo": "/Gallery/Board%20/ganhuyag.png"
       },
       "battushig": {

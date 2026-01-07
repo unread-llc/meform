@@ -63,7 +63,8 @@ interface HeroSectionProps {
 }
 
 // Use fresh 2025 hero visual from downloaded gallery assets
-const heroBackground = "/Gallery/Menu%20option%202.jpg"
+// const heroBackground = "/Gallery/Menu%20option%202.jpg"
+const heroBackground = "/Menu.jpg"
 
 export function HeroSection({ dict, locale }: HeroSectionProps) {
   return (
