@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  outputFileTracingIncludes: {
+    "/api/pdf/**": ["./public/**/*.pdf"],
+  },
 }
 
 export default nextConfig
