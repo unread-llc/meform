@@ -88,6 +88,9 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
             <Users className="w-4 h-4" />
             <span>{dict.hero.participants}</span>
           </div>
+          <div className="uppercase tracking-wider text-xs font-semibold text-white/80">
+            {dict.hero.date} · {dict.hero.time}
+          </div>
         </div>
 
         <div className="mb-10">
