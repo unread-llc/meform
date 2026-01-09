@@ -237,7 +237,15 @@
     "title": "Our Partners & Sponsors",
     "description": "",
     "currentTitle": "MEF 2025 Partners",
-    "previousTitle": "Previous Years Partners"
+    "previousTitle": "Previous Years Partners",
+    "categories": {
+      "strategic": "Strategic partners",
+      "corporate": "Corporate partners",
+      "partnerOrganization": "Partner organizations",
+      "supporting": "Supporting organizations",
+      "media": "Media partners",
+      "logistics": "Logistic partners"
+    }
   },
   "faq": {
     "label": "FAQ",

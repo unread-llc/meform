@@ -10,48 +10,165 @@ type Partner = {
   logoClassName?: string
 }
 
-const partners: Partner[] = [
+type PartnerCategoryKey =
+  | "strategic"
+  | "corporate"
+  | "partnerOrganization"
+  | "supporting"
+  | "media"
+  | "logistics"
+
+const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }> = [
   {
-    name: "Badrakh Energy",
-    logo: "/Logo/Partners/2025/Partner%20organization/Badrakh%20energy.png",
-    url: "https://badrakhenergy.com/",
+    key: "strategic",
+    partners: [
+      {
+        name: "Breitling",
+        logo: "https://meforum.mn/storage/app/public/phpn3bIRd-1751439777.svg",
+        url: "https://www.breitling.com/us-en/",
+      },
+      {
+        name: "ARD Holdings",
+        logo: "https://meforum.mn/storage/app/public/phpeub6RX-1751448812.png",
+        url: "https://ardholdings.com/en/?home",
+      },
+    ],
   },
   {
-    name: "GTN",
-    logo: "/Logo/Partners/2025/Partner%20organization/GTN_Logo.jpg",
-    url: "https://gtngroup.com/global/home/",
+    key: "corporate",
+    partners: [
+      {
+        name: "StoneX",
+        logo: "https://meforum.mn/storage/app/public/php3JGOMg-1751440952.png",
+        url: "https://www.stonex.com/en/",
+      },
+      {
+        name: "Emart",
+        logo: "https://meforum.mn/storage/app/public/phpFig3T6-1751441447.svg",
+        url: "https://emartmall.mn/",
+      },
+      {
+        name: "ARD Holdings",
+        logo: "https://meforum.mn/storage/app/public/php8MQVAh-1751442262.png",
+        url: "https://ardholdings.com/mn/?home",
+      },
+    ],
   },
   {
-    name: "StoneX",
-    logo: "/Logo/Partners/2025/Corporate%20partners/StoneX_Dark.png",
-    url: "https://www.stonex.com/", // TODO
+    key: "partnerOrganization",
+    partners: [
+      {
+        name: "GTN",
+        logo: "https://meforum.mn/storage/app/public/phpzFHIpf-1719400733.png",
+        url: "https://gtngroup.com/europe/home/",
+      },
+      {
+        name: "Badrakh Energy",
+        logo: "https://meforum.mn/storage/app/public/php5LPaCS-1751442178.png",
+        url: "https://badrakhenergy.com/en/home-en/",
+      },
+    ],
   },
   {
-    name: "Emart",
-    logo: "/Logo/Partners/2025/Corporate%20partners/Emart%20logo.png",
-    url: "https://emartmall.mn/",
+    key: "supporting",
+    partners: [
+      {
+        name: "EBRD",
+        logo: "https://meforum.mn/storage/app/public/phpacCI3t-1719888669.png",
+        url: "https://www.ebrd.com/home",
+      },
+      {
+        name: "ADB",
+        logo: "https://meforum.mn/storage/app/public/phpUxjUqk-1751442800.png",
+        url: "https://www.adb.org/",
+      },
+      {
+        name: "EU Global Gateway",
+        logo: "https://meforum.mn/storage/app/public/phpP6ZJ9H-1751443644.jpg",
+        url: "https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/stronger-europe-world/global-gateway_en",
+      },
+      {
+        name: "Pinut Amongolia",
+        logo: "https://meforum.mn/storage/app/public/phpcuJsL1-1751442501.png",
+        url: "https://www.facebook.com/pinutamongolia/",
+      },
+      {
+        name: "Economic Journalism Club",
+        logo: "https://meforum.mn/storage/app/public/phpgRoci3-1751819353.png",
+        url: "https://www.facebook.com/profile.php?id=61574363563476",
+      },
+      {
+        name: "Unitel",
+        logo: "https://meforum.mn/storage/app/public/phpXSUd9Q-1719394259.png",
+        url: "https://www.unitel.mn/unitel/",
+      },
+    ],
   },
   {
-    name: "ADB",
-    logo: "/Logo/Partners/2025/Supporting%20organization/ADB/ADB_logoBLUE_PNG%20(2).png",
-    url: "https://www.adb.org/",
+    key: "media",
+    partners: [
+      {
+        name: "TikTok",
+        logo: "https://meforum.mn/storage/app/public/phpKcJ5qh-1751448965.png",
+        url: "https://www.tiktok.com/",
+      },
+      {
+        name: "Economic Journalists Club",
+        logo: "https://meforum.mn/storage/app/public/php5H1Gzm-1751448835.png",
+        url: "https://www.facebook.com/EconomicJournalistsClub",
+      },
+      {
+        name: "Lemonpress",
+        logo: "https://meforum.mn/storage/app/public/phpz6grD6-1751448675.png",
+        url: "https://lemonpress.mn/",
+      },
+      {
+        name: "Tsoilog Soz",
+        logo: "https://meforum.mn/storage/app/public/phphrzA1N-1751449003.png",
+        url: "https://www.facebook.com/tsoilogsoz/",
+      },
+      {
+        name: "Unread Today",
+        logo: "https://meforum.mn/storage/app/public/php8NHhnl-1751449107.png",
+        url: "https://unread.today/category/english",
+      },
+      {
+        name: "Tngr",
+        logo: "https://meforum.mn/storage/app/public/phpmIWxYI-1751468640.png",
+        url: "https://www.tngr.tv/",
+      },
+    ],
   },
   {
-    name: "EBRD",
-    logo: "/Logo/Partners/2025/Supporting%20organization/EBRD/EBRDlogo%20(004)%20(1).png",
-    url: "https://www.ebrd.com/",
-  },
-  {
-    name: "EU Global Gateway",
-    logo: "/Logo/Partners/2025/Supporting%20organization/EU/Global-Gateway-logo-EU-emblem-dark%20blue-1200x800.jpg",
-    url: "https://international-partnerships.ec.europa.eu/policies/global-gateway_en",
-  },
-  {
-    name: "Business Friendly Mongolia",
-    logo: "/Logo/Partners/2025/Supporting%20organization/Business%20Friendly%20Mongolia/edb%20logo.png",
-    url: "", // TODO
+    key: "logistics",
+    partners: [
+      {
+        name: "Mongol Post",
+        logo: "https://meforum.mn/storage/app/public/phpFthfiV-1751448782.png",
+        url: "https://mongolpost.mn/en",
+      },
+      {
+        name: "Royal Enfield",
+        logo: "https://meforum.mn/storage/app/public/phpSpizZF-1751468609.png",
+        url: "https://www.royalenfield.com/in/en/home/",
+      },
+      {
+        name: "EMC Mongolia",
+        logo: "https://meforum.mn/storage/app/public/phpefxbfw-1751819140.png",
+        url: "https://www.emcmongolia.mn/",
+      },
+    ],
   },
 ]
+
+const fallbackCategoryLabels: Record<PartnerCategoryKey, string> = {
+  strategic: "Strategic partners",
+  corporate: "Corporate partners",
+  partnerOrganization: "Partner organizations",
+  supporting: "Supporting organizations",
+  media: "Media partners",
+  logistics: "Logistic partners",
+}
 
 const previousPartners: Partner[] = [
   { name: "IDAX", logo: "/Logo/Previous%20years%20partners%20logo/IDAX.png", url: "https://www.idax.exchange/" },
@@ -105,6 +222,9 @@ function PartnerCard({ partner }: { partner: Partner }) {
 }
 
 export function PartnersSection({ dict, expanded = true }: PartnersSectionProps) {
+  const getCategoryLabel = (key: PartnerCategoryKey) =>
+    dict.partners?.categories?.[key] ?? fallbackCategoryLabels[key]
+
   return (
     <section id="partners" className="py-20 lg:py-32 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -120,11 +240,19 @@ export function PartnersSection({ dict, expanded = true }: PartnersSectionProps)
           </p>
         </div>
 
-        {/* 2025 Partners */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {partners.map((partner) => (
-            <div key={partner.name}>
-              <PartnerCard partner={partner} />
+        <div className="space-y-10">
+          {partnerCategories.map((category) => (
+            <div key={category.key} className="rounded-3xl border border-border bg-white/80 p-6">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold text-foreground">
+                  {getCategoryLabel(category.key)}
+                </h3>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                {category.partners.map((partner) => (
+                  <PartnerCard key={`${category.key}-${partner.name}`} partner={partner} />
+                ))}
+              </div>
             </div>
           ))}
         </div>

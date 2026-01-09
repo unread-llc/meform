@@ -15,6 +15,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+const anchorSectionIds = [
+  "about",
+  "agenda",
+  "timeline",
+  "why-participate",
+  "gallery",
+  "partners",
+  "faq",
+  "contact",
+] as const
+type AnchorSectionId = (typeof anchorSectionIds)[number]
+type NavItem = {
+  label: string
+  href: string
+  sectionId?: AnchorSectionId
+}
+
 interface HeaderProps {
   locale: Locale
   dict: any
@@ -23,6 +40,7 @@ interface HeaderProps {
 export function Header({ locale, dict }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState<AnchorSectionId>("about")
 
   useEffect(() => {
     const onScroll = () => {
@@ -33,20 +51,62 @@ export function Header({ locale, dict }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries.filter((entry) => entry.isIntersecting)
+        if (!visibleSections.length) return
+        const mostVisible = visibleSections.reduce((prev, current) =>
+          current.intersectionRatio > prev.intersectionRatio ? current : prev
+        )
+        setActiveSection(mostVisible.target.id as AnchorSectionId)
+      },
+      {
+        rootMargin: "-35% 0px -65% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    )
+
+    anchorSectionIds.forEach((id) => {
+      const section = document.getElementById(id)
+      if (section) {
+        observer.observe(section)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   const galleryYears = [2025, 2024, 2023, 2022, 2018, 2016, 2012, 2011, 2010]
   const videoYears = [2025, 2024, 2023, 2022, 2019, 2018, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
 
-  const navItems = [
-    { label: dict.nav.about, href: `/${locale}#about` },
-    { label: dict.nav.agenda, href: `/${locale}#agenda` },
-    { label: dict.nav.history, href: `/${locale}#timeline` },
-    { label: dict.nav.whyParticipate, href: `/${locale}#why-participate` },
+  const navItems: NavItem[] = [
+    { label: dict.nav.about, href: `/${locale}#about`, sectionId: "about" },
+    { label: dict.nav.agenda, href: `/${locale}#agenda`, sectionId: "agenda" },
+    { label: dict.nav.history, href: `/${locale}#timeline`, sectionId: "timeline" },
+    {
+      label: dict.nav.whyParticipate,
+      href: `/${locale}#why-participate`,
+      sectionId: "why-participate",
+    },
     { label: dict.nav.press, href: `/${locale}/press` },
-    { label: dict.nav.partners, href: `/${locale}#partners` },
-    { label: dict.nav.faq, href: `/${locale}#faq` },
+    { label: dict.nav.partners, href: `/${locale}#partners`, sectionId: "partners" },
+    { label: dict.nav.faq, href: `/${locale}#faq`, sectionId: "faq" },
     { label: dict.nav.mongolia, href: `/${locale}/mongolia` },
-    { label: dict.nav.contact, href: `/${locale}#contact` },
+    { label: dict.nav.contact, href: `/${locale}#contact`, sectionId: "contact" },
   ]
+
+  const getDesktopLinkClasses = (sectionId?: AnchorSectionId) =>
+    cn(
+      "text-sm font-medium hover:text-primary transition-colors",
+      sectionId === activeSection ? "text-primary font-semibold" : "text-muted-foreground"
+    )
+
+  const getDropdownTriggerClasses = (isActive: boolean) =>
+    cn(
+      "text-sm font-medium hover:text-primary transition-colors inline-flex items-center gap-1",
+      isActive ? "text-primary font-semibold" : "text-muted-foreground"
+    )
 
   return (
     <header
@@ -72,7 +132,7 @@ export function Header({ locale, dict }: HeaderProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className={getDesktopLinkClasses(item.sectionId)}
               >
                 {item.label}
               </Link>
@@ -80,7 +140,7 @@ export function Header({ locale, dict }: HeaderProps) {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1">
+                <button className={getDropdownTriggerClasses(activeSection === "gallery")}>
                   {dict.nav.gallery}
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -122,7 +182,7 @@ export function Header({ locale, dict }: HeaderProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className={getDesktopLinkClasses(item.sectionId)}
               >
                 {item.label}
               </Link>
@@ -153,14 +213,24 @@ export function Header({ locale, dict }: HeaderProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="py-3 text-foreground hover:text-primary transition-colors"
+                className={cn(
+                  "py-3 text-foreground hover:text-primary transition-colors",
+                  item.sectionId === activeSection && "text-primary font-semibold"
+                )}
               >
                 {item.label}
               </Link>
             ))}
 
             <div className="py-2">
-              <div className="text-sm font-medium text-muted-foreground py-2">{dict.nav.gallery}</div>
+              <div
+                className={cn(
+                  "text-sm font-medium py-2",
+                  activeSection === "gallery" ? "text-primary font-semibold" : "text-muted-foreground"
+                )}
+              >
+                {dict.nav.gallery}
+              </div>
               <div className="pl-4 flex flex-col">
                 <Link
                   href={`/${locale}/gallery`}
@@ -210,7 +280,10 @@ export function Header({ locale, dict }: HeaderProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="py-3 text-foreground hover:text-primary transition-colors"
+                className={cn(
+                  "py-3 text-foreground hover:text-primary transition-colors",
+                  item.sectionId === activeSection && "text-primary font-semibold"
+                )}
               >
                 {item.label}
               </Link>
