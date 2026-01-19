@@ -138,27 +138,7 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
         url: "https://www.tngr.tv/",
       },
     ],
-  },
-  {
-    key: "logistics",
-    partners: [
-      {
-        name: "Mongol Post",
-        logo: "https://meforum.mn/storage/app/public/phpFthfiV-1751448782.png",
-        url: "https://mongolpost.mn/en",
-      },
-      {
-        name: "Royal Enfield",
-        logo: "https://meforum.mn/storage/app/public/phpSpizZF-1751468609.png",
-        url: "https://www.royalenfield.com/in/en/home/",
-      },
-      {
-        name: "EMC Mongolia",
-        logo: "https://meforum.mn/storage/app/public/phpefxbfw-1751819140.png",
-        url: "https://www.emcmongolia.mn/",
-      },
-    ],
-  },
+  }
 ]
 
 const fallbackCategoryLabels: Record<PartnerCategoryKey, string> = {
