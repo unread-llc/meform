@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description:
     "The Mongolia Economic Forum is the country's premier discussion platform aimed at addressing economic and social development challenges and finding solutions.",
   keywords: ["Mongolia", "Economic Forum", "MEF", "Development", "Investment", "Ulaanbaatar"],
+  icons: {
+    icon: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({

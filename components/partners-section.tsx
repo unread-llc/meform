@@ -24,13 +24,13 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "Breitling",
-        logo: "https://meforum.mn/storage/app/public/phpn3bIRd-1751439777.svg",
+        logo: "/Partners/strategic/breitling.png",
         url: "https://www.breitling.com/us-en/",
       },
       {
-        name: "ARD Holdings",
-        logo: "https://meforum.mn/storage/app/public/phpeub6RX-1751448812.png",
-        url: "https://ardholdings.com/en/?home",
+        name: "AIG",
+        logo: "/Partners/strategic/aig.png",
+        url: "https://www.aig.com/",
       },
     ],
   },
@@ -39,17 +39,17 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "StoneX",
-        logo: "https://meforum.mn/storage/app/public/php3JGOMg-1751440952.png",
+        logo: "/Logo/Partners/2025/Corporate%20partners/StoneX_Dark.png",
         url: "https://www.stonex.com/en/",
       },
       {
         name: "Emart",
-        logo: "https://meforum.mn/storage/app/public/phpFig3T6-1751441447.svg",
+        logo: "/Logo/Partners/2025/Corporate%20partners/Emart%20logo.png",
         url: "https://emartmall.mn/",
       },
       {
         name: "ARD Holdings",
-        logo: "https://meforum.mn/storage/app/public/php8MQVAh-1751442262.png",
+        logo: "/Logo/Partners/2025/Corporate%20partners/photo_2025-07-05%2013.00.18.jpeg",
         url: "https://ardholdings.com/mn/?home",
       },
     ],
@@ -59,12 +59,12 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "GTN",
-        logo: "https://meforum.mn/storage/app/public/phpzFHIpf-1719400733.png",
+        logo: "/Logo/Partners/2025/Partner%20organization/GTN_Logo.jpg",
         url: "https://gtngroup.com/europe/home/",
       },
       {
         name: "Badrakh Energy",
-        logo: "https://meforum.mn/storage/app/public/php5LPaCS-1751442178.png",
+        logo: "/Logo/Partners/2025/Partner%20organization/Badrakh%20energy.png",
         url: "https://badrakhenergy.com/en/home-en/",
       },
     ],
@@ -74,32 +74,32 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "EBRD",
-        logo: "https://meforum.mn/storage/app/public/phpacCI3t-1719888669.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/EBRD/EBRDlogo%20(004)%20(1).png",
         url: "https://www.ebrd.com/home",
       },
       {
         name: "ADB",
-        logo: "https://meforum.mn/storage/app/public/phpUxjUqk-1751442800.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/ADB/ADB_logoBLUE_PNG%20(2).png",
         url: "https://www.adb.org/",
       },
       {
         name: "EU Global Gateway",
-        logo: "https://meforum.mn/storage/app/public/phpP6ZJ9H-1751443644.jpg",
+        logo: "/Logo/Partners/2025/Supporting%20organization/EU/Global-Gateway-logo-EU-emblem-dark%20blue-1200x800.jpg",
         url: "https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/stronger-europe-world/global-gateway_en",
       },
       {
         name: "Pinut Amongolia",
-        logo: "https://meforum.mn/storage/app/public/phpcuJsL1-1751442501.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/PINUTA/Logo/viber_image_2025-06-27_16-30-58-925.jpg",
         url: "https://www.facebook.com/pinutamongolia/",
       },
       {
         name: "Economic Journalism Club",
-        logo: "https://meforum.mn/storage/app/public/phpgRoci3-1751819353.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/%D0%9C%D0%AD%D0%97%D0%A1%D0%9A/photo_2025-07-05_13-23-51.jpg",
         url: "https://www.facebook.com/profile.php?id=61574363563476",
       },
       {
         name: "Unitel",
-        logo: "https://meforum.mn/storage/app/public/phpXSUd9Q-1719394259.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/unitel/Unitel_Logo.png",
         url: "https://www.unitel.mn/unitel/",
       },
     ],
@@ -109,32 +109,32 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "TikTok",
-        logo: "https://meforum.mn/storage/app/public/phpKcJ5qh-1751448965.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/Tik%20Tok/Tik.jpg",
         url: "https://www.tiktok.com/",
       },
       {
         name: "Economic Journalists Club",
-        logo: "https://meforum.mn/storage/app/public/php5H1Gzm-1751448835.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/%D0%9C%D0%AD%D0%97%D0%A1%D0%9A/photo_2025-07-05_13-23-51.jpg",
         url: "https://www.facebook.com/EconomicJournalistsClub",
       },
       {
         name: "Lemonpress",
-        logo: "https://meforum.mn/storage/app/public/phpz6grD6-1751448675.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/Lemon%20Press/logo_har.png",
         url: "https://lemonpress.mn/",
       },
       {
         name: "Tsoilog Soz",
-        logo: "https://meforum.mn/storage/app/public/phphrzA1N-1751449003.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/TsoilogsoZ%20logo/TsoilogsoZ%20logo_black.png",
         url: "https://www.facebook.com/tsoilogsoz/",
       },
       {
         name: "Unread Today",
-        logo: "https://meforum.mn/storage/app/public/php8NHhnl-1751449107.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/Unread/photo_2025-07-05%2013.00.31.jpeg",
         url: "https://unread.today/category/english",
       },
       {
         name: "Tngr",
-        logo: "https://meforum.mn/storage/app/public/phpmIWxYI-1751468640.png",
+        logo: "/Logo/Partners/2025/Supporting%20organization/Tenger%20TV/photo_2025-07-05%2013.00.22.jpeg",
         url: "https://www.tngr.tv/",
       },
     ],
