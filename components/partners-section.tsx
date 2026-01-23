@@ -203,20 +203,20 @@ function PartnerCard({ partner }: { partner: Partner }) {
 
 export function PartnersSection({ dict, expanded = true }: PartnersSectionProps) {
   const getCategoryLabel = (key: PartnerCategoryKey) =>
-    dict.partners?.categories?.[key] ?? fallbackCategoryLabels[key]
+    dict?.partners?.categories?.[key] ?? fallbackCategoryLabels[key]
 
   return (
     <section id="partners" className="py-20 lg:py-32 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
-            {dict.partners.label}
+            {dict?.partners?.label}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            {dict.partners.title}
+            {dict?.partners?.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {dict.partners.description}
+            {dict?.partners?.description}
           </p>
         </div>
 
@@ -242,7 +242,7 @@ export function PartnersSection({ dict, expanded = true }: PartnersSectionProps)
             href="mailto:info@meforum.mn"
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
-            {dict.nav.contact}
+            {dict?.nav?.contact}
           </a>
         </div>
 
