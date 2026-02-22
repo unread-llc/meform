@@ -2,11 +2,10 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { getDictionary } from "@/lib/dictionary"
 import type { Locale } from "@/lib/i18n"
-import { fetchLegacyVideosByYear, LEGACY_VIDEO_YEARS } from "@/lib/meforum-videos"
 import Link from "next/link"
 import { Play } from "lucide-react"
 
-const fallbackVideoYears = [
+const videoYears = [
   { year: 2025, videoCount: 7 },
   { year: 2024, videoCount: 3 },
   { year: 2023, videoCount: 10 },
@@ -29,23 +28,6 @@ export default async function VideosPage({
 }) {
   const { locale } = await params
   const dict = await getDictionary(locale)
-
-  const fallbackCountByYear = new Map(fallbackVideoYears.map((x) => [x.year, x.videoCount]))
-
-  const legacyCounts = await Promise.all(
-    LEGACY_VIDEO_YEARS.map(async (year) => {
-      try {
-        const videos = await fetchLegacyVideosByYear(year)
-        return { year: Number(year), videoCount: videos.length }
-      } catch {
-        return { year: Number(year), videoCount: fallbackCountByYear.get(Number(year)) ?? 0 }
-      }
-    })
-  )
-
-  const videoYears = [{ year: 2025, videoCount: fallbackCountByYear.get(2025) ?? 0 }, ...legacyCounts].sort(
-    (a, b) => b.year - a.year
-  )
 
   return (
     <main className="min-h-screen">

@@ -1,8 +1,8 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { getDictionary } from "@/lib/dictionary"
-import type { Locale } from "@/lib/i18n"
-import { fetchLegacyVideosByYear, LEGACY_VIDEO_YEARS, youtubeIdToEmbedUrl, youtubeIdToUrl } from "@/lib/meforum-videos"
+import { locales, type Locale } from "@/lib/i18n"
+import { youtubeIdToEmbedUrl } from "@/lib/meforum-videos"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink } from "lucide-react"
@@ -104,7 +104,13 @@ const videosByYear: Record<string, Video[]> = {
   ],
 }
 
-const validYears = ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2018", "2019", "2022", "2023", "2024", "2025"]
+const validYears = Object.keys(videosByYear)
+
+export function generateStaticParams() {
+  return validYears.flatMap((year) =>
+    locales.map((locale) => ({ locale, year }))
+  )
+}
 
 export default async function VideosYearPage({
   params,
@@ -118,23 +124,7 @@ export default async function VideosYearPage({
     notFound()
   }
 
-  const videos = await (async () => {
-    // Keep 2025 as the curated list currently used on the site.
-    if (year === "2025") return videosByYear[year] || []
-
-    if (LEGACY_VIDEO_YEARS.includes(year as (typeof LEGACY_VIDEO_YEARS)[number])) {
-      try {
-        const legacy = await fetchLegacyVideosByYear(year)
-        if (legacy.length > 0) {
-          return legacy.map((v) => ({ title: v.title, url: youtubeIdToUrl(v.youtubeId) }))
-        }
-      } catch {
-        // fall back below
-      }
-    }
-
-    return videosByYear[year] || []
-  })()
+  const videos = videosByYear[year] || []
 
   return (
     <main className="min-h-screen">

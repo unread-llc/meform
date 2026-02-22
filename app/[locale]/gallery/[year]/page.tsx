@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { GalleryGrid } from "@/components/gallery-grid"
 import { getDictionary } from "@/lib/dictionary"
-import type { Locale } from "@/lib/i18n"
+import { locales, type Locale } from "@/lib/i18n"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -268,6 +268,12 @@ const galleryImages: Record<string, string[]> = {
 }
 
 const validYears = ["2010", "2011", "2012", "2016", "2018", "2022", "2023", "2024", "2025"]
+
+export function generateStaticParams() {
+  return validYears.flatMap((year) =>
+    locales.map((locale) => ({ locale, year }))
+  )
+}
 
 export default async function GalleryYearPage({
   params,
