@@ -11,4 +11,5 @@ public/LICENSE_PDFJS_QCMS
 public/LICENSE_QCMS
 node_modules/
 .next/
+out/
 .env
