@@ -5,6 +5,7 @@ import {
   GetCommand,
   UpdateCommand,
   QueryCommand,
+  DeleteCommand,
 } from "@aws-sdk/lib-dynamodb"
 
 // No explicit credentials — on Amplify, the SDK uses the IAM service role
@@ -85,6 +86,15 @@ export async function getRegistrationByCheckoutId(
     })
   )
   return (result.Items?.[0] as RegistrationRecord) || null
+}
+
+export async function deleteRegistration(id: string): Promise<void> {
+  await docClient.send(
+    new DeleteCommand({
+      TableName: TABLE_NAME,
+      Key: { id },
+    })
+  )
 }
 
 export async function markRegistrationPaid(

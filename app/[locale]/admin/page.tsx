@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Lock, Download, Search, Eye, X } from "lucide-react"
+import { Lock, Download, Search, Eye, X, Trash2 } from "lucide-react"
 
 interface Registration {
   id: string
@@ -61,6 +61,24 @@ export default function AdminPage() {
       setViewingImages(null)
     } finally {
       setImgLoading(false)
+    }
+  }
+
+  const handleDelete = async (r: Registration) => {
+    if (!confirm(`Delete registration for ${r.firstname} ${r.lastname}?`)) return
+    try {
+      const res = await fetch("/api/admin/registrations/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({ id: r.id }),
+      })
+      if (!res.ok) throw new Error("Failed to delete")
+      setRegistrations((prev) => prev.filter((reg) => reg.id !== r.id))
+    } catch {
+      alert("Failed to delete registration")
     }
   }
 
@@ -207,6 +225,7 @@ export default function AdminPage() {
                 <th className="text-left p-3 font-medium">Status</th>
                 <th className="text-left p-3 font-medium">Photos</th>
                 <th className="text-left p-3 font-medium">Date</th>
+                <th className="text-left p-3 font-medium"></th>
               </tr>
             </thead>
             <tbody>
@@ -253,11 +272,21 @@ export default function AdminPage() {
                   <td className="p-3 whitespace-nowrap text-muted-foreground">
                     {r.created_at ? new Date(r.created_at).toLocaleDateString() : ""}
                   </td>
+                  <td className="p-3">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 px-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+                      onClick={() => handleDelete(r)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </td>
                 </tr>
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={11} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={12} className="p-8 text-center text-muted-foreground">
                     {search ? "No matching registrations" : "No registrations yet"}
                   </td>
                 </tr>

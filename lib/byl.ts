@@ -28,6 +28,7 @@ interface CreateCheckoutParams {
 interface CheckoutResponse {
   id: string
   url: string
+  _raw?: any
 }
 
 export async function createCheckout(
@@ -70,11 +71,22 @@ export async function createCheckout(
     throw new Error(`Failed to create checkout: ${response.status} ${errorText}`)
   }
 
-  const data = await response.json()
-  console.log("byl.mn checkout response:", JSON.stringify(data))
+  const raw = await response.text()
+  console.log("byl.mn checkout raw response:", raw)
+  let data: any
+  try {
+    data = JSON.parse(raw)
+  } catch {
+    throw new Error(`byl.mn returned non-JSON: ${raw}`)
+  }
+
+  // Flatten: the response may be wrapped in a "data" key
+  const d = data.data || data
+
   return {
-    id: data.id || data.checkout_id || "",
-    url: data.url || data.checkout_url || data.redirect_url || "",
+    id: d.id || d.checkout_id || "",
+    url: d.url || d.checkout_url || d.redirect_url || "",
+    _raw: data,
   }
 }
 
