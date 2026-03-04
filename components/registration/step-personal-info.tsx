@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { sectorOptions, genderOptions } from "@/lib/registration-schema"
+import { CountryCombobox } from "./country-combobox"
 
 interface StepPersonalInfoProps {
   dict: any
@@ -107,9 +108,9 @@ export function StepPersonalInfo({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>{t.nation} *</Label>
-          <Input
+          <CountryCombobox
             value={data.nation || ""}
-            onChange={(e) => onChange("nation", e.target.value)}
+            onChange={(v) => onChange("nation", v)}
             placeholder={t.nationPlaceholder}
           />
           {errors.nation && (
@@ -118,9 +119,9 @@ export function StepPersonalInfo({
         </div>
         <div className="space-y-2">
           <Label>{t.residence} *</Label>
-          <Input
+          <CountryCombobox
             value={data.residence || ""}
-            onChange={(e) => onChange("residence", e.target.value)}
+            onChange={(v) => onChange("residence", v)}
             placeholder={t.residencePlaceholder}
           />
           {errors.residence && (

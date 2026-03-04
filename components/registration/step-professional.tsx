@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { PhoneInput } from "./phone-input"
 
 interface StepProfessionalProps {
   dict: any
@@ -56,10 +57,10 @@ export function StepProfessional({
 
       <div className="space-y-2">
         <Label>{t.phone} *</Label>
-        <Input
-          type="tel"
+        <PhoneInput
           value={data.phone || ""}
-          onChange={(e) => onChange("phone", e.target.value)}
+          onChange={(v) => onChange("phone", v)}
+          placeholder={t.phonePlaceholder || "Phone number"}
         />
         {errors.phone && (
           <p className="text-sm text-destructive">{errors.phone}</p>
