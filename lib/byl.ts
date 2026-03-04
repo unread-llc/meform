@@ -71,9 +71,10 @@ export async function createCheckout(
   }
 
   const data = await response.json()
+  console.log("byl.mn checkout response:", JSON.stringify(data))
   return {
-    id: data.id,
-    url: data.url,
+    id: data.id || data.checkout_id || "",
+    url: data.url || data.checkout_url || data.redirect_url || "",
   }
 }
 

@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 // No explicit credentials — on Amplify, the SDK uses the IAM service role
@@ -33,4 +33,12 @@ export async function getPresignedUploadUrl(
     unhoistableHeaders: new Set(["content-type"]),
   })
   return { url, key }
+}
+
+export async function getPresignedViewUrl(key: string): Promise<string> {
+  const command = new GetObjectCommand({
+    Bucket: BUCKET,
+    Key: key,
+  })
+  return getSignedUrl(s3Client, command, { expiresIn: 3600 })
 }

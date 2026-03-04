@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Lock, Download, Search } from "lucide-react"
+import { Lock, Download, Search, Eye, X } from "lucide-react"
 
 interface Registration {
   id: string
@@ -21,6 +21,8 @@ interface Registration {
   birth: string
   passportno: string
   visa: string
+  passport_img?: string
+  img?: string
   payment_status: string
   created_at: string
   fee_amount: number
@@ -34,6 +36,33 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [search, setSearch] = useState("")
+  const [viewingImages, setViewingImages] = useState<{ name: string; passportUrl?: string; photoUrl?: string } | null>(null)
+  const [imgLoading, setImgLoading] = useState(false)
+
+  const viewImages = async (r: Registration) => {
+    setImgLoading(true)
+    setViewingImages({ name: `${r.firstname} ${r.lastname}` })
+    try {
+      const urls: { passportUrl?: string; photoUrl?: string } = {}
+      if (r.passport_img) {
+        const res = await fetch(`/api/admin/image?key=${encodeURIComponent(r.passport_img)}`, {
+          headers: { "x-admin-password": password },
+        })
+        if (res.ok) urls.passportUrl = (await res.json()).url
+      }
+      if (r.img) {
+        const res = await fetch(`/api/admin/image?key=${encodeURIComponent(r.img)}`, {
+          headers: { "x-admin-password": password },
+        })
+        if (res.ok) urls.photoUrl = (await res.json()).url
+      }
+      setViewingImages({ name: `${r.firstname} ${r.lastname}`, ...urls })
+    } catch {
+      setViewingImages(null)
+    } finally {
+      setImgLoading(false)
+    }
+  }
 
   const fetchRegistrations = async (pwd: string) => {
     setLoading(true)
@@ -176,6 +205,7 @@ export default function AdminPage() {
                 <th className="text-left p-3 font-medium">Nation</th>
                 <th className="text-left p-3 font-medium">Fee</th>
                 <th className="text-left p-3 font-medium">Status</th>
+                <th className="text-left p-3 font-medium">Photos</th>
                 <th className="text-left p-3 font-medium">Date</th>
               </tr>
             </thead>
@@ -206,6 +236,20 @@ export default function AdminPage() {
                       {r.payment_status}
                     </span>
                   </td>
+                  <td className="p-3">
+                    {(r.passport_img || r.img) ? (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 px-2"
+                        onClick={() => viewImages(r)}
+                      >
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                    ) : (
+                      <span className="text-muted-foreground text-xs">—</span>
+                    )}
+                  </td>
                   <td className="p-3 whitespace-nowrap text-muted-foreground">
                     {r.created_at ? new Date(r.created_at).toLocaleDateString() : ""}
                   </td>
@@ -213,7 +257,7 @@ export default function AdminPage() {
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={10} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={11} className="p-8 text-center text-muted-foreground">
                     {search ? "No matching registrations" : "No registrations yet"}
                   </td>
                 </tr>
@@ -221,6 +265,42 @@ export default function AdminPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Image viewer modal */}
+        {viewingImages && (
+          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onClick={() => setViewingImages(null)}>
+            <div className="bg-background rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-semibold text-lg">{viewingImages.name}</h3>
+                <Button variant="ghost" size="sm" onClick={() => setViewingImages(null)}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+              {imgLoading ? (
+                <p className="text-center text-muted-foreground py-8">Loading images...</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm font-medium mb-2">Passport Photo</p>
+                    {viewingImages.passportUrl ? (
+                      <img src={viewingImages.passportUrl} alt="Passport" className="w-full rounded-lg border object-contain max-h-80" />
+                    ) : (
+                      <div className="w-full h-40 rounded-lg border flex items-center justify-center text-muted-foreground text-sm">No image</div>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium mb-2">Profile Photo</p>
+                    {viewingImages.photoUrl ? (
+                      <img src={viewingImages.photoUrl} alt="Profile" className="w-full rounded-lg border object-contain max-h-80" />
+                    ) : (
+                      <div className="w-full h-40 rounded-lg border flex items-center justify-center text-muted-foreground text-sm">No image</div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

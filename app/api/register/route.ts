@@ -64,6 +64,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       registrationId,
       checkoutUrl: checkout.url,
+      // Debug: remove after confirming byl.mn integration works
+      _debug_checkout: checkout,
     })
   } catch (error: any) {
     console.error("Registration error:", error)
