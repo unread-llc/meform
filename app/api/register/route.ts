@@ -65,10 +65,14 @@ export async function POST(request: NextRequest) {
       registrationId,
       checkoutUrl: checkout.url,
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error("Registration error:", error)
     return NextResponse.json(
-      { error: "Failed to process registration" },
+      {
+        error: "Failed to process registration",
+        details: error?.message || String(error),
+        code: error?.name || error?.Code || undefined,
+      },
       { status: 500 }
     )
   }
