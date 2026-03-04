@@ -7,19 +7,17 @@ import {
   QueryCommand,
 } from "@aws-sdk/lib-dynamodb"
 
+// No explicit credentials — on Amplify, the SDK uses the IAM service role
+// automatically. For local dev, configure ~/.aws/credentials or set
+// AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY in your shell environment.
 const client = new DynamoDBClient({
-  region: process.env.AWS_REGION || "us-east-1",
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-  // Explicitly cap retries — default is 3 but be safe
+  region: process.env.MEF_AWS_REGION || "ap-southeast-1",
   maxAttempts: 3,
 })
 
 const docClient = DynamoDBDocumentClient.from(client)
 
-const TABLE_NAME = process.env.AWS_DYNAMODB_TABLE || "mef-registrations"
+const TABLE_NAME = process.env.MEF_DYNAMODB_TABLE || "mef-registrations"
 
 export interface RegistrationRecord {
   id: string

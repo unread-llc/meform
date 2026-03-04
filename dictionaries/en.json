@@ -422,14 +422,14 @@
       "sector": "Sector",
       "sectorPlaceholder": "Select your sector",
       "sectors": {
-        "government": "Government",
-        "private": "Private Sector",
-        "ngo": "NGO",
-        "academia": "Academia",
+        "government": "Government Institution",
         "media": "Media",
+        "private": "Private Sector",
         "international": "International Organization",
-        "youth": "Youth",
-        "other": "Other"
+        "political_party": "Political Party",
+        "moderator": "Moderator",
+        "panelist": "Panelist",
+        "organizing_team": "Organizing Team"
       },
       "lastname": "Last Name",
       "firstname": "First Name",

@@ -6,6 +6,10 @@ import { locales, type Locale } from "@/lib/i18n"
 import { getDictionary } from "@/lib/dictionary"
 import "../../app/globals.css"
 
+// Force all pages under [locale] to be statically generated at build time.
+// Only API routes (POST-only) will run as Lambda on Amplify.
+export const dynamic = "force-static"
+
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
 export async function generateStaticParams() {

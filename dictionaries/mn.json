@@ -420,13 +420,13 @@
       "sectorPlaceholder": "Салбараа сонгоно уу",
       "sectors": {
         "government": "Төрийн байгууллага",
-        "private": "Хувийн хэвшил",
-        "ngo": "ТББ",
-        "academia": "Эрдэм шинжилгээ",
         "media": "Хэвлэл мэдээлэл",
+        "private": "Хувийн хэвшил",
         "international": "Олон улсын байгууллага",
-        "youth": "Залуучууд",
-        "other": "Бусад"
+        "political_party": "Нам",
+        "moderator": "Модератор",
+        "panelist": "Панелист",
+        "organizing_team": "Зохион байгуулах баг"
       },
       "lastname": "Овог",
       "firstname": "Нэр",

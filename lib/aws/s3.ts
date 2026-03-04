@@ -1,15 +1,14 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
+// No explicit credentials — on Amplify, the SDK uses the IAM service role
+// automatically. For local dev, configure ~/.aws/credentials or set
+// AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY in your shell environment.
 const s3Client = new S3Client({
-  region: process.env.AWS_REGION || "us-east-1",
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
+  region: process.env.MEF_AWS_REGION || "ap-southeast-1",
 })
 
-const BUCKET = process.env.AWS_S3_BUCKET || "mef-registrations"
+const BUCKET = process.env.MEF_S3_BUCKET || "meforum"
 
 export async function getPresignedUploadUrl(
   key: string,

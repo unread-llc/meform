@@ -2,13 +2,13 @@ import { z } from "zod"
 
 export const sectorOptions = [
   "government",
-  "private",
-  "ngo",
-  "academia",
   "media",
+  "private",
   "international",
-  "youth",
-  "other",
+  "political_party",
+  "moderator",
+  "panelist",
+  "organizing_team",
 ] as const
 
 export const genderOptions = ["male", "female", "other"] as const
