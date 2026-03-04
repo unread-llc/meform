@@ -6,6 +6,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 // AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY in your shell environment.
 const s3Client = new S3Client({
   region: process.env.MEF_AWS_REGION || "ap-southeast-1",
+  requestChecksumCalculation: "WHEN_REQUIRED",
+  responseChecksumValidation: "WHEN_REQUIRED",
 })
 
 const BUCKET = process.env.MEF_S3_BUCKET || "meforum"
@@ -13,17 +15,22 @@ const BUCKET = process.env.MEF_S3_BUCKET || "meforum"
 export async function getPresignedUploadUrl(
   key: string,
   contentType: string,
-  maxSizeBytes: number = 5 * 1024 * 1024
+  _maxSizeBytes: number = 5 * 1024 * 1024
 ): Promise<{ url: string; key: string }> {
   const command = new PutObjectCommand({
     Bucket: BUCKET,
     Key: key,
     ContentType: contentType,
-    // Enforce max file size at the S3 level — uploads larger than this
-    // will be rejected by S3 even though the presigned URL is valid.
-    ContentLength: maxSizeBytes,
+    // NOTE: Do NOT set ContentLength here — it forces the upload to be
+    // exactly that size, breaking browser uploads. File size is validated
+    // client-side before upload. S3 bucket lifecycle rules can clean up
+    // oversized objects if needed.
   })
 
-  const url = await getSignedUrl(s3Client, command, { expiresIn: 600 })
+  const url = await getSignedUrl(s3Client, command, {
+    expiresIn: 600,
+    // Only sign the host header — minimizes CORS issues with browsers
+    unhoistableHeaders: new Set(["content-type"]),
+  })
   return { url, key }
 }
