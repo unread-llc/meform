@@ -14,7 +14,7 @@ const s3Client = new S3Client({
 const BUCKET = process.env.MEF_S3_BUCKET || "meforum"
 
 // Max 10 upload requests per IP per 15 minutes
-const RATE_LIMIT = { maxRequests: 10, windowMs: 15 * 60 * 1000 }
+const RATE_LIMIT_OPTS = { maxRequests: 10, windowMs: 15 * 60 * 1000 }
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       request.headers.get("x-real-ip") ||
       "unknown"
-    const { allowed } = rateLimit(ip, RATE_LIMIT)
+    const { allowed } = rateLimit(ip, RATE_LIMIT_OPTS)
     if (!allowed) {
       return NextResponse.json(
         { error: "Too many requests. Please try again later." },
@@ -64,22 +64,27 @@ export async function POST(request: NextRequest) {
 
     const ext = file.name.split(".").pop() || "jpg"
     const key = `registrations/${field}/${uuidv4()}.${ext}`
-    const buffer = Buffer.from(await file.arrayBuffer())
+    const bytes = new Uint8Array(await file.arrayBuffer())
 
     await s3Client.send(
       new PutObjectCommand({
         Bucket: BUCKET,
         Key: key,
-        Body: buffer,
+        Body: bytes,
         ContentType: file.type,
       })
     )
 
     return NextResponse.json({ key })
-  } catch (error) {
+  } catch (error: any) {
     console.error("Upload error:", error)
     return NextResponse.json(
-      { error: "Upload failed" },
+      {
+        error: "Upload failed",
+        // Return details temporarily so we can debug — remove in production
+        details: error?.message || String(error),
+        code: error?.name || error?.Code || undefined,
+      },
       { status: 500 }
     )
   }
