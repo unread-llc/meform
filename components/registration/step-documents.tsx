@@ -49,28 +49,18 @@ function FileUpload({
       setUploadError("")
 
       try {
-        const res = await fetch("/api/register/presign", {
+        const formData = new FormData()
+        formData.append("file", file)
+        formData.append("field", field)
+
+        const res = await fetch("/api/register/upload", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            filename: file.name,
-            contentType: file.type,
-            field,
-          }),
+          body: formData,
         })
 
-        if (!res.ok) throw new Error("Failed to get upload URL")
+        if (!res.ok) throw new Error("Upload failed")
 
-        const { url, key } = await res.json()
-
-        const uploadRes = await fetch(url, {
-          method: "PUT",
-          headers: { "Content-Type": file.type },
-          body: file,
-        })
-
-        if (!uploadRes.ok) throw new Error("Upload failed")
-
+        const { key } = await res.json()
         onChange(field, key)
       } catch {
         setUploadError(t.error)
