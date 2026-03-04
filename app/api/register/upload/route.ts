@@ -11,7 +11,7 @@ const s3Client = new S3Client({
   requestChecksumCalculation: "WHEN_REQUIRED",
   responseChecksumValidation: "WHEN_REQUIRED",
 })
-const BUCKET = process.env.MEF_S3_BUCKET || "meforum"
+const BUCKET = process.env.MEF_S3_BUCKET || "mef-registrations"
 
 // Max 10 upload requests per IP per 15 minutes
 const RATE_LIMIT_OPTS = { maxRequests: 10, windowMs: 15 * 60 * 1000 }

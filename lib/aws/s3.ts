@@ -10,7 +10,7 @@ const s3Client = new S3Client({
   responseChecksumValidation: "WHEN_REQUIRED",
 })
 
-const BUCKET = process.env.MEF_S3_BUCKET || "meforum"
+const BUCKET = process.env.MEF_S3_BUCKET || "mef-registrations"
 
 export async function getPresignedUploadUrl(
   key: string,
