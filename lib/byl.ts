@@ -55,7 +55,7 @@ export async function createCheckout(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        line_items: items,
+        items: items,
         success_url: params.successUrl,
         cancel_url: params.cancelUrl,
         metadata: {
