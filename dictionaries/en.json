@@ -406,7 +406,109 @@
     "location": "Location",
     "registration": "Registration",
     "followUs": "Follow Us",
-    "registrationClosed": "Registration is now closed"
+    "registrationClosed": "Registration is now closed",
+    "registerNow": "Register Now"
+  },
+  "registration": {
+    "title": "Register for MEF 2026",
+    "subtitle": "Join 2,000+ leaders shaping Mongolia's economic future",
+    "steps": {
+      "personal": "Personal Info",
+      "professional": "Professional",
+      "documents": "Documents",
+      "review": "Review"
+    },
+    "fields": {
+      "sector": "Sector",
+      "sectorPlaceholder": "Select your sector",
+      "sectors": {
+        "government": "Government",
+        "private": "Private Sector",
+        "ngo": "NGO",
+        "academia": "Academia",
+        "media": "Media",
+        "international": "International Organization",
+        "youth": "Youth",
+        "other": "Other"
+      },
+      "lastname": "Last Name",
+      "firstname": "First Name",
+      "gender": "Gender",
+      "genders": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      },
+      "birth": "Date of Birth",
+      "nation": "Nationality",
+      "nationPlaceholder": "e.g. Mongolia",
+      "residence": "Country of Residence",
+      "residencePlaceholder": "e.g. Mongolia",
+      "company": "Organization / Company",
+      "position": "Position / Title",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "passportno": "Passport Number",
+      "visa": "Do you need a visa invitation letter?",
+      "visaOptions": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "passportImg": "Passport Photo Page",
+      "passportImgHint": "Upload a clear photo of your passport information page",
+      "img": "Profile Photo",
+      "imgHint": "Upload a professional headshot photo"
+    },
+    "navigation": {
+      "next": "Next",
+      "back": "Back",
+      "submit": "Proceed to Payment"
+    },
+    "review": {
+      "title": "Review Your Registration",
+      "personalInfo": "Personal Information",
+      "professionalInfo": "Professional Information",
+      "documents": "Documents",
+      "fee": "Registration Fee",
+      "domestic": "Domestic Participant",
+      "international": "International Participant",
+      "feeAmountMNT": "MNT 1,000,000",
+      "feeAmountUSD": "USD 500",
+      "uploaded": "Uploaded",
+      "notUploaded": "Not uploaded"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "selectSector": "Please select a sector",
+      "selectGender": "Please select a gender",
+      "uploadPassport": "Please upload your passport photo",
+      "uploadPhoto": "Please upload your profile photo"
+    },
+    "upload": {
+      "dragDrop": "Drag & drop or click to upload",
+      "maxSize": "Max file size: 5MB",
+      "uploading": "Uploading...",
+      "uploaded": "File uploaded successfully",
+      "error": "Upload failed. Please try again."
+    },
+    "success": {
+      "title": "Registration Successful!",
+      "subtitle": "Your payment has been confirmed",
+      "description": "Thank you for registering for Mongolia Economic Forum 2026. Your registration details are below.",
+      "registrationId": "Registration ID",
+      "qrCode": "Your QR Code",
+      "qrDescription": "Present this QR code at the event for check-in.",
+      "backToHome": "Back to Home"
+    },
+    "cancel": {
+      "title": "Payment Cancelled",
+      "description": "Your payment was not completed. You can try again to complete your registration.",
+      "tryAgain": "Try Again",
+      "backToHome": "Back to Home"
+    },
+    "processing": "Processing your registration..."
   },
   "footer": {
     "description": "The premier platform for dialogue on Mongolia's economic development, bringing together leaders from government, business, and civil society since 2010.",

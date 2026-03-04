@@ -1,0 +1,109 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
+import {
+  DynamoDBDocumentClient,
+  PutCommand,
+  GetCommand,
+  UpdateCommand,
+  QueryCommand,
+} from "@aws-sdk/lib-dynamodb"
+
+const client = new DynamoDBClient({
+  region: process.env.AWS_REGION || "us-east-1",
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+  // Explicitly cap retries — default is 3 but be safe
+  maxAttempts: 3,
+})
+
+const docClient = DynamoDBDocumentClient.from(client)
+
+const TABLE_NAME = process.env.AWS_DYNAMODB_TABLE || "mef-registrations"
+
+export interface RegistrationRecord {
+  id: string
+  sector: string
+  lastname: string
+  firstname: string
+  gender: string
+  birth: string
+  nation: string
+  residence: string
+  company: string
+  position: string
+  email: string
+  phone: string
+  passportno: string
+  visa: string
+  passport_img: string
+  img: string
+  fee_amount: number
+  fee_currency: string
+  checkout_id?: string
+  checkout_url?: string
+  payment_status: "pending" | "paid"
+  created_at: string
+  paid_at?: string
+}
+
+export async function createRegistration(
+  record: RegistrationRecord
+): Promise<void> {
+  await docClient.send(
+    new PutCommand({
+      TableName: TABLE_NAME,
+      Item: record,
+      ConditionExpression: "attribute_not_exists(id)",
+    })
+  )
+}
+
+export async function getRegistration(
+  id: string
+): Promise<RegistrationRecord | null> {
+  const result = await docClient.send(
+    new GetCommand({
+      TableName: TABLE_NAME,
+      Key: { id },
+    })
+  )
+  return (result.Item as RegistrationRecord) || null
+}
+
+export async function getRegistrationByCheckoutId(
+  checkoutId: string
+): Promise<RegistrationRecord | null> {
+  const result = await docClient.send(
+    new QueryCommand({
+      TableName: TABLE_NAME,
+      IndexName: "checkout_id-index",
+      KeyConditionExpression: "checkout_id = :cid",
+      ExpressionAttributeValues: {
+        ":cid": checkoutId,
+      },
+      // Only need 1 result — stop scanning after finding it
+      Limit: 1,
+    })
+  )
+  return (result.Items?.[0] as RegistrationRecord) || null
+}
+
+export async function markRegistrationPaid(
+  id: string
+): Promise<void> {
+  await docClient.send(
+    new UpdateCommand({
+      TableName: TABLE_NAME,
+      Key: { id },
+      UpdateExpression:
+        "SET payment_status = :status, paid_at = :paidAt",
+      // Only update if not already paid — prevents redundant writes
+      ConditionExpression: "payment_status <> :status",
+      ExpressionAttributeValues: {
+        ":status": "paid",
+        ":paidAt": new Date().toISOString(),
+      },
+    })
+  )
+}

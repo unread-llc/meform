@@ -5,9 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface ContactSectionProps {
   dict: any
+  locale?: string
 }
 
-export function ContactSection({ dict }: ContactSectionProps) {
+export function ContactSection({ dict, locale = "en" }: ContactSectionProps) {
   return (
     <section id="contact" className="py-20 lg:py-32 bg-secondary/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,8 +28,10 @@ export function ContactSection({ dict }: ContactSectionProps) {
 
             <CardContent className="space-y-8">
               <div>
-                <Button size="lg" disabled className="w-full sm:w-auto">
-                  {dict.contact.registrationClosed}
+                <Button size="lg" className="w-full sm:w-auto" asChild>
+                  <Link href={`/${locale}/register`}>
+                    {dict.contact.registerNow || dict.hero?.registerNow || "Register Now"}
+                  </Link>
                 </Button>
               </div>
 

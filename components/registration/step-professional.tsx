@@ -1,0 +1,70 @@
+"use client"
+
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+interface StepProfessionalProps {
+  dict: any
+  data: Record<string, string>
+  onChange: (field: string, value: string) => void
+  errors: Record<string, string>
+}
+
+export function StepProfessional({
+  dict,
+  data,
+  onChange,
+  errors,
+}: StepProfessionalProps) {
+  const t = dict.registration.fields
+
+  return (
+    <div className="space-y-5">
+      <div className="space-y-2">
+        <Label>{t.company} *</Label>
+        <Input
+          value={data.company || ""}
+          onChange={(e) => onChange("company", e.target.value)}
+        />
+        {errors.company && (
+          <p className="text-sm text-destructive">{errors.company}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <Label>{t.position} *</Label>
+        <Input
+          value={data.position || ""}
+          onChange={(e) => onChange("position", e.target.value)}
+        />
+        {errors.position && (
+          <p className="text-sm text-destructive">{errors.position}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <Label>{t.email} *</Label>
+        <Input
+          type="email"
+          value={data.email || ""}
+          onChange={(e) => onChange("email", e.target.value)}
+        />
+        {errors.email && (
+          <p className="text-sm text-destructive">{errors.email}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <Label>{t.phone} *</Label>
+        <Input
+          type="tel"
+          value={data.phone || ""}
+          onChange={(e) => onChange("phone", e.target.value)}
+        />
+        {errors.phone && (
+          <p className="text-sm text-destructive">{errors.phone}</p>
+        )}
+      </div>
+    </div>
+  )
+}

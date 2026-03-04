@@ -1,0 +1,218 @@
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
+import { cn } from "@/lib/utils"
+import { registrationSchema } from "@/lib/registration-schema"
+import { StepPersonalInfo } from "./step-personal-info"
+import { StepProfessional } from "./step-professional"
+import { StepDocuments } from "./step-documents"
+import { StepReview } from "./step-review"
+import type { Locale } from "@/lib/i18n"
+
+const STEPS = ["personal", "professional", "documents", "review"] as const
+type Step = (typeof STEPS)[number]
+
+const STEP_FIELDS: Record<Step, string[]> = {
+  personal: ["sector", "lastname", "firstname", "gender", "birth", "nation", "residence"],
+  professional: ["company", "position", "email", "phone"],
+  documents: ["passportno", "visa", "passport_img", "img"],
+  review: [],
+}
+
+interface RegistrationFormProps {
+  dict: any
+  locale: Locale
+}
+
+export function RegistrationForm({ dict, locale }: RegistrationFormProps) {
+  const router = useRouter()
+  const [currentStep, setCurrentStep] = useState(0)
+  const [formData, setFormData] = useState<Record<string, string>>({})
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [submitting, setSubmitting] = useState(false)
+
+  const step = STEPS[currentStep]
+  const progress = ((currentStep + 1) / STEPS.length) * 100
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    setErrors((prev) => {
+      const next = { ...prev }
+      delete next[field]
+      return next
+    })
+  }
+
+  const validateStep = (): boolean => {
+    const fields = STEP_FIELDS[step]
+    const newErrors: Record<string, string> = {}
+
+    for (const field of fields) {
+      const value = formData[field]
+      if (!value || value.trim() === "") {
+        newErrors[field] = dict.registration.validation.required
+      }
+    }
+
+    if (formData.email && fields.includes("email")) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = dict.registration.validation.invalidEmail
+      }
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleNext = () => {
+    if (!validateStep()) return
+    if (currentStep < STEPS.length - 1) {
+      setCurrentStep((prev) => prev + 1)
+    }
+  }
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1)
+    }
+  }
+
+  const handleSubmit = async () => {
+    const parsed = registrationSchema.safeParse(formData)
+    if (!parsed.success) {
+      const flatErrors = parsed.error.flatten().fieldErrors
+      const newErrors: Record<string, string> = {}
+      for (const [key, msgs] of Object.entries(flatErrors)) {
+        if (msgs && msgs.length > 0) {
+          newErrors[key] = msgs[0]
+        }
+      }
+      setErrors(newErrors)
+      return
+    }
+
+    setSubmitting(true)
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, locale }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error || "Registration failed")
+      }
+
+      const { checkoutUrl } = await res.json()
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl
+      }
+    } catch (error) {
+      console.error("Submit error:", error)
+      setErrors({ _form: "Failed to process registration. Please try again." })
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Progress bar */}
+      <div className="space-y-3">
+        <div className="flex justify-between">
+          {STEPS.map((s, i) => (
+            <button
+              key={s}
+              onClick={() => {
+                if (i < currentStep) setCurrentStep(i)
+              }}
+              className={cn(
+                "text-xs sm:text-sm font-medium transition-colors",
+                i === currentStep
+                  ? "text-primary"
+                  : i < currentStep
+                    ? "text-foreground cursor-pointer hover:text-primary"
+                    : "text-muted-foreground"
+              )}
+            >
+              <span className="hidden sm:inline">
+                {i + 1}. {dict.registration.steps[s]}
+              </span>
+              <span className="sm:hidden">{i + 1}</span>
+            </button>
+          ))}
+        </div>
+        <Progress value={progress} className="h-2" />
+      </div>
+
+      {/* Step content */}
+      <Card className="rounded-2xl">
+        <CardContent className="pt-6">
+          {step === "personal" && (
+            <StepPersonalInfo
+              dict={dict}
+              data={formData}
+              onChange={handleChange}
+              errors={errors}
+            />
+          )}
+          {step === "professional" && (
+            <StepProfessional
+              dict={dict}
+              data={formData}
+              onChange={handleChange}
+              errors={errors}
+            />
+          )}
+          {step === "documents" && (
+            <StepDocuments
+              dict={dict}
+              data={formData}
+              onChange={handleChange}
+              errors={errors}
+            />
+          )}
+          {step === "review" && <StepReview dict={dict} data={formData} />}
+        </CardContent>
+      </Card>
+
+      {/* Form-level error */}
+      {errors._form && (
+        <p className="text-sm text-destructive text-center">{errors._form}</p>
+      )}
+
+      {/* Navigation buttons */}
+      <div className="flex justify-between gap-4">
+        <Button
+          variant="outline"
+          onClick={handleBack}
+          disabled={currentStep === 0}
+          className="flex-1 sm:flex-none"
+        >
+          {dict.registration.navigation.back}
+        </Button>
+
+        {step === "review" ? (
+          <Button
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="flex-1 sm:flex-none"
+          >
+            {submitting
+              ? dict.registration.processing
+              : dict.registration.navigation.submit}
+          </Button>
+        ) : (
+          <Button onClick={handleNext} className="flex-1 sm:flex-none">
+            {dict.registration.navigation.next}
+          </Button>
+        )}
+      </div>
+    </div>
+  )
+}

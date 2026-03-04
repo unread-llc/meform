@@ -37,7 +37,7 @@ export default async function HomePage({
             <PartnersSection dict={dict} />
             <FAQSection dict={dict} />
             {/* <MongoliaSection dict={dict} /> */}
-            <ContactSection dict={dict} />
+            <ContactSection dict={dict} locale={locale} />
             <Footer dict={dict} locale={locale} />
         </main>
     )
