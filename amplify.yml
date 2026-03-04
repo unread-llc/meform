@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # The lockfile pins macOS-only native binaries (lightningcss,
+        # @tailwindcss/oxide). Remove it so npm resolves the correct
+        # linux-x64 binaries for this build environment.
+        - rm -rf node_modules package-lock.json
+        - npm install
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths: []
