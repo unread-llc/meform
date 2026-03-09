@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { sectorOptions, genderOptions } from "@/lib/registration-schema"
+import { paidSectorOptions, inviteSectorOptions, genderOptions } from "@/lib/registration-schema"
 import { CountryCombobox } from "./country-combobox"
 
 interface StepPersonalInfoProps {
@@ -18,6 +18,7 @@ interface StepPersonalInfoProps {
   data: Record<string, string>
   onChange: (field: string, value: string) => void
   errors: Record<string, string>
+  invite?: boolean
 }
 
 export function StepPersonalInfo({
@@ -25,8 +26,10 @@ export function StepPersonalInfo({
   data,
   onChange,
   errors,
+  invite,
 }: StepPersonalInfoProps) {
   const t = dict.registration.fields
+  const sectors = invite ? inviteSectorOptions : paidSectorOptions
 
   return (
     <div className="space-y-5">
@@ -37,7 +40,7 @@ export function StepPersonalInfo({
             <SelectValue placeholder={t.sectorPlaceholder} />
           </SelectTrigger>
           <SelectContent>
-            {sectorOptions.map((s) => (
+            {sectors.map((s) => (
               <SelectItem key={s} value={s}>
                 {t.sectors[s]}
               </SelectItem>

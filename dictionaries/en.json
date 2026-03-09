@@ -429,7 +429,8 @@
         "political_party": "Political Party",
         "moderator": "Moderator",
         "panelist": "Panelist",
-        "organizing_team": "Organizing Team"
+        "organizing_team": "Organizing Team",
+        "other": "Other"
       },
       "lastname": "Last Name",
       "firstname": "First Name",

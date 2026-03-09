@@ -1,6 +1,14 @@
 import { z } from "zod"
 
-export const sectorOptions = [
+export const paidSectorOptions = [
+  "government",
+  "media",
+  "private",
+  "international",
+  "other",
+] as const
+
+export const inviteSectorOptions = [
   "government",
   "media",
   "private",
@@ -9,7 +17,10 @@ export const sectorOptions = [
   "moderator",
   "panelist",
   "organizing_team",
+  "other",
 ] as const
+
+export const sectorOptions = inviteSectorOptions
 
 export const genderOptions = ["male", "female", "other"] as const
 export const visaOptions = ["yes", "no"] as const

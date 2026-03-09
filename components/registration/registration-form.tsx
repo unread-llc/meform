@@ -169,6 +169,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
               data={formData}
               onChange={handleChange}
               errors={errors}
+              invite={invite}
             />
           )}
           {step === "professional" && (
