@@ -7,6 +7,7 @@ import { calculateFee } from "@/lib/registration-schema"
 interface StepReviewProps {
   dict: any
   data: Record<string, string>
+  invite?: boolean
 }
 
 function ReviewRow({ label, value }: { label: string; value: string }) {
@@ -18,7 +19,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
   )
 }
 
-export function StepReview({ dict, data }: StepReviewProps) {
+export function StepReview({ dict, data, invite }: StepReviewProps) {
   const t = dict.registration
   const f = t.fields
   const r = t.review
@@ -71,20 +72,22 @@ export function StepReview({ dict, data }: StepReviewProps) {
         </CardContent>
       </Card>
 
-      <Card className="rounded-xl border-primary/20 bg-primary/5">
-        <CardContent className="pt-4">
-          <h3 className="font-semibold mb-3">{r.fee}</h3>
-          <Separator className="mb-3" />
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">
-              {isMongolian ? r.domestic : r.international}
-            </span>
-            <span className="text-lg font-bold text-primary">
-              {isMongolian ? r.feeAmountMNT : r.feeAmountUSD}
-            </span>
-          </div>
-        </CardContent>
-      </Card>
+      {!invite && (
+        <Card className="rounded-xl border-primary/20 bg-primary/5">
+          <CardContent className="pt-4">
+            <h3 className="font-semibold mb-3">{r.fee}</h3>
+            <Separator className="mb-3" />
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">
+                {isMongolian ? r.domestic : r.international}
+              </span>
+              <span className="text-lg font-bold text-primary">
+                {isMongolian ? r.feeAmountMNT : r.feeAmountUSD}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 }

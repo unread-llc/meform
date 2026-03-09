@@ -188,7 +188,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
               errors={errors}
             />
           )}
-          {step === "review" && <StepReview dict={dict} data={formData} />}
+          {step === "review" && <StepReview dict={dict} data={formData} invite={invite} />}
         </CardContent>
       </Card>
 
@@ -216,7 +216,9 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
           >
             {submitting
               ? dict.registration.processing
-              : dict.registration.navigation.submit}
+              : invite
+                ? dict.registration.navigation.submitInvite
+                : dict.registration.navigation.submit}
           </Button>
         ) : (
           <Button onClick={handleNext} className="flex-1 sm:flex-none">

@@ -464,7 +464,8 @@
     "navigation": {
       "next": "Next",
       "back": "Back",
-      "submit": "Proceed to Payment"
+      "submit": "Proceed to Payment",
+      "submitInvite": "Complete Registration"
     },
     "review": {
       "title": "Review Your Registration",
@@ -506,7 +507,12 @@
       "registrationId": "Registration ID",
       "qrCode": "Your QR Code",
       "qrDescription": "Present this QR code at the event for check-in.",
-      "backToHome": "Back to Home"
+      "backToHome": "Back to Home",
+      "invalidTitle": "Registration Not Found",
+      "invalidDescription": "This registration ID is invalid or does not exist.",
+      "pendingTitle": "Payment Pending",
+      "pendingSubtitle": "Your payment is being processed",
+      "pendingDescription": "Your registration has been received. The QR code will be available once payment is confirmed."
     },
     "cancel": {
       "title": "Payment Cancelled",
