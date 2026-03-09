@@ -45,6 +45,7 @@ export function StepReview({ dict, data }: StepReviewProps) {
         <CardContent className="pt-4">
           <h3 className="font-semibold mb-3">{r.professionalInfo}</h3>
           <ReviewRow label={f.company} value={data.company} />
+          <ReviewRow label={f.companyRegister} value={data.company_register} />
           <ReviewRow label={f.position} value={data.position} />
           <ReviewRow label={f.email} value={data.email} />
           <ReviewRow label={f.phone} value={data.phone} />

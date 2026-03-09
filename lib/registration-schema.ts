@@ -23,6 +23,7 @@ export const registrationSchema = z.object({
   nation: z.string().min(1),
   residence: z.string().min(1),
   company: z.string().min(1),
+  company_register: z.string().min(1),
   position: z.string().min(1),
   email: z.string().email(),
   phone: z.string().min(1),
@@ -33,6 +34,13 @@ export const registrationSchema = z.object({
 })
 
 export type RegistrationData = z.infer<typeof registrationSchema>
+
+// Mongolian register number: 2 Cyrillic letters + 8 digits (e.g. АБ12345678)
+const MN_REGISTER_REGEX = /^[А-ЯЁӨҮа-яёөү]{2}\d{8}$/
+
+export function isValidMnRegisterNo(value: string): boolean {
+  return MN_REGISTER_REGEX.test(value)
+}
 
 export function calculateFee(nation: string): { amount: number; currency: string } {
   const isMongolian =

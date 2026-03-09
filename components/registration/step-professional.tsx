@@ -33,6 +33,17 @@ export function StepProfessional({
       </div>
 
       <div className="space-y-2">
+        <Label>{t.companyRegister} *</Label>
+        <Input
+          value={data.company_register || ""}
+          onChange={(e) => onChange("company_register", e.target.value)}
+        />
+        {errors.company_register && (
+          <p className="text-sm text-destructive">{errors.company_register}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
         <Label>{t.position} *</Label>
         <Input
           value={data.position || ""}

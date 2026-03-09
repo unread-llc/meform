@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { cn } from "@/lib/utils"
-import { registrationSchema } from "@/lib/registration-schema"
+import { registrationSchema, isValidMnRegisterNo } from "@/lib/registration-schema"
 import { StepPersonalInfo } from "./step-personal-info"
 import { StepProfessional } from "./step-professional"
 import { StepDocuments } from "./step-documents"
@@ -18,7 +18,7 @@ type Step = (typeof STEPS)[number]
 
 const STEP_FIELDS: Record<Step, string[]> = {
   personal: ["sector", "lastname", "firstname", "gender", "birth", "nation", "residence"],
-  professional: ["company", "position", "email", "phone"],
+  professional: ["company", "company_register", "position", "email", "phone"],
   documents: ["passportno", "visa", "passport_img", "img"],
   review: [],
 }
@@ -26,9 +26,10 @@ const STEP_FIELDS: Record<Step, string[]> = {
 interface RegistrationFormProps {
   dict: any
   locale: Locale
+  invite?: boolean
 }
 
-export function RegistrationForm({ dict, locale }: RegistrationFormProps) {
+export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps) {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<Record<string, string>>({})
@@ -65,6 +66,12 @@ export function RegistrationForm({ dict, locale }: RegistrationFormProps) {
       }
     }
 
+    if (formData.passportno && fields.includes("passportno") && locale === "mn") {
+      if (!isValidMnRegisterNo(formData.passportno)) {
+        newErrors.passportno = dict.registration.validation.invalidRegisterNo
+      }
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -98,7 +105,8 @@ export function RegistrationForm({ dict, locale }: RegistrationFormProps) {
 
     setSubmitting(true)
     try {
-      const res = await fetch("/api/register", {
+      const endpoint = invite ? "/api/register/invite" : "/api/register"
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, locale }),
@@ -109,9 +117,11 @@ export function RegistrationForm({ dict, locale }: RegistrationFormProps) {
         throw new Error(err.error || "Registration failed")
       }
 
-      const { checkoutUrl } = await res.json()
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl
+      const result = await res.json()
+      if (invite) {
+        router.push(`/${locale}/register/success?registration_id=${result.registrationId}`)
+      } else if (result.checkoutUrl) {
+        window.location.href = result.checkoutUrl
       }
     } catch (error) {
       console.error("Submit error:", error)

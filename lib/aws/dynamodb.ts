@@ -30,6 +30,7 @@ export interface RegistrationRecord {
   nation: string
   residence: string
   company: string
+  company_register: string
   position: string
   email: string
   phone: string
@@ -42,6 +43,8 @@ export interface RegistrationRecord {
   checkout_id?: string
   checkout_url?: string
   payment_status: "pending" | "paid"
+  is_invite?: boolean
+  locale?: string
   created_at: string
   paid_at?: string
 }

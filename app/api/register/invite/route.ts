@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
 import { v4 as uuidv4 } from "uuid"
-import { registrationSchema, calculateFee } from "@/lib/registration-schema"
+import { registrationSchema } from "@/lib/registration-schema"
 import { createRegistration, type RegistrationRecord } from "@/lib/aws/dynamodb"
-import { createCheckout } from "@/lib/byl"
+import { sendRegistrationEmail } from "@/lib/aws/ses"
 import { rateLimit } from "@/lib/rate-limit"
 
-// Max 5 registration attempts per IP per 15 minutes
 const RATE_LIMIT = { maxRequests: 5, windowMs: 15 * 60 * 1000 }
 
 export async function POST(request: NextRequest) {
   try {
-    // --- Rate limiting ---
     const ip =
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       request.headers.get("x-real-ip") ||
@@ -35,47 +33,32 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data
-    const fee = calculateFee(data.nation)
     const registrationId = uuidv4()
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-
-    const checkout = await createCheckout({
-      registrationId,
-      amount: fee.amount,
-      currency: fee.currency,
-      description: `MEF 2026 Registration - ${data.firstname} ${data.lastname}`,
-      successUrl: `${appUrl}/${locale}/register/success?registration_id=${registrationId}`,
-      cancelUrl: `${appUrl}/${locale}/register/cancel`,
-    })
 
     const record: RegistrationRecord = {
       id: registrationId,
       ...data,
-      fee_amount: fee.amount,
-      fee_currency: fee.currency,
-      checkout_id: checkout.id,
-      checkout_url: checkout.url,
-      payment_status: "pending",
+      fee_amount: 0,
+      fee_currency: "MNT",
+      payment_status: "paid",
+      is_invite: true,
       locale,
       created_at: new Date().toISOString(),
     }
 
     await createRegistration(record)
 
-    return NextResponse.json({
-      registrationId,
-      checkoutUrl: checkout.url,
-      // Debug: remove after confirming byl.mn integration works
-      _debug_checkout: checkout,
-      _debug_raw_byl: checkout._raw,
-    })
+    await sendRegistrationEmail(record, locale).catch((err) =>
+      console.error("Failed to send invite registration email:", err)
+    )
+
+    return NextResponse.json({ registrationId })
   } catch (error: any) {
-    console.error("Registration error:", error)
+    console.error("Invite registration error:", error)
     return NextResponse.json(
       {
         error: "Failed to process registration",
         details: error?.message || String(error),
-        code: error?.name || error?.Code || undefined,
       },
       { status: 500 }
     )

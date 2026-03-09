@@ -445,6 +445,7 @@
       "residence": "Country of Residence",
       "residencePlaceholder": "e.g. Mongolia",
       "company": "Organization / Company",
+      "companyRegister": "Company Register Code",
       "position": "Position / Title",
       "email": "Email Address",
       "phone": "Phone Number",
@@ -484,7 +485,8 @@
       "selectSector": "Please select a sector",
       "selectGender": "Please select a gender",
       "uploadPassport": "Please upload your passport photo",
-      "uploadPhoto": "Please upload your profile photo"
+      "uploadPhoto": "Please upload your profile photo",
+      "invalidRegisterNo": "Please enter a valid register number (e.g. АБ12345678)"
     },
     "upload": {
       "dragDrop": "Drag & drop or click to upload",
