@@ -13,6 +13,7 @@ frontend:
         - echo "MEF_S3_BUCKET is set to [$MEF_S3_BUCKET]"
         - echo "MEF_DYNAMODB_TABLE is set to [$MEF_DYNAMODB_TABLE]"
         - echo "MEF_AWS_REGION is set to [$MEF_AWS_REGION]"
+        - echo "NEXT_PUBLIC_APP_URL is set to [$NEXT_PUBLIC_APP_URL]"
         - npm run build
   artifacts:
     baseDirectory: .next

@@ -58,12 +58,18 @@ function FileUpload({
           body: formData,
         })
 
-        if (!res.ok) throw new Error("Upload failed")
-
-        const { key } = await res.json()
-        onChange(field, key)
-      } catch {
-        setUploadError(t.error)
+        const result = await res.json()
+        if (!res.ok) {
+          const faceErrors: Record<string, string> = {
+            no_face: t.noFace,
+            multiple_faces: t.multipleFaces,
+            low_confidence: t.lowConfidence,
+          }
+          throw new Error(faceErrors[result.error] || t.error)
+        }
+        onChange(field, result.key)
+      } catch (err: any) {
+        setUploadError(err.message || t.error)
       } finally {
         setUploading(false)
       }

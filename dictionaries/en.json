@@ -491,7 +491,10 @@
       "maxSize": "Max file size: 5MB",
       "uploading": "Uploading...",
       "uploaded": "File uploaded successfully",
-      "error": "Upload failed. Please try again."
+      "error": "Upload failed. Please try again.",
+      "noFace": "No face detected. Please upload a clear photo of your face.",
+      "multipleFaces": "Multiple faces detected. Please upload a photo with only your face.",
+      "lowConfidence": "Face is not clear enough. Please upload a higher quality photo."
     },
     "success": {
       "title": "Registration Successful!",
