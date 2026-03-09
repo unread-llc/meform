@@ -24,6 +24,7 @@ interface Registration {
   passport_img?: string
   img?: string
   payment_status: string
+  is_invite?: boolean
   created_at: string
   fee_amount: number
   fee_currency: string
@@ -115,13 +116,13 @@ export default function AdminPage() {
       "ID", "First Name", "Last Name", "Email", "Phone", "Company",
       "Position", "Sector", "Nationality", "Residence", "Gender",
       "Date of Birth", "Passport No", "Visa Needed", "Payment Status",
-      "Fee", "Currency", "Registered At",
+      "Invite", "Fee", "Currency", "Registered At",
     ]
     const rows = registrations.map((r) => [
       r.id, r.firstname, r.lastname, r.email, r.phone, r.company,
       r.position, r.sector, r.nation, r.residence, r.gender,
       r.birth, r.passportno, r.visa, r.payment_status,
-      r.fee_amount, r.fee_currency, r.created_at,
+      r.is_invite ? "yes" : "no", r.fee_amount, r.fee_currency, r.created_at,
     ])
     const csv = [headers, ...rows].map((row) =>
       row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(",")
@@ -223,6 +224,7 @@ export default function AdminPage() {
                 <th className="text-left p-3 font-medium">Nation</th>
                 <th className="text-left p-3 font-medium">Fee</th>
                 <th className="text-left p-3 font-medium">Status</th>
+                <th className="text-left p-3 font-medium">Invite</th>
                 <th className="text-left p-3 font-medium">Photos</th>
                 <th className="text-left p-3 font-medium">Date</th>
                 <th className="text-left p-3 font-medium"></th>
@@ -256,6 +258,15 @@ export default function AdminPage() {
                     </span>
                   </td>
                   <td className="p-3">
+                    {r.is_invite ? (
+                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                        invite
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground text-xs">—</span>
+                    )}
+                  </td>
+                  <td className="p-3">
                     {(r.passport_img || r.img) ? (
                       <Button
                         variant="ghost"
@@ -286,7 +297,7 @@ export default function AdminPage() {
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={12} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={13} className="p-8 text-center text-muted-foreground">
                     {search ? "No matching registrations" : "No registrations yet"}
                   </td>
                 </tr>

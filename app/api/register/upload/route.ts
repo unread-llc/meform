@@ -18,8 +18,8 @@ const rekognitionClient = new RekognitionClient({
   region: process.env.MEF_AWS_REGION || "ap-southeast-1",
 })
 
-// Max 10 upload requests per IP per 15 minutes
-const RATE_LIMIT_OPTS = { maxRequests: 10, windowMs: 15 * 60 * 1000 }
+// Max 30 upload requests per IP per 15 minutes
+const RATE_LIMIT_OPTS = { maxRequests: 30, windowMs: 15 * 60 * 1000 }
 
 export async function POST(request: NextRequest) {
   try {

@@ -5,8 +5,8 @@ import { createRegistration, type RegistrationRecord } from "@/lib/aws/dynamodb"
 import { createCheckout } from "@/lib/byl"
 import { rateLimit } from "@/lib/rate-limit"
 
-// Max 5 registration attempts per IP per 15 minutes
-const RATE_LIMIT = { maxRequests: 5, windowMs: 15 * 60 * 1000 }
+// Max 20 registration attempts per IP per 15 minutes
+const RATE_LIMIT = { maxRequests: 20, windowMs: 15 * 60 * 1000 }
 
 export async function POST(request: NextRequest) {
   try {
