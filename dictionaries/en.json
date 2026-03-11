@@ -478,6 +478,9 @@
       "feeAmountMNT": "MNT 1,000,000",
       "feeAmountUSD": "USD 500",
       "mntEquivalent": "MNT equivalent",
+      "paymentMethod": "Payment Method",
+      "golomt": "Card Payment (Golomt)",
+      "byl": "byl.mn",
       "uploaded": "Uploaded",
       "notUploaded": "Not uploaded"
     },

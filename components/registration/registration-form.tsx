@@ -188,7 +188,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
               errors={errors}
             />
           )}
-          {step === "review" && <StepReview dict={dict} data={formData} invite={invite} />}
+          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} />}
         </CardContent>
       </Card>
 

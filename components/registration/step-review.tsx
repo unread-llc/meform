@@ -8,6 +8,7 @@ import { calculateFee } from "@/lib/registration-schema"
 interface StepReviewProps {
   dict: any
   data: Record<string, string>
+  onChange?: (field: string, value: string) => void
   invite?: boolean
 }
 
@@ -20,7 +21,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
   )
 }
 
-export function StepReview({ dict, data, invite }: StepReviewProps) {
+export function StepReview({ dict, data, onChange, invite }: StepReviewProps) {
   const t = dict.registration
   const f = t.fields
   const r = t.review
@@ -41,10 +42,19 @@ export function StepReview({ dict, data, invite }: StepReviewProps) {
     }
   }, [isMongolian])
 
+  // Default payment method: golomt for all, but set it if not already chosen
+  useEffect(() => {
+    if (!invite && !data.payment_method) {
+      onChange?.("payment_method", "golomt")
+    }
+  }, [invite, data.payment_method, onChange])
+
   const mntEquivalent =
     !isMongolian && exchangeRate
       ? Math.round(fee.amount * exchangeRate)
       : null
+
+  const selectedMethod = data.payment_method || "golomt"
 
   return (
     <div className="space-y-6">
@@ -114,6 +124,35 @@ export function StepReview({ dict, data, invite }: StepReviewProps) {
                 </span>
               </div>
             )}
+
+            <Separator className="my-3" />
+            <h3 className="font-semibold mb-3">{r.paymentMethod}</h3>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => onChange?.("payment_method", "golomt")}
+                className={`flex-1 rounded-lg border-2 p-3 text-center transition-colors ${
+                  selectedMethod === "golomt"
+                    ? "border-primary bg-primary/10"
+                    : "border-muted hover:border-primary/40"
+                }`}
+              >
+                <span className="text-sm font-medium">{r.golomt}</span>
+              </button>
+              {isMongolian && (
+                <button
+                  type="button"
+                  onClick={() => onChange?.("payment_method", "byl")}
+                  className={`flex-1 rounded-lg border-2 p-3 text-center transition-colors ${
+                    selectedMethod === "byl"
+                      ? "border-primary bg-primary/10"
+                      : "border-muted hover:border-primary/40"
+                  }`}
+                >
+                  <span className="text-sm font-medium">{r.byl}</span>
+                </button>
+              )}
+            </div>
           </CardContent>
         </Card>
       )}

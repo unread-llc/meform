@@ -8,9 +8,6 @@ import { sendInvoiceEmail } from "@/lib/aws/ses"
 import { rateLimit } from "@/lib/rate-limit"
 import { convertUsdToMnt } from "@/lib/exchange-rate"
 
-// "golomt" or "byl" — set via env to switch payment provider
-const PAYMENT_PROVIDER = process.env.PAYMENT_PROVIDER || "golomt"
-
 // Max 20 registration attempts per IP per 15 minutes
 const RATE_LIMIT = { maxRequests: 20, windowMs: 15 * 60 * 1000 }
 
@@ -30,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { locale = "en", ...formData } = body
+    const { locale = "en", payment_method, ...formData } = body
 
     const parsed = registrationSchema.safeParse(formData)
     if (!parsed.success) {
@@ -45,13 +42,8 @@ export async function POST(request: NextRequest) {
     const registrationId = uuidv4()
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 
-    console.log("--- Registration Debug ---")
-    console.log("PAYMENT_PROVIDER:", PAYMENT_PROVIDER)
-    console.log("GOLOMT_BASE_URL:", process.env.GOLOMT_BASE_URL || "(not set, using default)")
-    console.log("GOLOMT_TOKEN:", process.env.GOLOMT_TOKEN ? `set (${process.env.GOLOMT_TOKEN.length} chars)` : "NOT SET")
-    console.log("GOLOMT_SECRET:", process.env.GOLOMT_SECRET ? `set (${process.env.GOLOMT_SECRET.length} chars)` : "NOT SET")
-    console.log("GOLOMT_CALLBACK:", process.env.GOLOMT_CALLBACK || "(not set)")
-    console.log("Fee:", fee, "→ checkoutAmount will be calculated next")
+    // User-selected payment method, default to golomt
+    const paymentProvider = payment_method === "byl" ? "byl" : "golomt"
 
     // Convert USD to MNT for international participants
     let checkoutAmount = fee.amount
@@ -70,7 +62,7 @@ export async function POST(request: NextRequest) {
     let checkoutId = ""
     let checkoutUrl = ""
 
-    if (PAYMENT_PROVIDER === "golomt") {
+    if (paymentProvider === "golomt") {
       const callbackUrl = `${appUrl}/${locale}/register/success?registration_id=${registrationId}`
       const invoice = await createGolomtInvoice({
         registrationId,
@@ -104,7 +96,7 @@ export async function POST(request: NextRequest) {
       checkout_id: checkoutId,
       checkout_url: checkoutUrl,
       payment_status: "pending",
-      payment_provider: PAYMENT_PROVIDER,
+      payment_provider: paymentProvider,
       locale,
       created_at: new Date().toISOString(),
     }
