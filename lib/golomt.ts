@@ -174,7 +174,7 @@ export async function checkGolomtTransaction(
   // Verify response checksum
   const expectedChecksum = hmacChecksum(
     config.secret,
-    result.transactionId + result.errorCode + result.amount + result.token
+    result.transactionId + result.errorCode + result.amount + (result.token || "")
   )
   if (result.checksum !== expectedChecksum) {
     throw new Error(`${result.errorCode}:${result.errorDesc}`)
