@@ -19,11 +19,16 @@ export async function GET(request: NextRequest) {
     registration.payment_status === "pending" &&
     registration.payment_provider === "golomt"
   ) {
+    console.log("Verify: checking Golomt payment for", registration.id)
+    console.log("Verify: GOLOMT_SECRET set?", !!process.env.GOLOMT_SECRET)
+    console.log("Verify: GOLOMT_TOKEN set?", !!process.env.GOLOMT_TOKEN)
     try {
       const txn = await checkGolomtTransaction(registration.id)
+      console.log("Verify: Golomt response:", txn.errorCode, txn.errorDesc)
       if (txn.errorCode === GOLOMT_SUCCESS_CODE) {
         await markRegistrationPaid(registration.id)
         registration.payment_status = "paid"
+        console.log("Verify: marked as paid:", registration.id)
         await sendRegistrationEmail(registration, registration.locale).catch(
           (err) => console.error("Failed to send registration email:", err)
         )
