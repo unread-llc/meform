@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Lock, Download, Search, Eye, X, Trash2 } from "lucide-react"
+import { Lock, Download, Search, Eye, X, Trash2, Mail } from "lucide-react"
 
 interface Registration {
   id: string
@@ -41,6 +41,33 @@ export default function AdminPage() {
   const [search, setSearch] = useState("")
   const [viewingImages, setViewingImages] = useState<{ name: string; passportUrl?: string; photoUrl?: string } | null>(null)
   const [imgLoading, setImgLoading] = useState(false)
+  const [emailMenuId, setEmailMenuId] = useState<string | null>(null)
+  const [sendingEmail, setSendingEmail] = useState(false)
+
+  const handleSendEmail = async (id: string, type: "confirmation" | "invoice") => {
+    setSendingEmail(true)
+    setEmailMenuId(null)
+    try {
+      const res = await fetch("/api/admin/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({ id, type }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error || "Failed")
+      }
+      const data = await res.json()
+      alert(`Email sent to ${data.email}`)
+    } catch (err: any) {
+      alert(`Failed to send email: ${err.message}`)
+    } finally {
+      setSendingEmail(false)
+    }
+  }
 
   const viewImages = async (r: Registration) => {
     setImgLoading(true)
@@ -229,6 +256,7 @@ export default function AdminPage() {
                 <th className="text-left p-3 font-medium">Invite</th>
                 <th className="text-left p-3 font-medium">Photos</th>
                 <th className="text-left p-3 font-medium">Date</th>
+                <th className="text-left p-3 font-medium">Email</th>
                 <th className="text-left p-3 font-medium"></th>
               </tr>
             </thead>
@@ -289,6 +317,33 @@ export default function AdminPage() {
                   <td className="p-3 whitespace-nowrap text-muted-foreground">
                     {r.created_at ? new Date(r.created_at).toLocaleDateString() : ""}
                   </td>
+                  <td className="p-3 relative">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 px-2"
+                      disabled={sendingEmail}
+                      onClick={() => setEmailMenuId(emailMenuId === r.id ? null : r.id)}
+                    >
+                      <Mail className="w-4 h-4" />
+                    </Button>
+                    {emailMenuId === r.id && (
+                      <div className="absolute right-0 top-full z-10 bg-background border rounded-lg shadow-lg py-1 min-w-[180px]">
+                        <button
+                          className="w-full text-left px-3 py-2 text-sm hover:bg-muted"
+                          onClick={() => handleSendEmail(r.id, "confirmation")}
+                        >
+                          Send Confirmation
+                        </button>
+                        <button
+                          className="w-full text-left px-3 py-2 text-sm hover:bg-muted"
+                          onClick={() => handleSendEmail(r.id, "invoice")}
+                        >
+                          Send Invoice (PDF)
+                        </button>
+                      </div>
+                    )}
+                  </td>
                   <td className="p-3">
                     <Button
                       variant="ghost"
@@ -303,7 +358,7 @@ export default function AdminPage() {
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={13} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={14} className="p-8 text-center text-muted-foreground">
                     {search ? "No matching registrations" : "No registrations yet"}
                   </td>
                 </tr>
