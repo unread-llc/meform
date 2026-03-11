@@ -58,9 +58,11 @@ export function calculateFee(nation: string): { amount: number; currency: string
     nation.toLowerCase() === "mongolia" ||
     nation.toLowerCase() === "mn" ||
     nation.toLowerCase() === "монгол"
+  // TODO: restore original prices after testing
+  // Mongolian: 1,000,000 MNT, International: 500 USD
   return isMongolian
-    ? { amount: 1_000_000, currency: "MNT" }
-    : { amount: 500, currency: "USD" }
+    ? { amount: 100, currency: "MNT" }
+    : { amount: 100, currency: "MNT" }
 }
 
 export function generateQRString(registrationId: string): string {
