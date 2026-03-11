@@ -3,7 +3,13 @@ import { v4 as uuidv4 } from "uuid"
 import { registrationSchema, calculateFee } from "@/lib/registration-schema"
 import { createRegistration, type RegistrationRecord } from "@/lib/aws/dynamodb"
 import { createCheckout } from "@/lib/byl"
+import { createGolomtInvoice } from "@/lib/golomt"
+import { sendInvoiceEmail } from "@/lib/aws/ses"
 import { rateLimit } from "@/lib/rate-limit"
+import { convertUsdToMnt } from "@/lib/exchange-rate"
+
+// "golomt" or "byl" — set via env to switch payment provider
+const PAYMENT_PROVIDER = process.env.PAYMENT_PROVIDER || "golomt"
 
 // Max 20 registration attempts per IP per 15 minutes
 const RATE_LIMIT = { maxRequests: 20, windowMs: 15 * 60 * 1000 }
@@ -39,35 +45,72 @@ export async function POST(request: NextRequest) {
     const registrationId = uuidv4()
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 
-    const checkout = await createCheckout({
-      registrationId,
-      amount: fee.amount,
-      currency: fee.currency,
-      description: `MEF 2026 Registration - ${data.firstname} ${data.lastname}`,
-      successUrl: `${appUrl}/${locale}/register/success?registration_id=${registrationId}`,
-      cancelUrl: `${appUrl}/${locale}/register/cancel`,
-    })
+    // Convert USD to MNT for international participants
+    let checkoutAmount = fee.amount
+    let checkoutCurrency = fee.currency
+    let exchangeRate: number | undefined
+    let originalUsdAmount: number | undefined
+
+    if (fee.currency === "USD") {
+      const conversion = await convertUsdToMnt(fee.amount)
+      originalUsdAmount = fee.amount
+      exchangeRate = conversion.rate
+      checkoutAmount = conversion.mntAmount
+      checkoutCurrency = "MNT"
+    }
+
+    let checkoutId = ""
+    let checkoutUrl = ""
+
+    if (PAYMENT_PROVIDER === "golomt") {
+      const callbackUrl = `${appUrl}/${locale}/register/success?registration_id=${registrationId}`
+      const invoice = await createGolomtInvoice({
+        registrationId,
+        amount: checkoutAmount,
+        callbackUrl,
+      })
+      checkoutId = invoice.transactionId
+      checkoutUrl = invoice.invoice
+    } else {
+      const checkout = await createCheckout({
+        registrationId,
+        amount: checkoutAmount,
+        currency: checkoutCurrency,
+        description: `MEF 2026 Registration - ${data.firstname} ${data.lastname}`,
+        successUrl: `${appUrl}/${locale}/register/success?registration_id=${registrationId}`,
+        cancelUrl: `${appUrl}/${locale}/register/cancel`,
+      })
+      checkoutId = checkout.id
+      checkoutUrl = checkout.url
+    }
 
     const record: RegistrationRecord = {
       id: registrationId,
       ...data,
-      fee_amount: fee.amount,
-      fee_currency: fee.currency,
-      checkout_id: checkout.id,
-      checkout_url: checkout.url,
+      fee_amount: checkoutAmount,
+      fee_currency: checkoutCurrency,
+      ...(originalUsdAmount !== undefined && {
+        fee_usd_amount: originalUsdAmount,
+        fee_exchange_rate: exchangeRate,
+      }),
+      checkout_id: checkoutId,
+      checkout_url: checkoutUrl,
       payment_status: "pending",
+      payment_provider: PAYMENT_PROVIDER,
       locale,
       created_at: new Date().toISOString(),
     }
 
     await createRegistration(record)
 
+    // Send invoice email with PDF attachment
+    await sendInvoiceEmail(record, locale).catch((err) =>
+      console.error("Failed to send invoice email:", err)
+    )
+
     return NextResponse.json({
       registrationId,
-      checkoutUrl: checkout.url,
-      // Debug: remove after confirming byl.mn integration works
-      _debug_checkout: checkout,
-      _debug_raw_byl: checkout._raw,
+      checkoutUrl,
     })
   } catch (error: any) {
     console.error("Registration error:", error)

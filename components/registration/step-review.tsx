@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { calculateFee } from "@/lib/registration-schema"
@@ -26,6 +27,24 @@ export function StepReview({ dict, data, invite }: StepReviewProps) {
 
   const fee = calculateFee(data.nation || "")
   const isMongolian = fee.currency === "MNT"
+
+  const [exchangeRate, setExchangeRate] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (!isMongolian) {
+      fetch("/api/exchange-rate")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.rate) setExchangeRate(data.rate)
+        })
+        .catch(() => {})
+    }
+  }, [isMongolian])
+
+  const mntEquivalent =
+    !isMongolian && exchangeRate
+      ? Math.round(fee.amount * exchangeRate)
+      : null
 
   return (
     <div className="space-y-6">
@@ -85,6 +104,16 @@ export function StepReview({ dict, data, invite }: StepReviewProps) {
                 {isMongolian ? r.feeAmountMNT : r.feeAmountUSD}
               </span>
             </div>
+            {!isMongolian && mntEquivalent && (
+              <div className="mt-2 flex justify-between items-center">
+                <span className="text-xs text-muted-foreground">
+                  {r.mntEquivalent} (1 USD = {exchangeRate?.toLocaleString()} MNT)
+                </span>
+                <span className="text-sm font-semibold text-primary">
+                  ₮{mntEquivalent.toLocaleString()}
+                </span>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}

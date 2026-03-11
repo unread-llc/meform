@@ -28,6 +28,8 @@ interface Registration {
   created_at: string
   fee_amount: number
   fee_currency: string
+  fee_usd_amount?: number
+  fee_exchange_rate?: number
 }
 
 export default function AdminPage() {
@@ -243,8 +245,12 @@ export default function AdminPage() {
                   <td className="p-3 capitalize">{r.sector}</td>
                   <td className="p-3">{r.nation}</td>
                   <td className="p-3 whitespace-nowrap">
-                    {r.fee_currency === "MNT" ? "₮" : "$"}
-                    {r.fee_amount?.toLocaleString()}
+                    ₮{r.fee_amount?.toLocaleString()}
+                    {r.fee_usd_amount && (
+                      <span className="block text-xs text-muted-foreground">
+                        (${r.fee_usd_amount} × {r.fee_exchange_rate?.toLocaleString()})
+                      </span>
+                    )}
                   </td>
                   <td className="p-3">
                     <span

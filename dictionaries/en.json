@@ -477,6 +477,7 @@
       "international": "International Participant",
       "feeAmountMNT": "MNT 1,000,000",
       "feeAmountUSD": "USD 500",
+      "mntEquivalent": "MNT equivalent",
       "uploaded": "Uploaded",
       "notUploaded": "Not uploaded"
     },

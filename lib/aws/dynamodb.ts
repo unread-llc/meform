@@ -40,9 +40,12 @@ export interface RegistrationRecord {
   img: string
   fee_amount: number
   fee_currency: string
+  fee_usd_amount?: number
+  fee_exchange_rate?: number
   checkout_id?: string
   checkout_url?: string
   payment_status: "pending" | "paid"
+  payment_provider?: string
   is_invite?: boolean
   locale?: string
   created_at: string
