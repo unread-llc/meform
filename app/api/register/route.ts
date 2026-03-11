@@ -45,6 +45,14 @@ export async function POST(request: NextRequest) {
     const registrationId = uuidv4()
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 
+    console.log("--- Registration Debug ---")
+    console.log("PAYMENT_PROVIDER:", PAYMENT_PROVIDER)
+    console.log("GOLOMT_BASE_URL:", process.env.GOLOMT_BASE_URL || "(not set, using default)")
+    console.log("GOLOMT_TOKEN:", process.env.GOLOMT_TOKEN ? `set (${process.env.GOLOMT_TOKEN.length} chars)` : "NOT SET")
+    console.log("GOLOMT_SECRET:", process.env.GOLOMT_SECRET ? `set (${process.env.GOLOMT_SECRET.length} chars)` : "NOT SET")
+    console.log("GOLOMT_CALLBACK:", process.env.GOLOMT_CALLBACK || "(not set)")
+    console.log("Fee:", fee, "→ checkoutAmount will be calculated next")
+
     // Convert USD to MNT for international participants
     let checkoutAmount = fee.amount
     let checkoutCurrency = fee.currency
