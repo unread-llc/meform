@@ -22,7 +22,14 @@ export function SuccessContent({
   dict: any
 }) {
   const searchParams = useSearchParams()
-  const registrationId = searchParams.get("registration_id") || ""
+  // Golomt callback uses ?invoice=MEF2026-{uuid}&status_code=000
+  // byl.mn callback uses ?registration_id={uuid}
+  const invoiceParam = searchParams.get("invoice") || ""
+  const registrationId =
+    searchParams.get("registration_id") ||
+    (invoiceParam.startsWith("MEF2026-")
+      ? invoiceParam.replace("MEF2026-", "")
+      : "")
   const [loading, setLoading] = useState(true)
   const [result, setResult] = useState<VerifyResult | null>(null)
 
