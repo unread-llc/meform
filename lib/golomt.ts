@@ -123,7 +123,7 @@ export async function createGolomtInvoice(
   }
 
   // Construct full payment URL from the invoice ID
-  const paymentUrl = `${GOLOMT_BASE_URL}/payment/UI/payment/${result.invoice}`
+  const paymentUrl = `${GOLOMT_BASE_URL}/payment/en/${result.invoice}`
   console.log("Golomt payment URL:", paymentUrl)
 
   return {
