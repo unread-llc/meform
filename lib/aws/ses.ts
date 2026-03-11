@@ -1,5 +1,5 @@
 import { SESClient, SendEmailCommand, SendRawEmailCommand } from "@aws-sdk/client-ses"
-import { readFileSync } from "fs"
+import { readFileSync, existsSync } from "fs"
 import { join } from "path"
 import type { RegistrationRecord } from "./dynamodb"
 
@@ -113,7 +113,18 @@ let invoicePdfBase64: string | null = null
 
 function getInvoicePdfBase64(): string {
   if (!invoicePdfBase64) {
-    const pdfPath = join(process.cwd(), "assets", "invoice.pdf")
+    // Try multiple paths: local dev vs Amplify runtime
+    const candidates = [
+      join(process.cwd(), "assets", "invoice.pdf"),
+      join(process.cwd(), ".next", "assets", "invoice.pdf"),
+      join(__dirname, "..", "..", "assets", "invoice.pdf"),
+    ]
+    const pdfPath = candidates.find((p) => existsSync(p))
+    if (!pdfPath) {
+      console.error("Invoice PDF not found. Tried:", candidates)
+      throw new Error("Invoice PDF not found")
+    }
+    console.log("Loading invoice PDF from:", pdfPath)
     invoicePdfBase64 = readFileSync(pdfPath).toString("base64")
   }
   return invoicePdfBase64

@@ -19,6 +19,8 @@ frontend:
         # Write env vars to .env.production so they're available at SSR runtime
         - env | grep -E '^(GOLOMT_|PAYMENT_|SES_|MEF_|BYL_|NEXT_PUBLIC_|ADMIN_)' >> .env.production
         - npm run build
+        # Copy assets into .next so they're available at SSR runtime
+        - cp -r assets .next/assets
   artifacts:
     baseDirectory: .next
     files:
