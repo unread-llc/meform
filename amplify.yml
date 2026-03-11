@@ -14,6 +14,10 @@ frontend:
         - echo "MEF_DYNAMODB_TABLE is set to [$MEF_DYNAMODB_TABLE]"
         - echo "MEF_AWS_REGION is set to [$MEF_AWS_REGION]"
         - echo "NEXT_PUBLIC_APP_URL is set to [$NEXT_PUBLIC_APP_URL]"
+        - echo "GOLOMT_TOKEN is set to [${GOLOMT_TOKEN:+yes}${GOLOMT_TOKEN:-no}]"
+        - echo "GOLOMT_SECRET is set to [${GOLOMT_SECRET:+yes}${GOLOMT_SECRET:-no}]"
+        # Write env vars to .env.production so they're available at SSR runtime
+        - env | grep -E '^(GOLOMT_|PAYMENT_|SES_|MEF_|BYL_|NEXT_PUBLIC_|ADMIN_)' >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
