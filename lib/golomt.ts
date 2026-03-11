@@ -108,7 +108,10 @@ export async function createGolomtInvoice(
     throw new Error(errorMsg)
   }
 
-  const result: InvoiceResponse = await res.json()
+  const rawText = await res.text()
+  console.log("Golomt CreateInvoice raw response:", rawText)
+  const result: InvoiceResponse = JSON.parse(rawText)
+  console.log("Golomt CreateInvoice parsed:", JSON.stringify(result))
 
   // Verify response checksum: HMAC-SHA256(secret, invoice + transactionId)
   const expectedChecksum = hmacChecksum(
@@ -121,6 +124,7 @@ export async function createGolomtInvoice(
 
   // Construct full payment URL from the invoice ID
   const paymentUrl = `${GOLOMT_BASE_URL}/payment/UI/payment/${result.invoice}`
+  console.log("Golomt payment URL:", paymentUrl)
 
   return {
     transactionId: result.transactionId,
