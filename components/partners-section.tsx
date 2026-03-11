@@ -49,7 +49,7 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
       },
       {
         name: "ARD Holdings",
-        logo: "/Logo/Partners/2025/Corporate%20partners/photo_2025-07-05%2013.00.18.jpeg",
+        logo: "/ardcoin.png",
         url: "https://ardholdings.com/mn/?home",
       },
     ],
@@ -112,11 +112,7 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
         logo: "/Logo/Partners/2025/Supporting%20organization/Tik%20Tok/Tik.jpg",
         url: "https://www.tiktok.com/",
       },
-      {
-        name: "Economic Journalists Club",
-        logo: "/Logo/Partners/2025/Supporting%20organization/%D0%9C%D0%AD%D0%97%D0%A1%D0%9A/photo_2025-07-05_13-23-51.jpg",
-        url: "https://www.facebook.com/EconomicJournalistsClub",
-      },
+
       {
         name: "Lemonpress",
         logo: "/Logo/Partners/2025/Supporting%20organization/Lemon%20Press/logo_har.png",
