@@ -1,10 +1,20 @@
 import { createHmac } from "crypto"
 
-const GOLOMT_BASE_URL = process.env.GOLOMT_BASE_URL || "https://ecommerce.golomtbank.com"
-const GOLOMT_TOKEN = process.env.GOLOMT_TOKEN!
-const GOLOMT_SECRET = process.env.GOLOMT_SECRET!
-const GOLOMT_CALLBACK = process.env.GOLOMT_CALLBACK || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 const GOLOMT_TAG = "MEF2026"
+
+// Read env vars lazily to avoid issues with module load order
+function getConfig() {
+  const secret = process.env.GOLOMT_SECRET
+  const token = process.env.GOLOMT_TOKEN
+  if (!secret || !token) {
+    throw new Error(`Golomt config missing: SECRET=${!!secret}, TOKEN=${!!token}`)
+  }
+  return {
+    baseUrl: process.env.GOLOMT_BASE_URL || "https://ecommerce.golomtbank.com",
+    token,
+    secret,
+  }
+}
 
 function hmacChecksum(secret: string, data: string): string {
   return createHmac("sha256", secret).update(data).digest("hex")
@@ -60,23 +70,22 @@ export interface CreateGolomtInvoiceParams {
 
 export interface GolomtInvoiceResult {
   transactionId: string
-  invoice: string // payment URL/link for the user
+  invoice: string // payment URL for the user
 }
 
 /**
  * Creates a Golomt payment invoice.
- * The invoice URL is what gets shown to the user to complete payment.
  */
 export async function createGolomtInvoice(
   params: CreateGolomtInvoiceParams
 ): Promise<GolomtInvoiceResult> {
+  const config = getConfig()
   const transactionId = `${GOLOMT_TAG}-${params.registrationId}`
   const amountStr = params.amount.toFixed(2)
   const callbackUrl = params.callbackUrl
 
-  // checksum = HMAC-SHA256(secret, transactionId + amount + "GET" + callbackURL)
   const checksum = hmacChecksum(
-    GOLOMT_SECRET,
+    config.secret,
     transactionId + amountStr + "GET" + callbackUrl
   )
 
@@ -89,11 +98,11 @@ export async function createGolomtInvoice(
     transactionId,
   }
 
-  const res = await fetch(`${GOLOMT_BASE_URL}/api/invoice`, {
+  const res = await fetch(`${config.baseUrl}/api/invoice`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${GOLOMT_TOKEN}`,
+      Authorization: `Bearer ${config.token}`,
     },
     body: JSON.stringify(body),
   })
@@ -108,23 +117,18 @@ export async function createGolomtInvoice(
     throw new Error(errorMsg)
   }
 
-  const rawText = await res.text()
-  console.log("Golomt CreateInvoice raw response:", rawText)
-  const result: InvoiceResponse = JSON.parse(rawText)
-  console.log("Golomt CreateInvoice parsed:", JSON.stringify(result))
+  const result: InvoiceResponse = await res.json()
 
-  // Verify response checksum: HMAC-SHA256(secret, invoice + transactionId)
+  // Verify response checksum
   const expectedChecksum = hmacChecksum(
-    GOLOMT_SECRET,
+    config.secret,
     result.invoice + result.transactionId
   )
   if (result.checksum !== expectedChecksum) {
     throw new Error("Invalid Golomt response checksum")
   }
 
-  // Construct full payment URL from the invoice ID
-  const paymentUrl = `${GOLOMT_BASE_URL}/payment/en/${result.invoice}`
-  console.log("Golomt payment URL:", paymentUrl)
+  const paymentUrl = `${config.baseUrl}/payment/en/${result.invoice}`
 
   return {
     transactionId: result.transactionId,
@@ -134,24 +138,23 @@ export async function createGolomtInvoice(
 
 /**
  * Checks the status of a Golomt transaction.
- * Returns the transaction details if paid (errorCode "000").
  */
 export async function checkGolomtTransaction(
   registrationId: string
 ): Promise<TransactionResponse> {
+  const config = getConfig()
   const transactionId = `${GOLOMT_TAG}-${registrationId}`
 
-  // checksum = HMAC-SHA256(secret, transactionId + transactionId)
   const checksum = hmacChecksum(
-    GOLOMT_SECRET,
+    config.secret,
     transactionId + transactionId
   )
 
-  const res = await fetch(`${GOLOMT_BASE_URL}/api/inquiry`, {
+  const res = await fetch(`${config.baseUrl}/api/inquiry`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${GOLOMT_TOKEN}`,
+      Authorization: `Bearer ${config.token}`,
     },
     body: JSON.stringify({ checksum, transactionId }),
   })
@@ -168,9 +171,9 @@ export async function checkGolomtTransaction(
 
   const result: TransactionResponse = await res.json()
 
-  // Verify response checksum: HMAC-SHA256(secret, transactionId + errorCode + amount + token)
+  // Verify response checksum
   const expectedChecksum = hmacChecksum(
-    GOLOMT_SECRET,
+    config.secret,
     result.transactionId + result.errorCode + result.amount + result.token
   )
   if (result.checksum !== expectedChecksum) {
@@ -187,7 +190,6 @@ export async function checkGolomtTransaction(
 export function parseGolomtTransactionId(transactionId: string): string | null {
   const parts = transactionId.split("-")
   if (parts.length < 2) return null
-  // Registration ID is a UUID, rejoin everything after the tag
   return parts.slice(1).join("-")
 }
 
