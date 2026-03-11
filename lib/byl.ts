@@ -84,7 +84,7 @@ export async function createCheckout(
   const d = data.data || data
 
   return {
-    id: d.id || d.checkout_id || "",
+    id: String(d.id || d.checkout_id || ""),
     url: d.url || d.checkout_url || d.redirect_url || "",
     _raw: data,
   }

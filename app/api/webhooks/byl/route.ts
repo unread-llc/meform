@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     console.log("Webhook event type:", event.type, "event keys:", Object.keys(event))
 
     if (event.type === "checkout.completed") {
-      const checkoutId = event.data?.id
+      const checkoutId = String(event.data?.object?.id || event.data?.id || "")
       console.log("Checkout ID from webhook:", checkoutId)
 
       if (!checkoutId) {
