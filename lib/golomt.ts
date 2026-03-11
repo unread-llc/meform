@@ -119,9 +119,12 @@ export async function createGolomtInvoice(
     throw new Error("Invalid Golomt response checksum")
   }
 
+  // Construct full payment URL from the invoice ID
+  const paymentUrl = `${GOLOMT_BASE_URL}/payment/UI/payment/${result.invoice}`
+
   return {
     transactionId: result.transactionId,
-    invoice: result.invoice,
+    invoice: paymentUrl,
   }
 }
 
