@@ -1,11 +1,9 @@
-import { SESClient, SendEmailCommand, SendRawEmailCommand } from "@aws-sdk/client-ses"
+import { Resend } from "resend"
 import { readFileSync, existsSync } from "fs"
 import { join } from "path"
 import type { RegistrationRecord } from "./dynamodb"
 
-const sesClient = new SESClient({
-  region: process.env.MEF_AWS_REGION || "ap-southeast-1",
-})
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 const FROM_EMAIL = process.env.SES_FROM_EMAIL || "info@meforum.mn"
 
@@ -88,31 +86,23 @@ Sincerely,
 Mongolia Economic Forum 2026
 Organizing Committee`
 
-  await sesClient.send(
-    new SendEmailCommand({
-      Source: FROM_EMAIL,
-      Destination: {
-        ToAddresses: [registration.email],
-      },
-      Message: {
-        Subject: { Data: subject, Charset: "UTF-8" },
-        Body: {
-          Html: { Data: html, Charset: "UTF-8" },
-          Text: { Data: text, Charset: "UTF-8" },
-        },
-      },
-    })
-  )
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: [registration.email],
+    subject,
+    html,
+    text,
+  })
 }
 
 // ---------------------------------------------------------------------------
 // 2. Invoice email with PDF attachment (sent when registration is created)
 // ---------------------------------------------------------------------------
 
-let invoicePdfBase64: string | null = null
+let invoicePdfBuffer: Buffer | null = null
 
-function getInvoicePdfBase64(): string {
-  if (!invoicePdfBase64) {
+function getInvoicePdfBuffer(): Buffer {
+  if (!invoicePdfBuffer) {
     // Try multiple paths: local dev vs Amplify runtime
     const candidates = [
       join(process.cwd(), "assets", "invoice.pdf"),
@@ -125,9 +115,9 @@ function getInvoicePdfBase64(): string {
       throw new Error("Invoice PDF not found")
     }
     console.log("Loading invoice PDF from:", pdfPath)
-    invoicePdfBase64 = readFileSync(pdfPath).toString("base64")
+    invoicePdfBuffer = readFileSync(pdfPath)
   }
-  return invoicePdfBase64
+  return invoicePdfBuffer
 }
 
 export async function sendInvoiceEmail(
@@ -135,7 +125,6 @@ export async function sendInvoiceEmail(
   locale: string = "en"
 ) {
   const name = `${registration.firstname} ${registration.lastname}`
-  const to = registration.email
 
   const subject =
     "Монголын Эдийн Засгийн Форум 2026 - Нэхэмжлэх / Invoice"
@@ -208,51 +197,19 @@ Sincerely,
 Mongolia Economic Forum 2026
 Organizing Committee`
 
-  // Build MIME message with PDF attachment
-  const boundary = `----=_Part_${Date.now()}`
-  const pdfBase64 = getInvoicePdfBase64()
+  const pdfBuffer = getInvoicePdfBuffer()
 
-  const rawMessage = [
-    `From: ${FROM_EMAIL}`,
-    `To: ${to}`,
-    `Subject: =?UTF-8?B?${Buffer.from(subject).toString("base64")}?=`,
-    "MIME-Version: 1.0",
-    `Content-Type: multipart/mixed; boundary="${boundary}"`,
-    "",
-    `--${boundary}`,
-    `Content-Type: multipart/alternative; boundary="${boundary}_alt"`,
-    "",
-    `--${boundary}_alt`,
-    "Content-Type: text/plain; charset=UTF-8",
-    "Content-Transfer-Encoding: base64",
-    "",
-    Buffer.from(textBody).toString("base64"),
-    "",
-    `--${boundary}_alt`,
-    "Content-Type: text/html; charset=UTF-8",
-    "Content-Transfer-Encoding: base64",
-    "",
-    Buffer.from(html).toString("base64"),
-    "",
-    `--${boundary}_alt--`,
-    "",
-    `--${boundary}`,
-    "Content-Type: application/pdf",
-    "Content-Transfer-Encoding: base64",
-    `Content-Disposition: attachment; filename="MEF2026_Invoice.pdf"`,
-    "",
-    pdfBase64,
-    "",
-    `--${boundary}--`,
-  ].join("\r\n")
-
-  await sesClient.send(
-    new SendRawEmailCommand({
-      Source: FROM_EMAIL,
-      Destinations: [to],
-      RawMessage: {
-        Data: Buffer.from(rawMessage),
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: [registration.email],
+    subject,
+    html,
+    text: textBody,
+    attachments: [
+      {
+        filename: "MEF2026_Invoice.pdf",
+        content: pdfBuffer,
       },
-    })
-  )
+    ],
+  })
 }
