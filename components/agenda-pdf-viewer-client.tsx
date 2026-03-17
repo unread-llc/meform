@@ -34,12 +34,11 @@ export default function AgendaPdfViewerClient({
   const [currentPage, setCurrentPage] = useState(1) // Always the left-most page index
 
   // Responsive state
-  const [isDesktop, setIsDesktop] = useState(false)
   const [containerWidth, setContainerWidth] = useState(0)
   const [containerHeight, setContainerHeight] = useState(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
 
-  const spreadStep = isDesktop ? 2 : 1
+  const spreadStep = 1
   const pdfFile = useMemo(() => ({ url: encodeURI(pdfUrl) }), [pdfUrl])
 
   // Resize Observer
@@ -57,14 +56,12 @@ export default function AgendaPdfViewerClient({
         const height = entry.contentRect.height
         setContainerWidth(Math.floor(width))
         setContainerHeight(Math.floor(height))
-        setIsDesktop(window.innerWidth >= 1024)
       }, 50)
     })
 
     ro.observe(node)
 
     // Initial check
-    setIsDesktop(window.innerWidth >= 1024)
     if (node) {
       setContainerWidth(node.getBoundingClientRect().width)
       setContainerHeight(node.getBoundingClientRect().height)
@@ -78,7 +75,7 @@ export default function AgendaPdfViewerClient({
 
   // Navigation
   const canGoPrev = currentPage > 1
-  const canGoNext = numPages > 0 && currentPage + (isDesktop ? 1 : 0) < numPages
+  const canGoNext = numPages > 0 && currentPage < numPages
 
   const goPrev = () => {
     if (!canGoPrev) return
@@ -95,7 +92,6 @@ export default function AgendaPdfViewerClient({
     // Default fallback
     if (!containerWidth) return { pageWidth: 300, pageHeight: 400 }
 
-    const gutter = isDesktop ? 24 : 0
     const padding = variant === "inline" ? 48 : 32 // Approximate padding inside container
 
     const availableWidth = Math.max(300, containerWidth - padding)
@@ -103,16 +99,14 @@ export default function AgendaPdfViewerClient({
 
     if (variant === "inline") {
       // Inline: Width constrained
-      const maxColWidth = isDesktop ? (availableWidth - gutter) / 2 : availableWidth
       return {
-        pageWidth: Math.floor(maxColWidth),
+        pageWidth: Math.floor(availableWidth),
         pageHeight: undefined // Auto height
       }
     } else {
       // Fullscreen: Fit within box
-      // Target is spread layout
-      const targetSpreadWidth = availableWidth
-      const targetSingleWidth = isDesktop ? (targetSpreadWidth - gutter) / 2 : targetSpreadWidth
+      // Target is single layout
+      const targetSingleWidth = availableWidth
 
       const ratio = pageAspectRatio || 0.707
 
@@ -131,7 +125,7 @@ export default function AgendaPdfViewerClient({
         pageHeight: Math.floor(h)
       }
     }
-  }, [containerWidth, containerHeight, isDesktop, variant, pageAspectRatio])
+  }, [containerWidth, containerHeight, variant, pageAspectRatio])
 
   const PageShell = ({ children, pageNum }: { children: React.ReactNode, pageNum: number }) => (
     <div
@@ -170,7 +164,6 @@ export default function AgendaPdfViewerClient({
             {numPages > 0 ? (
                 <span className="font-medium">
                 {locale === "mn" ? "Хуудас" : "Page"} {currentPage}
-                {isDesktop && currentPage + 1 <= numPages ? `–${currentPage + 1}` : ""}
                 <span className="opacity-50 mx-1">/</span> {numPages}
                 </span>
             ) : (
@@ -241,12 +234,9 @@ export default function AgendaPdfViewerClient({
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
-                    className={cn(
-                        "grid gap-4 md:gap-8 mx-auto",
-                        isDesktop ? "grid-cols-2" : "grid-cols-1"
-                    )}
+                    className="grid gap-4 md:gap-8 mx-auto grid-cols-1"
                 >
-                    {/* Left Page */}
+                    {/* Full Width Page */}
                     <div className="flex justify-center">
                         <PageShell pageNum={currentPage}>
                              <Page
@@ -262,25 +252,6 @@ export default function AgendaPdfViewerClient({
                              />
                         </PageShell>
                     </div>
-
-                    {/* Right Page (Desktop Only) */}
-                    {isDesktop && currentPage + 1 <= numPages && (
-                        <div className="flex justify-center">
-                            <PageShell pageNum={currentPage + 1}>
-                                <Page
-                                    key={`page_${currentPage + 1}`}
-                                    pageNumber={currentPage + 1}
-                                    width={pageWidth}
-                                    height={pageHeight}
-                                    className="block"
-                                    renderTextLayer={false}
-                                    renderAnnotationLayer={false}
-                                    loading={<LoadingSkeleton />}
-                                    devicePixelRatio={Math.min(window.devicePixelRatio, 2)}
-                                />
-                            </PageShell>
-                        </div>
-                    )}
                 </motion.div>
             </AnimatePresence>
 
