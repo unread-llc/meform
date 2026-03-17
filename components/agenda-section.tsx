@@ -26,15 +26,17 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [year, setYear] = useState("2025")
 
   const getPdfUrl = (selectedYear: string, currentLocale: string) => {
-    const baseUrl = "https://strapi-techworm.s3.ap-southeast-1.amazonaws.com"
     if (selectedYear === "2025") {
-      return `${baseUrl}/25-both.pdf`
+      const baseUrl2025 = "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/agenda"
+      return currentLocale === "mn" ? `${baseUrl2025}/Agenda.pdf` : `${baseUrl2025}/Agenda+eng.pdf`
     }
+
+    const oldBaseUrl = "https://strapi-techworm.s3.ap-southeast-1.amazonaws.com"
     if (selectedYear === "2024") {
-      return currentLocale === "mn" ? `${baseUrl}/24-mon.pdf` : `${baseUrl}/24-eng.pdf`
+      return currentLocale === "mn" ? `${oldBaseUrl}/24-mon.pdf` : `${oldBaseUrl}/24-eng.pdf`
     }
     // Fallback to 2023
-    return currentLocale === "mn" ? `${baseUrl}/23-mon.pdf` : `${baseUrl}/23-eng.pdf`
+    return currentLocale === "mn" ? `${oldBaseUrl}/23-mon.pdf` : `${oldBaseUrl}/23-eng.pdf`
   }
 
   const pdfUrl = getPdfUrl(year, locale)
