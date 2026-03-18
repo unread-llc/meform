@@ -3,13 +3,6 @@
 import { useState } from "react"
 import { Calendar, FileText, Download, Maximize2, X } from "lucide-react"
 import dynamic from "next/dynamic"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 const AgendaPdfViewerClient = dynamic(() => import("@/components/agenda-pdf-viewer-client"), {
   ssr: false,
@@ -23,23 +16,14 @@ interface AgendaSectionProps {
 
 export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [year, setYear] = useState("2025")
+  const year = "2026"
 
-  const getPdfUrl = (selectedYear: string, currentLocale: string) => {
-    if (selectedYear === "2025") {
-      const baseUrl2025 = "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/agenda"
-      return currentLocale === "mn" ? `${baseUrl2025}/Agenda.pdf` : `${baseUrl2025}/Agenda+eng.pdf`
-    }
-
-    const oldBaseUrl = "https://strapi-techworm.s3.ap-southeast-1.amazonaws.com"
-    if (selectedYear === "2024") {
-      return currentLocale === "mn" ? `${oldBaseUrl}/24-mon.pdf` : `${oldBaseUrl}/24-eng.pdf`
-    }
-    // Fallback to 2023
-    return currentLocale === "mn" ? `${oldBaseUrl}/23-mon.pdf` : `${oldBaseUrl}/23-eng.pdf`
+  const getPdfUrl = (currentLocale: string) => {
+    const baseUrl = "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/agenda"
+    return currentLocale === "mn" ? `${baseUrl}/Agenda.pdf` : `${baseUrl}/Agenda+eng.pdf`
   }
 
-  const pdfUrl = getPdfUrl(year, locale)
+  const pdfUrl = getPdfUrl(locale)
   const title = `MEF ${year} Agenda`
 
   return (
@@ -112,16 +96,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
                 <FileText className="w-4 h-4 text-primary" />
                 <span>PDF</span>
               </div>
-              <Select value={year} onValueChange={setYear}>
-                <SelectTrigger className="w-[100px] h-9 text-xs">
-                  <SelectValue placeholder="Year" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="2025">2025</SelectItem>
-                  <SelectItem value="2024">2024</SelectItem>
-                  <SelectItem value="2023">2023</SelectItem>
-                </SelectContent>
-              </Select>
+              <span className="text-sm font-medium text-foreground">2026</span>
             </div>
 
             <div className="flex items-center gap-2">
