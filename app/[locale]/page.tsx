@@ -1,7 +1,6 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
-import { AgendaSection } from "@/components/agenda-section"
 import { StatsSection } from "@/components/stats-section"
 import { TimelineSection } from "@/components/timeline-section"
 import { BoardSection } from "@/components/board-section"
@@ -28,7 +27,7 @@ export default async function HomePage({
             <Header locale={locale} dict={dict} />
             <HeroSection dict={dict} locale={locale} />
             <AboutSection dict={dict} />
-            <AgendaSection dict={dict} locale={locale} />
+            {/* <AgendaSection dict={dict} locale={locale} /> */}
             <StatsSection dict={dict} />
             <TimelineSection dict={dict} />
             {/* <BoardSection dict={dict} /> */}
