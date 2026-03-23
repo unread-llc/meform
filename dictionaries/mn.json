@@ -153,25 +153,25 @@
         "name": "Чулууны Ганхуяг",
         "role": "МЭЗФ-ын УЗ-ийн дарга",
         "position": "Ард санхүүгийн нэгдлийн ТУЗ-ийн дарга",
-        "photo": "/Gallery/Board%20/ganhuyag.png"
+        "photo": "/heads/ganhuyg.jpg"
       },
       "battushig": {
         "name": "Батболд Баттүшиг",
         "role": "Удирдах зөвлөлийн гишүүн",
         "position": "Монголын Үндэсний Олимпын Хорооны Ерөнхийлөгч",
-        "photo": "/Gallery/Board%20/Battushig.JPG"
+        "photo": "/heads/battushig.jpg"
       },
       "byambasaikhan": {
         "name": "Баянжаргал Бямбасайхан",
         "role": "Удирдах зөвлөлийн гишүүн",
         "position": "Монголын Бизнесийн Зөвлөлийн УЗ-ийн Дарга",
-        "photo": "/Gallery/Board%20/Byambasaihan.png"
+        "photo": "/heads/byambaihan.jpg"
       },
       "ganzorig": {
         "name": "Ванчиг Ганзориг",
         "role": "Удирдах зөвлөлийн гишүүн",
         "position": "Бат Солюшн Партнерсын УЗ-ийн дарга",
-        "photo": "/Gallery/Board%20/v%20ganzorig.jpg"
+        "photo": "/heads/v%20ganzorig.jpg"
       }
     }
   },
