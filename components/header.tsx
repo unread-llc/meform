@@ -17,6 +17,7 @@ import {
 
 const anchorSectionIds = [
   "about",
+  "agenda",
   "timeline",
   "why-participate",
   "gallery",
@@ -81,6 +82,7 @@ export function Header({ locale, dict }: HeaderProps) {
 
   const navItems: NavItem[] = [
     { label: dict.nav.about, href: `/${locale}#about`, sectionId: "about" },
+    { label: dict.nav.agenda, href: `/${locale}#agenda`, sectionId: "agenda" },
     { label: dict.nav.history, href: `/${locale}#timeline`, sectionId: "timeline" },
     {
       label: dict.nav.whyParticipate,
