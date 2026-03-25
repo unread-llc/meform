@@ -35,7 +35,7 @@ export default async function HomePage({
             <WhyParticipateSection dict={dict} />
             <GallerySection dict={dict} locale={locale} />
             <PartnersSection dict={dict} />
-            <FAQSection dict={dict} />
+            <FAQSection dict={dict} locale={locale} />
             {/* <MongoliaSection dict={dict} /> */}
             <ContactSection dict={dict} locale={locale} />
             <Footer dict={dict} locale={locale} />

@@ -4,9 +4,13 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import type { Locale } from "@/lib/i18n"
 
 interface FAQSectionProps {
   dict: any
+  locale: Locale
 }
 
 const faqKeys = [
@@ -39,11 +43,17 @@ function BulletList({ items }: { items: string[] }) {
   )
 }
 
-export function FAQSection({ dict }: FAQSectionProps) {
+export function FAQSection({ dict, locale }: FAQSectionProps) {
   return (
     <section id="faq" className="py-20 lg:py-32 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          <div className="mb-8">
+            <Button size="lg" className="w-full sm:w-auto font-semibold px-8" asChild>
+              <Link href={`/${locale}/register`}>{dict?.hero?.registerNow}</Link>
+            </Button>
+          </div>
+
           <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
             {dict?.faq?.label}
           </span>
