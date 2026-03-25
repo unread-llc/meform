@@ -99,14 +99,18 @@ export function Header({ locale, dict }: HeaderProps) {
 
   const getDesktopLinkClasses = (sectionId?: AnchorSectionId) =>
     cn(
-      "text-sm font-medium hover:text-primary transition-colors",
-      sectionId === activeSection ? "text-primary font-semibold" : "text-muted-foreground"
+      "relative text-sm font-medium hover:text-primary transition-colors pb-1",
+      sectionId === activeSection
+        ? "text-primary font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
+        : "text-muted-foreground"
     )
 
   const getDropdownTriggerClasses = (isActive: boolean) =>
     cn(
-      "text-sm font-medium hover:text-primary transition-colors inline-flex items-center gap-1",
-      isActive ? "text-primary font-semibold" : "text-muted-foreground"
+      "relative text-sm font-medium hover:text-primary transition-colors inline-flex items-center gap-1 pb-1",
+      isActive
+        ? "text-primary font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
+        : "text-muted-foreground"
     )
 
   return (
@@ -219,7 +223,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 onClick={() => setIsOpen(false)}
                 className={cn(
                   "py-3 text-foreground hover:text-primary transition-colors",
-                  item.sectionId === activeSection && "text-primary font-semibold"
+                  item.sectionId === activeSection && "text-primary font-semibold border-l-2 border-primary pl-3"
                 )}
               >
                 {item.label}
@@ -230,7 +234,7 @@ export function Header({ locale, dict }: HeaderProps) {
               <div
                 className={cn(
                   "text-sm font-medium py-2",
-                  activeSection === "gallery" ? "text-primary font-semibold" : "text-muted-foreground"
+                  activeSection === "gallery" ? "text-primary font-semibold border-l-2 border-primary pl-3" : "text-muted-foreground"
                 )}
               >
                 {dict.nav.gallery}
@@ -286,7 +290,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 onClick={() => setIsOpen(false)}
                 className={cn(
                   "py-3 text-foreground hover:text-primary transition-colors",
-                  item.sectionId === activeSection && "text-primary font-semibold"
+                  item.sectionId === activeSection && "text-primary font-semibold border-l-2 border-primary pl-3"
                 )}
               >
                 {item.label}
