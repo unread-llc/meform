@@ -191,23 +191,23 @@ const previousPartners: Partner[] = [
 
 function PartnerCard({ partner }: { partner: Partner }) {
   const isLocalLogo = partner.logo?.startsWith("/")
-
+  
   const inner = (
-    <div className="bg-white rounded-xl p-5 flex items-center justify-center h-28 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl p-4 flex items-center justify-center h-24 hover:shadow-md transition-shadow">
       {partner.logo ? (
         isLocalLogo ? (
           <Image
             src={partner.logo}
             alt={partner.name}
-            width={200}
-            height={80}
-            className={`object-contain ${partner.logoClassName ?? "max-h-20 max-w-48"}`}
+            width={160}
+            height={64}
+            className={`object-contain ${partner.logoClassName ?? "max-h-16 max-w-40"}`}
           />
         ) : (
           <img
             src={partner.logo}
             alt={partner.name}
-            className={`object-contain ${partner.logoClassName ?? "max-h-20 max-w-48"}`}
+            className={`object-contain ${partner.logoClassName ?? "max-h-16 max-w-40"}`}
           />
         )
       ) : (
@@ -262,11 +262,9 @@ export function PartnersSection({ dict, expanded = true }: PartnersSectionProps)
                   {getCategoryLabel(category.key)}
                 </h3>
               </div>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {category.partners.map((partner) => (
-                  <div key={`${category.key}-${partner.name}`} className="w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.75rem)] lg:w-[calc(25%-0.75rem)]">
-                    <PartnerCard partner={partner} />
-                  </div>
+                  <PartnerCard key={`${category.key}-${partner.name}`} partner={partner} />
                 ))}
               </div>
             </div>
@@ -294,9 +292,9 @@ export function PartnersSection({ dict, expanded = true }: PartnersSectionProps)
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {previousPartners.map((partner) => (
-                <div key={partner.name} className="w-[calc(50%-0.75rem)] md:w-[calc(25%-1.125rem)]">
+                <div key={partner.name}>
                   <PartnerCard partner={partner} />
                 </div>
               ))}
