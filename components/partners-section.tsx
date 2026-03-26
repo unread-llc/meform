@@ -26,13 +26,8 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "Breitling",
-        logo: "https://meforum.mn/storage/app/public/phpn3bIRd-1751439777.svg",
+        logo: "/Partners/strategic/breitling.png",
         url: "https://www.breitling.com/us-en/",
-      },
-      {
-        name: "ARD Holdings",
-        logo: "/Logo/Partners/2025/Corporate partners/photo_2025-07-05 13.00.18.jpeg",
-        url: "https://ardholdings.com/en/?home",
       },
     ],
   },
@@ -51,7 +46,7 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
       },
       {
         name: "ARD Holdings",
-        logo: "/Logo/Partners/2025/Corporate partners/photo_2025-07-05 13.00.18.jpeg",
+        logo: "/ardcoin.png",
         url: "https://ardholdings.com/mn/?home",
       },
     ],
@@ -101,7 +96,7 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
       },
       {
         name: "Unitel",
-        logo: "https://meforum.mn/storage/app/public/phpXSUd9Q-1719394259.png",
+        logo: "/Logo/Partners/2025/Supporting organization/unitel/Unitel_Logo.png",
         url: "https://www.unitel.mn/unitel/",
       },
     ],
@@ -146,17 +141,17 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     partners: [
       {
         name: "Mongol Post",
-        logo: "https://meforum.mn/storage/app/public/phpFthfiV-1751448782.png",
+        logo: "/logistic_partners/logo ENG1 PNG.png",
         url: "https://mongolpost.mn/en",
       },
       {
         name: "Royal Enfield",
-        logo: "https://meforum.mn/storage/app/public/phpSpizZF-1751468609.png",
+        logo: "/logistic_partners/royal_enfield.jpeg",
         url: "https://www.royalenfield.com/in/en/home/",
       },
       {
         name: "EMC Mongolia",
-        logo: "https://meforum.mn/storage/app/public/phpefxbfw-1751819140.png",
+        logo: "/logistic_partners/Copy of EMC Logo.png",
         url: "https://www.emcmongolia.mn/",
       },
     ],
