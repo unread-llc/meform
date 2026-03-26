@@ -231,7 +231,9 @@
     "label": "Gallery",
     "title": "Explore highlights from past MEF events.",
     "viewPhotos": "View Photos",
-    "viewVideos": "View Videos"
+    "viewVideos": "View Videos",
+    "allYears": "All years",
+    "allVideos": "All videos"
   },
   "partners": {
     "label": "Partners",

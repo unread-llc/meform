@@ -230,7 +230,9 @@
     "label": "Фото зураг",
     "title": "Өмнөх МЭЗФ-ийн онцлох мөчүүдийг үзээрэй.",
     "viewPhotos": "Зураг үзэх",
-    "viewVideos": "Видео үзэх"
+    "viewVideos": "Видео үзэх",
+    "allYears": "Бүх он",
+    "allVideos": "Бүх бичлэг"
   },
   "partners": {
     "label": "Түнш",

@@ -27,7 +27,7 @@ export default async function HomePage({
         <main className="min-h-screen">
             <Header locale={locale} dict={dict} />
             <HeroSection dict={dict} locale={locale} />
-            <AboutSection dict={dict} />
+            <AboutSection dict={dict} locale={locale} />
             <AgendaSection dict={dict} locale={locale} />
             <StatsSection dict={dict} />
             <TimelineSection dict={dict} />
