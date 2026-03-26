@@ -1,0 +1,417 @@
+Delivered-To: catbyte.tech@gmail.com
+Received: by 2002:a05:7208:3798:b0:bb:4d8d:c79a with SMTP id it24csp1492231rbb;
+        Mon, 23 Mar 2026 23:34:28 -0700 (PDT)
+X-Received: by 2002:a05:6820:1351:b0:67c:3ee:938 with SMTP id 006d021491bc7-67c22edfb5emr10976635eaf.28.1774334068563;
+        Mon, 23 Mar 2026 23:34:28 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1774334068; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=fVC9BugnJDnhkwNpW9DuosA3yo/5OHxzYix88XvQLVu54Ho/Zb4ocRZfikl2eumqdN
+         aeYfMi5YE/D/0rpZp4W3pox1m0MQhy6uocMgXLbdnC0YXvyNXet/EdVvIxVdgT6zJl7M
+         zOzdWxGJv+W881Yoi6k9E5k/F2f1JXFJa6nmoGg2DhECvTvX8dUTgVdqx8zksb2wF++9
+         QzFr1ih14dQR/U63EXW+QqlzM9EityLQRPSbvqL1xmmfZhZndY+ggrIG5iXyOwUWlzV2
+         6TpnXSjaaOmdrK65yVL9ecdGKR/Ojd3eIq5zq027wP5C5daY2Yg8bP5xamCpkcl1rrVq
+         bIbg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=NAEJeiYIoecntADj32y/x+c75ttD+qR/VE4lPO83+JU=;
+        fh=/Ji90IpqPq/Tx1YpaYrLEZP9YnNPo0JMkOr36yoVD3A=;
+        b=dLFNu9tL8cglUPzL0rBk9NUxrwMLphooJXSkeUE5IBSYbBgZ9aRslYSe3DslxtaZpQ
+         ieE55+hQ822bwFmYMt32Y9ZHVfdt6bUYjxmUqPdWITpQB91n29SDIxFQvuBg8vua0uDo
+         hq7XzdNhwXqnVOJYcM3BHX9fiSG1+sZQRPRdXS20sPZzQsvlGSVTIBHEtcyc+H+e8x9n
+         H8nCfLqYGje9fc8g6GEmmVfdx7MCACMHzPk6CAsSpX7G48LIGLCwMXzqiRNSsifPLOQW
+         dqjZXTr27Wub1mt+0dns99iOynXHwHAfg7o35TcIgtPK3TNLkArYyRKkqmNn7d5Tlpca
+         cdEw==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@meforum-mn.20230601.gappssmtp.com header.s=20230601 header.b=T8XGSFiU;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of hulan.d@meforum.mn designates 209.85.220.41 as permitted sender) smtp.mailfrom=hulan.d@meforum.mn;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=meforum.mn;
+       dara=pass header.i=@gmail.com
+Return-Path: <hulan.d@meforum.mn>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 586e51a60fabf-41c14971eb8sor3594666fac.4.2026.03.23.23.34.28
+        for <catbyte.tech@gmail.com>
+        (Google Transport Security);
+        Mon, 23 Mar 2026 23:34:28 -0700 (PDT)
+Received-SPF: pass (google.com: domain of hulan.d@meforum.mn designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@meforum-mn.20230601.gappssmtp.com header.s=20230601 header.b=T8XGSFiU;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of hulan.d@meforum.mn designates 209.85.220.41 as permitted sender) smtp.mailfrom=hulan.d@meforum.mn;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=meforum.mn;
+       dara=pass header.i=@gmail.com
+ARC-Seal: i=1; a=rsa-sha256; t=1774334068; cv=none;
+        d=google.com; s=arc-20240605;
+        b=PP3ABCud8vC+LtZVPojtd7MW8FGixnHeQyUY1q14/WOJwNyzLZDBK5FUIVttOqm8g+
+         MTaNo6YSa/NX2GPZRFs1UUi5HsspOu/5xQFcgVO4ZoYJUpmIkrlCT+YTyBVTQqJ5tr7i
+         iR3JyBWmOOH8VZOoXCZi4j8BE2Xv2L+tK+7xL5MhN5Meiu/ryXeoAhA82mebwHTUWSh9
+         s+mAv/KUPIpER3Bqzj6eZcWvfN075aPqC/wbDEzGW9qytE7bahyj9WOiDlGNb+VvDriT
+         4b29c7Tw8u5Cfxnejfbrcue2N4FV46WpsMdEh2t/rQglBba4OmaAn6nBm5hw6p6xfu/3
+         G+mw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=NAEJeiYIoecntADj32y/x+c75ttD+qR/VE4lPO83+JU=;
+        fh=/Ji90IpqPq/Tx1YpaYrLEZP9YnNPo0JMkOr36yoVD3A=;
+        b=dIHDtVOrczYocc3jt1P59m9GFaHMFEiUoXfoA41hEcKohKw1q3lJlfS62om1KjalU9
+         /BziKNJ4aHlCNs25ilveg0/HbRXJMjbaidrzseZsVK5bCK4kQbBCowqjwv3HnXCTSn3K
+         Rc9wXm+AXyipUv8oYv/Pgm/6vC6tvFJtP4VSLDMhJleH5uqd09VWHRnaN05lfLEppqij
+         0LnOghEXyTIuhj1M743sko05rXperPXYM5k6yzEHASX9+KllUhmC7IZqdKpG/sRl5+F6
+         5rCOoV5fThYa3dxZGVGxW05rJmA0Z0tSZb3h/1zpZbN0XL9KRjvSaT28Xsc+2CM3iC5S
+         Oh6Q==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=meforum-mn.20230601.gappssmtp.com; s=20230601; t=1774334068; x=1774938868; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=NAEJeiYIoecntADj32y/x+c75ttD+qR/VE4lPO83+JU=;
+        b=T8XGSFiUbUvGrE3GrS5UbYHuwAtG7E9b1wFSUMfGA6XLgwMnyYI6TMhk6x5WAV0nrJ
+         ylJL3h/LuZ2xs/1ckZfSq2om9eQAdH/EjJ+v912OAidpy0KkINUDgiNPVk2euCgQ85YG
+         5wOh6/3Obijsq/dGVVQruP/jCmE1gEqG+i2IQtWWF/D+SQTIKF48tlmjOZcrqXIOD/85
+         i52VjxOXPSClrUTVwYHKJwhrFAzQ4he98roWVCXdO5SD1404e+IgYU+b+OjLdGNpjaaS
+         6fMVT/M5BUMl4GTeU+2fQ5I8OcfKgmVXeLF/k0L7FmO8nl3cvvegibXnQ0oT544BsIWL
+         aBbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774334068; x=1774938868;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=NAEJeiYIoecntADj32y/x+c75ttD+qR/VE4lPO83+JU=;
+        b=aHI7yPQrTWeOjUh2roWL0kSA6tHNdNc4v8VruvWeT1t7Fr/Ynx4vgDadByIWamqTQ+
+         2frkTG8BN3QSER7PtXGC0zpDgusclxhElVs7vc7extP9lorhYhWMz9GzBe6XU2pnMSd+
+         ZXkUatbIUeuKkqnvvtZMoiNrFQvDcDkY9MqoH4WmN3kIQDEbsHE04cITxZKXAjDtPKO6
+         XpwrdAi5sikKMzmXWJi6jR3VLSHVVPQiYuvqDnnNiDhwK5HWvU6ZvcXkwvxFxi/Rc/AZ
+         wZcLAZ0syG5ldHrr8U7w+pc6pro1qWZGm9ZOVLrIbP4zDY1HDWjK6RwZw+L2u7NOoXsT
+         ZToQ==
+X-Gm-Message-State: AOJu0Yy2jedACS9gh5HdXBvhHgq71dPsKgUk7SXRuKL76SeqeEjTvtyz
+	b7e9mAcV9Bc2dpSJeGJ3PytXvg/oKjADpLdMC5NDzsvOxdS2RQZVLdwSuhYjK0XDErJ/l/pYPWw
+	kPFfsr3suo5ji4fs9uLqorudtH2hD8r/RuCsJIBIefgtEUuMgKqDCxbU=
+X-Gm-Gg: ATEYQzzr7ljpCBg3SggFrezGuTlkhkxcn2j2ei+6/6g+v8eSHdKZn5QFC7Qdznq10jZ
+	czufgqBo2UA5oXe8wTqfJK+oboi/wqwBBPWBz/GR/InsM5qa782fcxQ4d/XqdJ15J+s9+/1QiTM
+	72S5Z2LZRMBanOUv1Q5IdcO3BynLsirIcWw7r1CEek97TiVPoING6309eTcSMBBdlub0oOl7EeQ
+	JNnfa5luhszhhYBXorXQToiLsIezlyeUYZJmgtIPbeyQYrEy9dDfjmDE2tlhGGulwlCZ7MPEiSS
+	F+B4dG01
+X-Received: by 2002:a05:6820:16a6:b0:67d:e587:e11e with SMTP id
+ 006d021491bc7-67de587e5fbmr5812025eaf.20.1774334067676; Mon, 23 Mar 2026
+ 23:34:27 -0700 (PDT)
+MIME-Version: 1.0
+From: Hulan Danzan <hulan.d@meforum.mn>
+Date: Tue, 24 Mar 2026 14:34:16 +0800
+X-Gm-Features: AQROBzDKpmWXU-q7kjkNxHFx_zW30kM6zElNm1eZDhxxk9Wl_ti5PicI6H_d3T0
+Message-ID: <CAJouoJ6L6vR4Uk_oGzrFwuc-Vg4L8qVvHVYTo-NmMbwpwKd=ZA@mail.gmail.com>
+Subject: =?UTF-8?B?VGVtcGxhdGU6IChFTkcpINCx0q/RgNGC0LPRjdC7INCx0LDRgtCw0LvQs9Cw0LDQttGD?=
+	=?UTF-8?B?0YPQu9GB0LDQvSDQvNGN0LnQuw==?=
+To: catbyte.tech@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000d12a21064dbf5770"
+
+--000000000000d12a21064dbf5770
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+*Dear  *,
+
+
+
+Thank you for confirming your registration to participate in the Mongolia
+Economic Forum 2026, which will be held on June 29=E2=80=9330, 2026.
+
+You will be contacted once your entry badge has been printed and is ready
+for collection. Please note that the badge will be valid only when
+presented together with a government-issued identification document, such
+as a national ID card or passport. We kindly advise you to carry your
+identification document with you throughout the Forum.
+
+
+Detailed information regarding the venue, program, discussion topics, and
+speakers is available on our official website at *www.meforum.mn*
+<http://www.meforum.mn/>, through our official social media channels, and
+via the MEF2026 mobile application.
+
+
+
+
+
+
+Should you have any questions regarding your registration, please do not
+hesitate to contact at registration@meforum.mn
+View Program <https://www.meforum.mn/en#agenda>
+Contact Us <registration@meforum.mn?subject=3D&body=3D>
+
+--000000000000d12a21064dbf5770
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><table id=3D"m_-26700412839779088m_-3946484943196753922m_-=
+3364466882839759628root" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" w=
+idth=3D"100%" role=3D"presentation" style=3D"background-color:rgb(244,244,2=
+44)"><tbody><tr><td valign=3D"top" align=3D"center" style=3D"background-col=
+or:transparent"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" role=3D"presentation" style=3D"max-width:660px"><tbody><tr><td =
+valign=3D"top" style=3D"background-color:rgb(255,255,255)"><table align=3D"=
+center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" rol=
+e=3D"presentation"><tbody><tr><td valign=3D"top" style=3D"background-positi=
+on:center center;background-repeat:no-repeat;background-size:cover"><table =
+border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"pre=
+sentation"><tbody><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-39464=
+84943196753922m_-3364466882839759628mceColumnId--5" colspan=3D"12" width=3D=
+"100%" style=3D"padding-top:0px;padding-bottom:0px"><table border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbod=
+y><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_=
+-3364466882839759628gutterContainerId-17"><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><t=
+d valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-3364466=
+882839759628b17" style=3D"padding:8px 0px;border:0px;border-radius:0px"><ta=
+ble align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" role=3D"presentation" id=3D"m_-26700412839779088m_-39464849431967=
+53922m_-3364466882839759628section_43eb1084a932c07309de025f78f7213c"><tbody=
+><tr><td valign=3D"top" style=3D"background-position:center center;backgrou=
+nd-repeat:no-repeat;background-size:cover"><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><t=
+d valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-3364466=
+882839759628mceColumnId--8" colspan=3D"12" width=3D"100%"><table border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"=
+><tbody><tr><td valign=3D"top" align=3D"center" id=3D"m_-26700412839779088m=
+_-3946484943196753922m_-3364466882839759628b-2" style=3D"border:0px;border-=
+radius:0px"><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"top=
+" style=3D"background-position:center center;background-repeat:no-repeat;ba=
+ckground-size:cover"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"top" id=3D"=
+m_-26700412839779088m_-3946484943196753922m_-3364466882839759628mceColumnId=
+--10" colspan=3D"12" width=3D"100%"><table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=
+=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-336446688283975=
+9628b16" style=3D"border:0px;border-radius:0px"><table align=3D"center" bor=
+der=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presen=
+tation"><tbody><tr><td valign=3D"top" style=3D"background-position:center c=
+enter;background-repeat:no-repeat;background-size:cover"><table border=3D"0=
+" cellpadding=3D"0" cellspacing=3D"24" width=3D"100%" role=3D"presentation"=
+><tbody><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-394648494319675=
+3922m_-3364466882839759628mceColumnId-19" colspan=3D"12" width=3D"100%" sty=
+le=3D"padding-top:0px;padding-bottom:0px"><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><t=
+d valign=3D"top" align=3D"center" id=3D"m_-26700412839779088m_-394648494319=
+6753922m_-3364466882839759628b18" style=3D"background-color:transparent;pad=
+ding:0px;border:0px;border-radius:0px"><div></div><table align=3D"center" b=
+order=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"pres=
+entation" style=3D"margin:0px;vertical-align:top;max-width:100%;width:612px=
+;height:auto"><tbody><tr><td valign=3D"top" style=3D"border:0px;border-radi=
+us:0px"><img alt=3D"" src=3D"https://mcusercontent.com/163b77b54a66e344077f=
+64588/images/03e32c81-ba8e-7e75-8958-0db771a3feac.png" width=3D"660" height=
+=3D"auto" class=3D"gmail-CToWUd gmail-a6T" tabindex=3D"0" style=3D"cursor: =
+pointer; outline: 0px; display: block; max-width: 100%; height: auto; borde=
+r-radius: 0px;"></td></tr></tbody></table><div></div><div></div></td></tr><=
+/tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></t=
+r></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td>=
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></=
+td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table=
+></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody><tbo=
+dy><tr><td valign=3D"top" align=3D"center" style=3D"background-color:transp=
+arent"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100=
+%" role=3D"presentation" style=3D"max-width:660px"><tbody><tr><td valign=3D=
+"top" style=3D"background-color:rgb(255,255,255)"><table align=3D"center" b=
+order=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"pres=
+entation"><tbody><tr><td valign=3D"top" style=3D"background-position:center=
+ center;background-repeat:no-repeat;background-size:cover"><table border=3D=
+"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation=
+"><tbody><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-39464849431967=
+53922m_-3364466882839759628mceColumnId--6" colspan=3D"12" width=3D"100%" st=
+yle=3D"padding-top:0px;padding-bottom:0px"><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><t=
+d valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-3364466=
+882839759628gutterContainerId-5" style=3D"padding:0px"><table border=3D"0" =
+cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><t=
+body><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-394648494319675392=
+2m_-3364466882839759628b5" style=3D"padding:0px;border:0px;border-radius:0p=
+x"><table width=3D"100%" style=3D"border:0px;background-color:transparent;b=
+order-radius:0px"><tbody><tr><td style=3D"padding:12px 24px"><div id=3D"m_-=
+26700412839779088m_-3946484943196753922m_-3364466882839759628d5" style=3D"w=
+idth:608px"><p style=3D"line-height:0;margin:0px"><br></p><p style=3D"line-=
+height:0;margin:0px"><br></p><p style=3D"margin:0px"><strong><span style=3D=
+"color:black"><span style=3D"font-size:12pt"><span style=3D"font-family:&qu=
+ot;Times New Roman&quot;,serif">Dear=C2=A0</span><span style=3D"font-family=
+:Calibri,sans-serif">=C2=A0</span></span></span></strong>,</p></div></td></=
+tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td=
+></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><=
+/td></tr></tbody><tbody><tr><td valign=3D"top" align=3D"center" style=3D"ba=
+ckground-color:transparent"><table border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" width=3D"100%" role=3D"presentation" style=3D"max-width:660px"><tb=
+ody><tr><td valign=3D"top" style=3D"background-color:rgb(255,255,255);backg=
+round-position:center center;background-repeat:no-repeat;background-size:co=
+ver"><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"top" style=
+=3D"background-position:center center;background-repeat:no-repeat;backgroun=
+d-size:cover"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"top" id=3D"m_-2670=
+0412839779088m_-3946484943196753922m_-3364466882839759628mceColumnId--7" co=
+lspan=3D"12" width=3D"100%" style=3D"padding-top:0px;padding-bottom:0px"><t=
+able border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=
+=3D"presentation"><tbody><tr><td valign=3D"top" id=3D"m_-26700412839779088m=
+_-3946484943196753922m_-3364466882839759628b95" style=3D"background-color:t=
+ransparent;padding:12px 24px;border:0px;border-radius:0px"><table align=3D"=
+center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" rol=
+e=3D"presentation" style=3D"background-color:transparent;width:612px"><tbod=
+y><tr><td valign=3D"top" style=3D"min-width:100%;border-top:1px solid rgb(2=
+35,235,235);line-height:0;font-size:0px">=C2=A0</td></tr></tbody></table></=
+td></tr><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-394648494319675=
+3922m_-3364466882839759628gutterContainerId-21" style=3D"padding:0px"><tabl=
+e border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"p=
+resentation"><tbody><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-394=
+6484943196753922m_-3364466882839759628b21" style=3D"padding:0px;border:0px;=
+border-radius:0px"><table width=3D"100%" style=3D"border:0px;background-col=
+or:transparent;border-radius:0px"><tbody><tr><td style=3D"padding:12px 24px=
+"><div id=3D"m_-26700412839779088m_-3946484943196753922m_-33644668828397596=
+28d21" style=3D"width:608px"><p style=3D"line-height:0;margin:0px"><br></p>=
+<p style=3D"line-height:0"></p><p style=3D"line-height:0"></p><p class=3D"g=
+mail-mcePastedContent"><span style=3D"color:black"><font face=3D"times new =
+roman, serif">Thank you for confirming your registration to participate in =
+the=C2=A0Mongolia Economic Forum 2026, which will be held on June 29=E2=80=
+=9330, 2026.</font></span></p></div></td></tr></tbody></table></td></tr></t=
+body></table></td></tr><tr><td valign=3D"top" id=3D"m_-26700412839779088m_-=
+3946484943196753922m_-3364466882839759628gutterContainerId-28" style=3D"pad=
+ding:0px"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"=
+100%" role=3D"presentation"><tbody><tr><td valign=3D"top" id=3D"m_-26700412=
+839779088m_-3946484943196753922m_-3364466882839759628b28" style=3D"padding:=
+0px;border:0px;border-radius:0px"><table width=3D"100%" style=3D"border:0px=
+;background-color:transparent;border-radius:0px"><tbody><tr><td style=3D"pa=
+dding:12px 24px"><div id=3D"m_-26700412839779088m_-3946484943196753922m_-33=
+64466882839759628d28" style=3D"width:608px"><p style=3D"line-height:0"></p>=
+<p class=3D"gmail-mcePastedContent"><span style=3D"color:black"><font face=
+=3D"times new roman, serif">You will be contacted once your entry badge has=
+ been printed and is ready for collection. Please note that the badge will =
+be valid only when presented together with a government-issued identificati=
+on document, such as a national ID card or passport. We kindly advise you t=
+o carry your identification document with you throughout the Forum.</font><=
+/span></p><p><font face=3D"times new roman, serif"><span style=3D"color:bla=
+ck"><br></span></font></p><p style=3D"line-height:0"></p><p class=3D"gmail-=
+mcePastedContent"><font face=3D"times new roman, serif"><span style=3D"colo=
+r:black">Detailed information regarding the venue, program, discussion topi=
+cs, and speakers is available on our official website at=C2=A0</span><a hre=
+f=3D"http://www.meforum.mn/" tabindex=3D"-1"><strong>www.meforum.mn</strong=
+></a><span style=3D"color:black">, through our official social media channe=
+ls, and via the=C2=A0MEF2026 mobile application.</span></font></p><p style=
+=3D"line-height:normal;margin:0px"><br></p></div></td></tr></tbody></table>=
+</td></tr></tbody></table></td></tr><tr><td valign=3D"top" id=3D"m_-2670041=
+2839779088m_-3946484943196753922m_-3364466882839759628gutterContainerId-97"=
+ style=3D"padding:0px"><table border=3D"0" cellpadding=3D"0" cellspacing=3D=
+"0" width=3D"100%" role=3D"presentation"><tbody></tbody></table></td></tr><=
+tr><td valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-33=
+64466882839759628b96" style=3D"background-color:transparent;padding:12px 24=
+px;border:0px;border-radius:0px"><table align=3D"center" border=3D"0" cellp=
+adding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation" style=
+=3D"background-color:transparent;width:612px"><tbody><tr><td valign=3D"top"=
+ style=3D"min-width:100%;border-top:1px solid rgb(235,235,235);line-height:=
+0;font-size:0px">=C2=A0</td></tr></tbody></table></td></tr><tr><td valign=
+=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-336446688283975=
+9628gutterContainerId-50" style=3D"padding:0px"><table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><t=
+r><td valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-336=
+4466882839759628b50" style=3D"padding:0px;border:0px;border-radius:0px"><ta=
+ble width=3D"100%" style=3D"border:0px;background-color:transparent;border-=
+radius:0px"><tbody><tr><td style=3D"padding:12px 24px"><div id=3D"m_-267004=
+12839779088m_-3946484943196753922m_-3364466882839759628d50" style=3D"width:=
+608px"><p style=3D"line-height:0;text-align:center;margin:0px"><br></p><p s=
+tyle=3D"line-height:0;text-align:center;margin:0px"><br></p><p style=3D"tex=
+t-align:center">      <span style=3D"color:black">Should you have any quest=
+ions regarding your registration, please do not hesitate to contact at <a h=
+ref=3D"mailto:registration@meforum.mn">registration@meforum.mn</a></span></=
+p></div></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><=
+td valign=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-336446=
+6882839759628gutterContainerId-61"><table border=3D"0" cellpadding=3D"0" ce=
+llspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=
+=3D"top" id=3D"m_-26700412839779088m_-3946484943196753922m_-336446688283975=
+9628b61" style=3D"padding:0px;border:0px;border-radius:0px"><table align=3D=
+"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" ro=
+le=3D"presentation" id=3D"m_-26700412839779088m_-3946484943196753922m_-3364=
+466882839759628section_e77f51d13e409cb70db8e1a42ae050fc"><tbody><tr><td val=
+ign=3D"top" style=3D"background-position:center center;background-repeat:no=
+-repeat;background-size:cover"><table border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"t=
+op" id=3D"m_-26700412839779088m_-3946484943196753922m_-3364466882839759628m=
+ceColumnId--9" colspan=3D"12" width=3D"100%"><table border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr><=
+td valign=3D"top" align=3D"center" id=3D"m_-26700412839779088m_-39464849431=
+96753922m_-3364466882839759628b-4" style=3D"border:0px;border-radius:0px"><=
+table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"top" style=3D"ba=
+ckground-position:center center;background-repeat:no-repeat;background-size=
+:cover"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" role=3D"presentation"><tbody><tr><td valign=3D"top" id=3D"m_-2670041283=
+9779088m_-3946484943196753922m_-3364466882839759628mceColumnId--11" colspan=
+=3D"12" width=3D"100%"><table border=3D"0" cellpadding=3D"0" cellspacing=3D=
+"0" width=3D"100%" role=3D"presentation"><tbody><tr><td valign=3D"top" id=
+=3D"m_-26700412839779088m_-3946484943196753922m_-3364466882839759628b66" st=
+yle=3D"border:0px;border-radius:0px"><table align=3D"center" border=3D"0" c=
+ellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tb=
+ody><tr><td valign=3D"top" style=3D"background-position:center center;backg=
+round-repeat:no-repeat;background-size:cover;padding-top:0px;padding-bottom=
+:0px"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"24" width=3D"100=
+%" role=3D"presentation" style=3D"table-layout:fixed"><colgroup><col span=
+=3D"1" width=3D"8.333333333333332%"><col span=3D"1" width=3D"8.333333333333=
+332%"><col span=3D"1" width=3D"8.333333333333332%"><col span=3D"1" width=3D=
+"8.333333333333332%"><col span=3D"1" width=3D"8.333333333333332%"><col span=
+=3D"1" width=3D"8.333333333333332%"><col span=3D"1" width=3D"8.333333333333=
+332%"><col span=3D"1" width=3D"8.333333333333332%"><col span=3D"1" width=3D=
+"8.333333333333332%"><col span=3D"1" width=3D"8.333333333333332%"><col span=
+=3D"1" width=3D"8.333333333333332%"><col span=3D"1" width=3D"8.333333333333=
+332%"></colgroup><tbody><tr><td valign=3D"center" id=3D"m_-2670041283977908=
+8m_-3946484943196753922m_-3364466882839759628mceColumnId-67" colspan=3D"6" =
+width=3D"50%" style=3D"padding-top:0px;padding-bottom:0px"><table border=3D=
+"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation=
+"><tbody><tr><td valign=3D"top" align=3D"center" id=3D"m_-26700412839779088=
+m_-3946484943196753922m_-3364466882839759628b60" style=3D"background-color:=
+transparent;padding:12px 8px;border:0px;border-radius:0px"><div></div><tabl=
+e align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" role=3D"presentation" style=3D"max-width:294px"><tbody><tr><td va=
+lign=3D"top" style=3D"background-color:rgb(36,166,223);border-radius:8px;te=
+xt-align:center"><a href=3D"https://www.meforum.mn/en#agenda" rel=3D"norefe=
+rrer" target=3D"_blank" style=3D"color:rgb(255,255,255);border-radius:8px;b=
+order:1px solid rgb(36,166,223);display:block;font-family:&quot;Helvetica N=
+eue&quot;,Helvetica,Arial,Verdana,sans-serif;font-size:16px;padding:16px 28=
+px;text-decoration-line:none;direction:ltr;letter-spacing:0px">View Program=
+</a></td></tr></tbody></table><div></div><table align=3D"center" border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"=
+ style=3D"max-width:294px"><tbody><tr></tr></tbody></table></td></tr></tbod=
+y></table></td><td valign=3D"center" id=3D"m_-26700412839779088m_-394648494=
+3196753922m_-3364466882839759628mceColumnId-65" colspan=3D"6" width=3D"50%"=
+ style=3D"padding-top:0px;padding-bottom:0px"><table border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentation"><tbody><tr>=
+<td valign=3D"top" align=3D"center" id=3D"m_-26700412839779088m_-3946484943=
+196753922m_-3364466882839759628b64" style=3D"background-color:transparent;p=
+adding:12px 8px;border:0px;border-radius:0px"><div></div><table align=3D"ce=
+nter" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=
+=3D"presentation" style=3D"max-width:294px"><tbody><tr><td valign=3D"top" s=
+tyle=3D"background-color:rgb(36,166,223);border-radius:8px;text-align:cente=
+r"><a href=3D"mailto:registration@meforum.mn?subject=3D&amp;body=3D" rel=3D=
+"noreferrer" target=3D"_blank" style=3D"color:rgb(255,255,255);border-radiu=
+s:8px;border:1px solid rgb(36,166,223);display:block;font-family:&quot;Helv=
+etica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;font-size:16px;padding:=
+16px 28px;text-decoration-line:none;direction:ltr;letter-spacing:0px">Conta=
+ct Us</a></td></tr></tbody></table><div></div><table align=3D"center" borde=
+r=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presenta=
+tion" style=3D"max-width:294px"><tbody><tr></tr></tbody></table></td></tr><=
+/tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></t=
+r></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td>=
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></=
+td></tr></tbody></table></td></tr><tr><td valign=3D"top" id=3D"m_-267004128=
+39779088m_-3946484943196753922m_-3364466882839759628b51" style=3D"backgroun=
+d-color:transparent;padding:12px 24px;border:0px;border-radius:0px"><table =
+align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"=
+100%" role=3D"presentation" style=3D"background-color:transparent;width:612=
+px"><tbody><tr><td valign=3D"top" style=3D"min-width:100%;border-top:1px so=
+lid rgb(235,235,235);line-height:0;font-size:0px">=C2=A0</td></tr></tbody><=
+/table></td></tr><tr><td valign=3D"top" align=3D"center" id=3D"m_-267004128=
+39779088m_-3946484943196753922m_-3364466882839759628b52" style=3D"backgroun=
+d-color:transparent;padding:0px;border:0px;border-radius:0px"><div></div><t=
+able align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" widt=
+h=3D"100%" role=3D"presentation" style=3D"margin:0px;vertical-align:top;max=
+-width:100%;width:660px;height:auto"><tbody><tr><td valign=3D"top" style=3D=
+"border:0px;border-radius:0px"><img alt=3D"" src=3D"https://mcusercontent.c=
+om/a0009141cc5482f152add5461/images/6ee44572-c145-f0c7-23fa-fd9f38f8be43.pn=
+g" width=3D"660" height=3D"auto" class=3D"gmail-CToWUd gmail-a6T" tabindex=
+=3D"0" style=3D"cursor: pointer; outline: 0px; display: block; max-width: 1=
+00%; height: auto; border-radius: 0px;"></td></tr></tbody></table></td></tr=
+></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td><=
+/tr></tbody></table></td></tr></tbody></table></div>
+
+--000000000000d12a21064dbf5770--

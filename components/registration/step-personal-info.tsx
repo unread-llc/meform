@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { paidSectorOptions, inviteSectorOptions, genderOptions } from "@/lib/registration-schema"
+import { paidSectorOptions, inviteSectorOptions, genderOptions, registrationTypeOptions } from "@/lib/registration-schema"
 import { CountryCombobox } from "./country-combobox"
 
 interface StepPersonalInfoProps {
@@ -33,6 +33,27 @@ export function StepPersonalInfo({
 
   return (
     <div className="space-y-5">
+      <div className="space-y-2">
+        <Label>{t.registrationType} *</Label>
+        <RadioGroup
+          value={data.registration_type || ""}
+          onValueChange={(v) => onChange("registration_type", v)}
+          className="flex gap-6"
+        >
+          {registrationTypeOptions.map((rt) => (
+            <div key={rt} className="flex items-center gap-2">
+              <RadioGroupItem value={rt} id={`rt-${rt}`} />
+              <Label htmlFor={`rt-${rt}`} className="font-normal cursor-pointer">
+                {t.registrationTypes[rt]}
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
+        {errors.registration_type && (
+          <p className="text-sm text-destructive">{errors.registration_type}</p>
+        )}
+      </div>
+
       <div className="space-y-2">
         <Label>{t.sector} *</Label>
         <Select value={data.sector || ""} onValueChange={(v) => onChange("sector", v)}>

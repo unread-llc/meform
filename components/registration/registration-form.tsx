@@ -17,7 +17,7 @@ const STEPS = ["personal", "professional", "documents", "review"] as const
 type Step = (typeof STEPS)[number]
 
 const STEP_FIELDS: Record<Step, string[]> = {
-  personal: ["sector", "lastname", "firstname", "gender", "birth", "nation", "residence"],
+  personal: ["registration_type", "sector", "lastname", "firstname", "gender", "birth", "nation", "residence"],
   professional: ["company", "company_register", "position", "email", "phone"],
   documents: ["passportno", "visa", "passport_img", "img"],
   review: [],
@@ -53,6 +53,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
     const newErrors: Record<string, string> = {}
 
     for (const field of fields) {
+      if (formData.registration_type === "individual" && ["company", "company_register", "position"].includes(field)) continue
       const value = formData[field]
       if (!value || value.trim() === "") {
         newErrors[field] = dict.registration.validation.required
@@ -178,6 +179,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
               data={formData}
               onChange={handleChange}
               errors={errors}
+              registrationType={formData.registration_type}
             />
           )}
           {step === "documents" && (

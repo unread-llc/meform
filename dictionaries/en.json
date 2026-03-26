@@ -419,6 +419,11 @@
       "review": "Review"
     },
     "fields": {
+      "registrationType": "Registration Type",
+      "registrationTypes": {
+        "organization": "Organization",
+        "individual": "Individual"
+      },
       "sector": "Sector",
       "sectorPlaceholder": "Select your sector",
       "sectors": {

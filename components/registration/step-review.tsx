@@ -61,6 +61,7 @@ export function StepReview({ dict, data, onChange, invite }: StepReviewProps) {
       <Card className="rounded-xl">
         <CardContent className="pt-4">
           <h3 className="font-semibold mb-3">{r.personalInfo}</h3>
+          <ReviewRow label={f.registrationType} value={f.registrationTypes?.[data.registration_type] || data.registration_type} />
           <ReviewRow label={f.sector} value={f.sectors?.[data.sector] || data.sector} />
           <ReviewRow label={f.lastname} value={data.lastname} />
           <ReviewRow label={f.firstname} value={data.firstname} />

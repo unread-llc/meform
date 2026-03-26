@@ -9,6 +9,7 @@ interface StepProfessionalProps {
   data: Record<string, string>
   onChange: (field: string, value: string) => void
   errors: Record<string, string>
+  registrationType?: string
 }
 
 export function StepProfessional({
@@ -16,13 +17,15 @@ export function StepProfessional({
   data,
   onChange,
   errors,
+  registrationType,
 }: StepProfessionalProps) {
   const t = dict.registration.fields
+  const isIndividual = registrationType === "individual"
 
   return (
     <div className="space-y-5">
       <div className="space-y-2">
-        <Label>{t.company} *</Label>
+        <Label>{t.company}{!isIndividual && " *"}</Label>
         <Input
           value={data.company || ""}
           onChange={(e) => onChange("company", e.target.value)}
@@ -32,19 +35,21 @@ export function StepProfessional({
         )}
       </div>
 
-      <div className="space-y-2">
-        <Label>{t.companyRegister} *</Label>
-        <Input
-          value={data.company_register || ""}
-          onChange={(e) => onChange("company_register", e.target.value)}
-        />
-        {errors.company_register && (
-          <p className="text-sm text-destructive">{errors.company_register}</p>
-        )}
-      </div>
+      {!isIndividual && (
+        <div className="space-y-2">
+          <Label>{t.companyRegister} *</Label>
+          <Input
+            value={data.company_register || ""}
+            onChange={(e) => onChange("company_register", e.target.value)}
+          />
+          {errors.company_register && (
+            <p className="text-sm text-destructive">{errors.company_register}</p>
+          )}
+        </div>
+      )}
 
       <div className="space-y-2">
-        <Label>{t.position} *</Label>
+        <Label>{t.position}{!isIndividual && " *"}</Label>
         <Input
           value={data.position || ""}
           onChange={(e) => onChange("position", e.target.value)}

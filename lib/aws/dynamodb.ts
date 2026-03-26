@@ -22,6 +22,7 @@ const TABLE_NAME = process.env.MEF_DYNAMODB_TABLE || "mef-registrations"
 
 export interface RegistrationRecord {
   id: string
+  registration_type: string
   sector: string
   lastname: string
   firstname: string

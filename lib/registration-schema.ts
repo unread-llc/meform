@@ -1,5 +1,7 @@
 import { z } from "zod"
 
+export const registrationTypeOptions = ["organization", "individual"] as const
+
 export const paidSectorOptions = [
   "government",
   "media",
@@ -26,6 +28,7 @@ export const genderOptions = ["male", "female", "other"] as const
 export const visaOptions = ["yes", "no"] as const
 
 export const registrationSchema = z.object({
+  registration_type: z.enum(registrationTypeOptions),
   sector: z.enum(sectorOptions),
   lastname: z.string().min(1),
   firstname: z.string().min(1),
@@ -33,9 +36,9 @@ export const registrationSchema = z.object({
   birth: z.string().min(1),
   nation: z.string().min(1),
   residence: z.string().min(1),
-  company: z.string().min(1),
-  company_register: z.string().min(1),
-  position: z.string().min(1),
+  company: z.string(),
+  company_register: z.string(),
+  position: z.string(),
   email: z.string().email(),
   phone: z.string().min(1),
   passportno: z.string().min(1),

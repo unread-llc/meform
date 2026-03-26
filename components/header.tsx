@@ -200,7 +200,7 @@ export function Header({ locale, dict }: HeaderProps) {
           <div className="flex items-center gap-2">
             <LanguageSwitcher currentLocale={locale} />
             <Button asChild className="hidden sm:inline-flex">
-              <Link href={`/${locale}#contact`}>{dict.nav.register}</Link>
+              <Link href={`/${locale}/register`}>{dict.nav.register}</Link>
             </Button>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -297,7 +297,7 @@ export function Header({ locale, dict }: HeaderProps) {
               </Link>
             ))}
             <Button asChild className="mt-4">
-              <Link href={`/${locale}#contact`}>{dict.nav.register}</Link>
+              <Link href={`/${locale}/register`}>{dict.nav.register}</Link>
             </Button>
           </nav>
         </div>

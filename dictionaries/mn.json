@@ -416,6 +416,11 @@
       "review": "Хянах"
     },
     "fields": {
+      "registrationType": "Бүртгэлийн төрөл",
+      "registrationTypes": {
+        "organization": "Байгууллага",
+        "individual": "Хувь хүн"
+      },
       "sector": "Салбар",
       "sectorPlaceholder": "Салбараа сонгоно уу",
       "sectors": {

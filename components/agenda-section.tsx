@@ -16,11 +16,10 @@ interface AgendaSectionProps {
 
 export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const year = "2026"
+  const year = "2023"
 
   const getPdfUrl = (currentLocale: string) => {
-    const baseUrl = "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/agenda"
-    return currentLocale === "mn" ? `${baseUrl}/Agenda.pdf` : `${baseUrl}/Agenda+eng.pdf`
+    return currentLocale === "mn" ? "/23-mon.pdf" : "/23-eng.pdf"
   }
 
   const pdfUrl = getPdfUrl(locale)
