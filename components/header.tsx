@@ -155,7 +155,7 @@ export function Header({ locale, dict }: HeaderProps) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
                 <DropdownMenuItem asChild>
-                  <Link href={`/${locale}/gallery`}>{locale === "mn" ? "Бүх он" : "All years"}</Link>
+                  <Link href={`/${locale}/gallery`}>{dict.gallery.allYears}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 {galleryYears.map((year) => (
@@ -175,7 +175,7 @@ export function Header({ locale, dict }: HeaderProps) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
                 <DropdownMenuItem asChild>
-                  <Link href={`/${locale}/videos`}>{locale === "mn" ? "Бүх бичлэг" : "All videos"}</Link>
+                  <Link href={`/${locale}/videos`}>{dict.gallery.allVideos}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 {videoYears.map((year) => (
@@ -245,7 +245,7 @@ export function Header({ locale, dict }: HeaderProps) {
                   onClick={() => setIsOpen(false)}
                   className="py-2 text-foreground hover:text-primary transition-colors"
                 >
-                  {locale === "mn" ? "Бүх он" : "All years"}
+                  {dict.gallery.allYears}
                 </Link>
                 {galleryYears.map((year) => (
                   <Link
@@ -268,7 +268,7 @@ export function Header({ locale, dict }: HeaderProps) {
                   onClick={() => setIsOpen(false)}
                   className="py-2 text-foreground hover:text-primary transition-colors"
                 >
-                  {locale === "mn" ? "Бүх бичлэг" : "All videos"}
+                  {dict.gallery.allVideos}
                 </Link>
                 {videoYears.map((year) => (
                   <Link
