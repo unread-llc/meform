@@ -29,6 +29,11 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
         logo: "/Partners/strategic/breitling.png",
         url: "https://www.breitling.com/us-en/",
       },
+      {
+        name: "AIG",
+        logo: "/Partners/strategic/aig.png",
+        url: "",
+      },
     ],
   },
   {
