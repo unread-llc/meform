@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { locales, type Locale } from "@/lib/i18n"
@@ -42,6 +43,20 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale}>
+            <head>
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-Q8V5P4TYZH"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-Q8V5P4TYZH');
+                    `}
+                </Script>
+            </head>
             <body className={`font-sans antialiased`}>
                 {children}
                 <Analytics />
