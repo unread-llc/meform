@@ -24,10 +24,9 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d6efd]/90 via-[#0d6efd]/80 to-[#0a58ca]/90" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 text-balance">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 text-balance">
           {dict.hero.title}
         </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8">{dict.hero.titleMn}</p>
 
         <div className="mb-10 flex justify-center">
           <Image
