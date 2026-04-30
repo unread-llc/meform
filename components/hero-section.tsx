@@ -1,6 +1,5 @@
 "use client"
 
-import { Users } from "lucide-react"
 import Image from "next/image"
 import type { Locale } from "@/lib/i18n"
 
@@ -28,17 +27,7 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 text-balance">
           {dict.hero.title}
         </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-2">{dict.hero.titleMn}</p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 text-white/80 text-sm mb-8">
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4" />
-            <span>{dict.hero.participants}</span>
-          </div>
-          <div className="uppercase tracking-wider text-xs font-semibold text-white/80">
-            {dict.hero.date} · {dict.hero.time}
-          </div>
-        </div>
+        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8">{dict.hero.titleMn}</p>
 
         <div className="mb-10 flex justify-center">
           <Image
