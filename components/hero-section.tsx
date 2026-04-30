@@ -1,61 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Users } from "lucide-react"
-import Link from "next/link"
+import Image from "next/image"
 import type { Locale } from "@/lib/i18n"
-
-interface CountdownTimerProps {
-  dict: any
-}
-
-function CountdownTimer({ dict }: CountdownTimerProps) {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  })
-
-  useEffect(() => {
-    const targetDate = new Date("2026-07-08T09:00:00")
-
-    const interval = setInterval(() => {
-      const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        })
-      }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div className="flex gap-4 justify-center">
-      {[
-        { value: timeLeft.days, label: dict.hero.days },
-        { value: timeLeft.hours, label: dict.hero.hours },
-        { value: timeLeft.minutes, label: dict.hero.minutes },
-        { value: timeLeft.seconds, label: dict.hero.seconds },
-      ].map((item) => (
-        <div key={item.label} className="text-center">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 min-w-[60px] sm:min-w-[80px]">
-            <span className="text-2xl sm:text-4xl font-bold text-white">{String(item.value).padStart(2, "0")}</span>
-          </div>
-          <span className="text-xs sm:text-sm text-white/80 mt-2 block">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 interface HeroSectionProps {
   dict: any
@@ -93,31 +40,23 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="mb-10">
-          <p className="text-white/70 text-sm mb-4 uppercase tracking-wider">{dict.hero.countdown}</p>
-          <CountdownTimer dict={dict} />
-        </div>
-
-        <div className="flex justify-center">
-          <Button size="lg" className="bg-white text-[#0d6efd] hover:bg-white/90 font-semibold px-8" asChild>
-            <Link href={`/${locale}/register`}>{dict.hero.registerNow}</Link>
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-white text-white hover:bg-white/10 bg-transparent font-semibold px-8"
-            asChild
-          >
-            {/* <Link href={`/${locale}/about`}>{dict.hero.learnMore}</Link> */}
-          </Button>
+        <div className="mb-10 flex justify-center">
+          <Image
+            src={locale === "mn" ? "/notice_mn.jpg" : "/notice_eng.jpg"}
+            alt="Event cancellation notice"
+            width={900}
+            height={1200}
+            priority
+            className="rounded-lg shadow-2xl max-w-full h-auto w-full sm:w-[600px]"
+          />
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-white/80 rounded-full" />
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }
