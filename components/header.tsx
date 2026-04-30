@@ -116,10 +116,10 @@ export function Header({ locale, dict }: HeaderProps) {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-colors",
+        "fixed top-0 left-0 right-0 z-50 bg-white border-b transition-colors",
         isScrolled
-          ? "bg-white/95 border-border shadow-lg"
-          : "bg-white/70 border-transparent shadow-none"
+          ? "border-border shadow-lg"
+          : "border-transparent shadow-none"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
