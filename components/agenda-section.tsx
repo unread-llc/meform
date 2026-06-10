@@ -14,16 +14,27 @@ interface AgendaSectionProps {
   locale?: string
 }
 
+const AGENDA_YEARS = ["2025", "2024", "2023"]
+
 export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const year = "2023"
+  const [year, setYear] = useState("2025")
 
-  const getPdfUrl = (currentLocale: string) => {
+  const getPdfUrl = (selectedYear: string, currentLocale: string) => {
+    if (selectedYear === "2025") {
+      // The 2025 booklet is bilingual (MN + EN in one file)
+      return "/booklet_mef2025.pdf"
+    }
+    if (selectedYear === "2024") {
+      return currentLocale === "mn" ? "/mef-mon-4.pdf" : "/mef-eng-4.pdf"
+    }
     return currentLocale === "mn" ? "/23-mon.pdf" : "/23-eng.pdf"
   }
 
-  const pdfUrl = getPdfUrl(locale)
+  const pdfUrl = getPdfUrl(year, locale)
   const title = `MEF ${year} Agenda`
+  const languageLabel =
+    year === "2025" ? "Монгол / English" : locale === "mn" ? "Монгол хэл дээр" : "English version"
 
   return (
     <section id="agenda" className="min-h-screen">
@@ -32,7 +43,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
         <div className="fixed inset-0 z-[100] bg-black/90 flex flex-col">
           <div className="flex items-center justify-between p-4 bg-black/50">
             <h3 className="text-white font-medium">
-              {title} - {locale === "mn" ? "Монгол" : "English"}
+              {title} - {languageLabel}
             </h3>
             <div className="flex items-center gap-2">
               <a
@@ -57,7 +68,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
             <div className="max-w-6xl mx-auto h-full flex flex-col">
               <div className="flex-1 bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
                 <div className="h-full p-4">
-                  <AgendaPdfViewerClient pdfUrl={pdfUrl} locale={locale} variant="fullscreen" />
+                  <AgendaPdfViewerClient key={pdfUrl} pdfUrl={pdfUrl} locale={locale} variant="fullscreen" />
                 </div>
               </div>
             </div>
@@ -95,7 +106,21 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
                 <FileText className="w-4 h-4 text-primary" />
                 <span>PDF</span>
               </div>
-              <span className="text-sm font-medium text-foreground">2026</span>
+              <div className="flex items-center gap-1">
+                {AGENDA_YEARS.map((y) => (
+                  <button
+                    key={y}
+                    onClick={() => setYear(y)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                      year === y
+                        ? "bg-primary text-white"
+                        : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                    }`}
+                  >
+                    {y}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -131,7 +156,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
                     {title}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {locale === "mn" ? "Монгол хэл дээр" : "English version"}
+                    {languageLabel}
                   </p>
                 </div>
               </div>
@@ -139,7 +164,7 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
             </div>
 
             <div className="bg-gray-100">
-              <AgendaPdfViewerClient pdfUrl={pdfUrl} locale={locale} variant="inline" />
+              <AgendaPdfViewerClient key={pdfUrl} pdfUrl={pdfUrl} locale={locale} variant="inline" />
             </div>
           </div>
 
