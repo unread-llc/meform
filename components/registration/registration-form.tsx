@@ -27,9 +27,10 @@ interface RegistrationFormProps {
   dict: any
   locale: Locale
   invite?: boolean
+  priceUsd?: number
 }
 
-export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps) {
+export function RegistrationForm({ dict, locale, invite, priceUsd }: RegistrationFormProps) {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<Record<string, string>>({})
@@ -110,7 +111,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, locale }),
+        body: JSON.stringify({ ...formData, locale, ...(priceUsd ? { price_usd: priceUsd } : {}) }),
       })
 
       if (!res.ok) {
@@ -190,7 +191,7 @@ export function RegistrationForm({ dict, locale, invite }: RegistrationFormProps
               errors={errors}
             />
           )}
-          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} />}
+          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={priceUsd} />}
         </CardContent>
       </Card>
 

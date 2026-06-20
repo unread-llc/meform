@@ -56,7 +56,14 @@ export function isValidMnRegisterNo(value: string): boolean {
   return MN_REGISTER_REGEX.test(value)
 }
 
-export function calculateFee(nation: string): { amount: number; currency: string } {
+export function calculateFee(
+  nation: string,
+  priceUsdOverride?: number
+): { amount: number; currency: string } {
+  // Fixed-price tiers (e.g. VIP) charge a flat USD amount for everyone.
+  if (priceUsdOverride && priceUsdOverride > 0) {
+    return { amount: priceUsdOverride, currency: "USD" }
+  }
   const isMongolian =
     nation.toLowerCase() === "mongolia" ||
     nation.toLowerCase() === "mn" ||

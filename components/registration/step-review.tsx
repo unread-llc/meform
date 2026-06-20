@@ -10,6 +10,7 @@ interface StepReviewProps {
   data: Record<string, string>
   onChange?: (field: string, value: string) => void
   invite?: boolean
+  priceUsd?: number
 }
 
 function ReviewRow({ label, value }: { label: string; value: string }) {
@@ -21,12 +22,12 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
   )
 }
 
-export function StepReview({ dict, data, onChange, invite }: StepReviewProps) {
+export function StepReview({ dict, data, onChange, invite, priceUsd }: StepReviewProps) {
   const t = dict.registration
   const f = t.fields
   const r = t.review
 
-  const fee = calculateFee(data.nation || "")
+  const fee = calculateFee(data.nation || "", priceUsd)
   const isMongolian = fee.currency === "MNT"
 
   const [exchangeRate, setExchangeRate] = useState<number | null>(null)
@@ -112,7 +113,11 @@ export function StepReview({ dict, data, onChange, invite }: StepReviewProps) {
                 {isMongolian ? r.domestic : r.international}
               </span>
               <span className="text-lg font-bold text-primary">
-                {isMongolian ? r.feeAmountMNT : r.feeAmountUSD}
+                {priceUsd
+                  ? `$${fee.amount.toLocaleString()}`
+                  : isMongolian
+                    ? r.feeAmountMNT
+                    : r.feeAmountUSD}
               </span>
             </div>
             {!isMongolian && mntEquivalent && (

@@ -27,7 +27,13 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { locale = "en", payment_method, ...formData } = body
+    const { locale = "en", payment_method, price_usd, ...formData } = body
+
+    // Allowed fixed-price tiers (e.g. VIP page). Guard against arbitrary client pricing.
+    const ALLOWED_PRICES_USD = [3000]
+    const priceOverride = ALLOWED_PRICES_USD.includes(Number(price_usd))
+      ? Number(price_usd)
+      : undefined
 
     const parsed = registrationSchema.safeParse(formData)
     if (!parsed.success) {
@@ -38,7 +44,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data
-    const fee = calculateFee(data.nation)
+    const fee = calculateFee(data.nation, priceOverride)
     const registrationId = uuidv4()
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 
