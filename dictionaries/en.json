@@ -437,6 +437,12 @@
         "moderator": "Moderator",
         "panelist": "Panelist",
         "organizing_team": "Organizing Team",
+        "academia": "Academia/Think-tank",
+        "business": "Business",
+        "civil_society": "Civil Society",
+        "social_entrepreneur": "Social Entrepreneur",
+        "arts_culture_sports": "Arts, Culture and Sports",
+        "public_figure": "Public Figure",
         "other": "Other"
       },
       "lastname": "Last Name",

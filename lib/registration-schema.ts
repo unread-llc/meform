@@ -24,12 +24,42 @@ export const inviteSectorOptions = [
 
 export const sectorOptions = inviteSectorOptions
 
+// Sectors offered on the YGL Learning Journey (VIP) registration page.
+export const yglSectorOptions = [
+  "academia",
+  "business",
+  "civil_society",
+  "social_entrepreneur",
+  "arts_culture_sports",
+  "public_figure",
+  "other",
+] as const
+
+// Union of every sector value any registration form may submit.
+const allSectorOptions = [
+  "government",
+  "media",
+  "private",
+  "international",
+  "political_party",
+  "moderator",
+  "panelist",
+  "organizing_team",
+  "academia",
+  "business",
+  "civil_society",
+  "social_entrepreneur",
+  "arts_culture_sports",
+  "public_figure",
+  "other",
+] as const
+
 export const genderOptions = ["male", "female", "other"] as const
 export const visaOptions = ["yes", "no"] as const
 
 export const registrationSchema = z.object({
   registration_type: z.enum(registrationTypeOptions),
-  sector: z.enum(sectorOptions),
+  sector: z.enum(allSectorOptions),
   lastname: z.string().min(1),
   firstname: z.string().min(1),
   gender: z.enum(genderOptions),

@@ -28,12 +28,18 @@ interface RegistrationFormProps {
   locale: Locale
   invite?: boolean
   priceUsd?: number
+  /** YGL Learning Journey variant: no registration type / company register, custom sectors. */
+  vip?: boolean
 }
 
-export function RegistrationForm({ dict, locale, invite, priceUsd }: RegistrationFormProps) {
+export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: RegistrationFormProps) {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState<Record<string, string>>({})
+  // In VIP mode there's no "registration type" question; everyone is treated as an
+  // individual, which also drops the company-register requirement.
+  const [formData, setFormData] = useState<Record<string, string>>(
+    vip ? { registration_type: "individual" } : {}
+  )
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
 
@@ -172,6 +178,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd }: Registratio
               onChange={handleChange}
               errors={errors}
               invite={invite}
+              vip={vip}
             />
           )}
           {step === "professional" && (
@@ -191,7 +198,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd }: Registratio
               errors={errors}
             />
           )}
-          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={priceUsd} />}
+          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={priceUsd} vip={vip} />}
         </CardContent>
       </Card>
 

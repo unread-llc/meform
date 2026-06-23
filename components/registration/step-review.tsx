@@ -11,6 +11,7 @@ interface StepReviewProps {
   onChange?: (field: string, value: string) => void
   invite?: boolean
   priceUsd?: number
+  vip?: boolean
 }
 
 function ReviewRow({ label, value }: { label: string; value: string }) {
@@ -22,7 +23,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
   )
 }
 
-export function StepReview({ dict, data, onChange, invite, priceUsd }: StepReviewProps) {
+export function StepReview({ dict, data, onChange, invite, priceUsd, vip }: StepReviewProps) {
   const t = dict.registration
   const f = t.fields
   const r = t.review
@@ -62,7 +63,9 @@ export function StepReview({ dict, data, onChange, invite, priceUsd }: StepRevie
       <Card className="rounded-xl">
         <CardContent className="pt-4">
           <h3 className="font-semibold mb-3">{r.personalInfo}</h3>
-          <ReviewRow label={f.registrationType} value={f.registrationTypes?.[data.registration_type] || data.registration_type} />
+          {!vip && (
+            <ReviewRow label={f.registrationType} value={f.registrationTypes?.[data.registration_type] || data.registration_type} />
+          )}
           <ReviewRow label={f.sector} value={f.sectors?.[data.sector] || data.sector} />
           <ReviewRow label={f.lastname} value={data.lastname} />
           <ReviewRow label={f.firstname} value={data.firstname} />
@@ -77,7 +80,9 @@ export function StepReview({ dict, data, onChange, invite, priceUsd }: StepRevie
         <CardContent className="pt-4">
           <h3 className="font-semibold mb-3">{r.professionalInfo}</h3>
           <ReviewRow label={f.company} value={data.company} />
-          <ReviewRow label={f.companyRegister} value={data.company_register} />
+          {!vip && (
+            <ReviewRow label={f.companyRegister} value={data.company_register} />
+          )}
           <ReviewRow label={f.position} value={data.position} />
           <ReviewRow label={f.email} value={data.email} />
           <ReviewRow label={f.phone} value={data.phone} />

@@ -434,6 +434,12 @@
         "moderator": "Модератор",
         "panelist": "Панелист",
         "organizing_team": "Зохион байгуулах баг",
+        "academia": "Эрдэм шинжилгээ/Тинк-танк",
+        "business": "Бизнес",
+        "civil_society": "Иргэний нийгэм",
+        "social_entrepreneur": "Нийгмийн бизнес эрхлэгч",
+        "arts_culture_sports": "Урлаг, соёл, спорт",
+        "public_figure": "Олон нийтийн зүтгэлтэн",
         "other": "Бусад"
       },
       "lastname": "Овог",
