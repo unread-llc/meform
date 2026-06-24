@@ -102,6 +102,8 @@ export async function POST(request: NextRequest) {
       checkout_url: checkoutUrl,
       payment_status: "pending",
       payment_provider: paymentProvider,
+      // VIP (YGL Learning Journey) registrations get the YGL confirmation email.
+      ...(priceOverride ? { is_vip: true } : {}),
       locale,
       created_at: new Date().toISOString(),
     }

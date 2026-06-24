@@ -48,6 +48,7 @@ export interface RegistrationRecord {
   payment_status: "pending" | "paid"
   payment_provider?: string
   is_invite?: boolean
+  is_vip?: boolean
   locale?: string
   created_at: string
   paid_at?: string

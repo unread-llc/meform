@@ -41,6 +41,22 @@ export async function sendRegistrationEmail(
   locale: string = "en"
 ) {
   const name = `${registration.firstname} ${registration.lastname}`
+
+  // VIP (YGL Learning Journey) registrations get the dedicated YGL email.
+  if (registration.is_vip) {
+    const html = loadTemplate("ygl_confirmation.html").replace(
+      /\[Participant Name\]/g,
+      name
+    )
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: [registration.email],
+      subject: "YGL Learning Journey in Mongolia 2026 — Participation Confirmed",
+      html,
+    })
+    return
+  }
+
   const templateFile = locale === "mn" ? "mng_confirmation.html" : "eng_confirmation.html"
   const html = injectName(loadTemplate(templateFile), name)
 
