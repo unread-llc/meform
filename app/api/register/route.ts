@@ -4,7 +4,6 @@ import { registrationSchema, calculateFee } from "@/lib/registration-schema"
 import { createRegistration, type RegistrationRecord } from "@/lib/aws/dynamodb"
 import { createCheckout } from "@/lib/byl"
 import { createGolomtInvoice } from "@/lib/golomt"
-import { sendInvoiceEmail } from "@/lib/aws/ses"
 import { rateLimit } from "@/lib/rate-limit"
 import { convertUsdToMnt } from "@/lib/exchange-rate"
 
@@ -109,10 +108,8 @@ export async function POST(request: NextRequest) {
 
     await createRegistration(record)
 
-    // Send invoice email with PDF attachment
-    await sendInvoiceEmail(record, locale).catch((err) =>
-      console.error("Failed to send invoice email:", err)
-    )
+    // No email on registration; the confirmation ("paid successfully") email is
+    // sent from the payment webhook once payment actually succeeds.
 
     return NextResponse.json({
       registrationId,
