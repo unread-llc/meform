@@ -81,24 +81,25 @@ export async function sendRegistrationEmail(
 // 2. Invoice email — sent at registration with PDF attachment
 // ---------------------------------------------------------------------------
 
-let invoicePdfBuffer: Buffer | null = null
+const assetPdfCache = new Map<string, Buffer>()
 
-function getInvoicePdfBuffer(): Buffer {
-  if (!invoicePdfBuffer) {
-    const candidates = [
-      join(process.cwd(), "assets", "invoice.pdf"),
-      join(process.cwd(), ".next", "assets", "invoice.pdf"),
-      join(__dirname, "..", "..", "assets", "invoice.pdf"),
-    ]
-    const pdfPath = candidates.find((p) => existsSync(p))
-    if (!pdfPath) {
-      console.error("Invoice PDF not found. Tried:", candidates)
-      throw new Error("Invoice PDF not found")
-    }
-    console.log("Loading invoice PDF from:", pdfPath)
-    invoicePdfBuffer = readFileSync(pdfPath)
+function getAssetPdfBuffer(filename: string): Buffer {
+  const cached = assetPdfCache.get(filename)
+  if (cached) return cached
+  const candidates = [
+    join(process.cwd(), "assets", filename),
+    join(process.cwd(), ".next", "assets", filename),
+    join(__dirname, "..", "..", "assets", filename),
+  ]
+  const pdfPath = candidates.find((p) => existsSync(p))
+  if (!pdfPath) {
+    console.error(`${filename} not found. Tried:`, candidates)
+    throw new Error(`${filename} not found`)
   }
-  return invoicePdfBuffer
+  console.log("Loading PDF from:", pdfPath)
+  const buffer = readFileSync(pdfPath)
+  assetPdfCache.set(filename, buffer)
+  return buffer
 }
 
 export async function sendInvoiceEmail(
@@ -116,7 +117,7 @@ export async function sendInvoiceEmail(
 
   const subject = "Монголын Эдийн Засгийн Форум 2026 - Нэхэмжлэх / Invoice"
 
-  const pdfBuffer = getInvoicePdfBuffer()
+  const pdfBuffer = getAssetPdfBuffer("invoice.pdf")
 
   await resend.emails.send({
     from: FROM_EMAIL,
@@ -155,5 +156,13 @@ export async function sendYglInvoiceEmail(registration: RegistrationRecord) {
     subject:
       "YGL Learning Journey in Mongolia 2026 — Complete Your Registration",
     html,
+    // Official stamped invoice with bank-transfer details, for participants
+    // who wire the fee instead of paying by card
+    attachments: [
+      {
+        filename: "YGL_Learning_Journey_Invoice.pdf",
+        content: getAssetPdfBuffer("ygl_invoice.pdf"),
+      },
+    ],
   })
 }
