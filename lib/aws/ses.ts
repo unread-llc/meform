@@ -24,11 +24,15 @@ function injectName(html: string, name: string): string {
   return html
     .replace(
       /Dear\u00a0<\/span><span style="font-family:Calibri,sans-serif">\u00a0<\/span>/,
-      `Dear\u00a0</span><span style="font-family:Calibri,sans-serif">${name}</span>`
+      // Replacer fn keeps user-supplied names literal ($-sequences would
+      // otherwise be interpreted as replacement patterns)
+      () =>
+        `Dear\u00a0</span><span style="font-family:Calibri,sans-serif">${name}</span>`
     )
     .replace(
       /Эрхэм хүндэт\u00a0<\/span><span style="font-family:Calibri,sans-serif"> <\/span>/,
-      `Эрхэм хүндэт\u00a0</span><span style="font-family:Calibri,sans-serif">${name}</span>`
+      () =>
+        `Эрхэм хүндэт\u00a0</span><span style="font-family:Calibri,sans-serif">${name}</span>`
     )
 }
 
@@ -46,7 +50,7 @@ export async function sendRegistrationEmail(
   if (registration.is_vip) {
     const html = loadTemplate("ygl_confirmation.html").replace(
       /\[Participant Name\]/g,
-      name
+      () => name
     )
     await resend.emails.send({
       from: FROM_EMAIL,
@@ -101,6 +105,12 @@ export async function sendInvoiceEmail(
   registration: RegistrationRecord,
   locale: string = "en"
 ) {
+  // VIP (YGL Learning Journey) registrations get the YGL payment-request
+  // email with a durable payment link instead of the MEF invoice PDF.
+  if (registration.is_vip) {
+    return sendYglInvoiceEmail(registration)
+  }
+
   const name = `${registration.firstname} ${registration.lastname}`
   const html = injectName(loadTemplate("mng_invoice.html"), name)
 
@@ -119,5 +129,31 @@ export async function sendInvoiceEmail(
         content: pdfBuffer,
       },
     ],
+  })
+}
+
+// ---------------------------------------------------------------------------
+// 3. YGL invoice email — sent to VIP registrations with a durable payment link
+//    (Golomt checkout URLs expire within minutes, so the link points at
+//    /api/register/pay which re-issues a fresh invoice on demand)
+// ---------------------------------------------------------------------------
+
+export async function sendYglInvoiceEmail(registration: RegistrationRecord) {
+  const name = `${registration.firstname} ${registration.lastname}`
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+  // Link to the interstitial page (side-effect-free GET), not the invoice-
+  // minting API: corporate mail gateways prefetch emailed links.
+  const paymentUrl = `${appUrl}/${registration.locale || "en"}/register/pay/${registration.id}`
+
+  const html = loadTemplate("ygl_invoice.html")
+    .replace(/\[Participant Name\]/g, () => name)
+    .replace(/\{\{PAYMENT_URL\}\}/g, () => paymentUrl)
+
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: [registration.email],
+    subject:
+      "YGL Learning Journey in Mongolia 2026 — Complete Your Registration",
+    html,
   })
 }

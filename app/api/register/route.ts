@@ -4,6 +4,7 @@ import { registrationSchema, calculateFee } from "@/lib/registration-schema"
 import { createRegistration, type RegistrationRecord } from "@/lib/aws/dynamodb"
 import { createCheckout } from "@/lib/byl"
 import { createGolomtInvoice } from "@/lib/golomt"
+import { sendYglInvoiceEmail } from "@/lib/aws/ses"
 import { rateLimit } from "@/lib/rate-limit"
 import { convertUsdToMnt } from "@/lib/exchange-rate"
 
@@ -110,8 +111,15 @@ export async function POST(request: NextRequest) {
 
     await createRegistration(record)
 
-    // No email on registration; the confirmation ("paid successfully") email is
-    // sent from the payment webhook once payment actually succeeds.
+    // VIP (YGL) registrants get a payment-request email with a durable pay
+    // link, since the Golomt checkout they are redirected to expires within
+    // minutes. Other registrants get no email until payment succeeds (the
+    // webhook sends the confirmation email).
+    if (record.is_vip) {
+      await sendYglInvoiceEmail(record).catch((err) =>
+        console.error("Failed to send YGL invoice email:", err)
+      )
+    }
 
     return NextResponse.json({
       registrationId,

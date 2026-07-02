@@ -105,6 +105,28 @@ export async function deleteRegistration(id: string): Promise<void> {
   )
 }
 
+export async function updateRegistrationCheckout(
+  id: string,
+  checkoutId: string,
+  checkoutUrl: string
+): Promise<void> {
+  await docClient.send(
+    new UpdateCommand({
+      TableName: TABLE_NAME,
+      Key: { id },
+      UpdateExpression:
+        "SET checkout_id = :checkoutId, checkout_url = :checkoutUrl",
+      // Never touch a registration that has already been paid
+      ConditionExpression: "payment_status <> :paid",
+      ExpressionAttributeValues: {
+        ":checkoutId": checkoutId,
+        ":checkoutUrl": checkoutUrl,
+        ":paid": "paid",
+      },
+    })
+  )
+}
+
 export async function markRegistrationPaid(
   id: string
 ): Promise<void> {

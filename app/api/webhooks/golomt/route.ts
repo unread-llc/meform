@@ -45,8 +45,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ received: true, status: "already_paid" })
     }
 
-    // Verify payment with Golomt API
-    const txn = await checkGolomtTransaction(registrationId)
+    // Verify payment with Golomt API using the exact transactionId from the
+    // webhook (it may carry an -R{n} retry suffix from a re-issued invoice)
+    const txn = await checkGolomtTransaction(req.transactionId)
 
     if (txn.errorCode === GOLOMT_SUCCESS_CODE) {
       try {

@@ -22,13 +22,14 @@ export function SuccessContent({
   dict: any
 }) {
   const searchParams = useSearchParams()
-  // Golomt callback uses ?invoice=MEF2026-{uuid}&status_code=000
+  // Golomt callback uses ?invoice=MEF2026-{uuid}&status_code=000, where the
+  // transactionId may carry an -R{n} re-issue suffix (MEF2026-{uuid}-R2).
   // byl.mn callback uses ?registration_id={uuid}
   const invoiceParam = searchParams.get("invoice") || ""
   const registrationId =
     searchParams.get("registration_id") ||
     (invoiceParam.startsWith("MEF2026-")
-      ? invoiceParam.replace("MEF2026-", "")
+      ? invoiceParam.replace("MEF2026-", "").replace(/-R\d+$/, "")
       : "")
   const [loading, setLoading] = useState(true)
   const [result, setResult] = useState<VerifyResult | null>(null)
@@ -38,12 +39,17 @@ export function SuccessContent({
       setLoading(false)
       return
     }
-    fetch(`/api/register/verify?id=${encodeURIComponent(registrationId)}`)
+    // Pass the exact transactionId that was just paid (if we have it) so the
+    // server verifies that invoice, not whichever one the record points at.
+    const txnQuery = invoiceParam
+      ? `&txn=${encodeURIComponent(invoiceParam)}`
+      : ""
+    fetch(`/api/register/verify?id=${encodeURIComponent(registrationId)}${txnQuery}`)
       .then((res) => res.json())
       .then((data) => setResult(data))
       .catch(() => setResult(null))
       .finally(() => setLoading(false))
-  }, [registrationId])
+  }, [registrationId, invoiceParam])
 
   if (loading) {
     return (
