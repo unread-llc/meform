@@ -58,7 +58,7 @@ export function BoardSection({ dict }: BoardSectionProps) {
                     </span>
                   )}
                 </div>
-                <h3 className="font-semibold text-foreground text-lg whitespace-nowrap overflow-hidden text-ellipsis">{member.name}</h3>
+                <h3 className="font-semibold text-foreground text-lg text-balance">{member.name}</h3>
                 <p className="text-primary text-sm font-medium mb-1">{member.role}</p>
                 <p className="text-muted-foreground text-xs mb-4">{member.position}</p>
                 <Link

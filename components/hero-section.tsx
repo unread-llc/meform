@@ -1,7 +1,59 @@
 "use client"
 
-import Image from "next/image"
+import { useEffect, useState } from "react"
 import type { Locale } from "@/lib/i18n"
+
+interface CountdownTimerProps {
+  dict: any
+}
+
+function CountdownTimer({ dict }: CountdownTimerProps) {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  })
+
+  useEffect(() => {
+    // MEF 2027 — July 3, 2027
+    const targetDate = new Date("2027-07-03T09:00:00")
+
+    const interval = setInterval(() => {
+      const now = new Date()
+      const difference = targetDate.getTime() - now.getTime()
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        })
+      }
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="flex gap-4 justify-center">
+      {[
+        { value: timeLeft.days, label: dict.hero.days },
+        { value: timeLeft.hours, label: dict.hero.hours },
+        { value: timeLeft.minutes, label: dict.hero.minutes },
+        { value: timeLeft.seconds, label: dict.hero.seconds },
+      ].map((item) => (
+        <div key={item.label} className="text-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 min-w-[60px] sm:min-w-[80px]">
+            <span className="text-2xl sm:text-4xl font-bold text-white">{String(item.value).padStart(2, "0")}</span>
+          </div>
+          <span className="text-xs sm:text-sm text-white/80 mt-2 block">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 interface HeroSectionProps {
   dict: any
@@ -28,15 +80,11 @@ export function HeroSection({ dict, locale }: HeroSectionProps) {
           {dict.hero.title}
         </h1>
 
-        <div className="mb-10 flex justify-center">
-          <Image
-            src={locale === "mn" ? "/notice_mn.jpg" : "/notice_eng.jpg"}
-            alt="Event cancellation notice"
-            width={900}
-            height={1200}
-            priority
-            className="rounded-lg shadow-2xl max-w-full h-auto w-full sm:w-[600px]"
-          />
+        <div className="mb-10">
+          <p className="text-white/80 text-sm sm:text-base mb-4 uppercase tracking-wider font-semibold">
+            {dict.hero.countdown}
+          </p>
+          <CountdownTimer dict={dict} />
         </div>
       </div>
 

@@ -28,7 +28,7 @@
     "themeMn": "Маргаашийн төлөө хамтдаа",
     "location": "Ulaanbaatar, Mongolia",
     "participants": "2000+ Participants",
-    "countdown": "Time Until MEF 2026",
+    "countdown": "Time Until Mongolia Economic Forum 2027",
     "registerNow": "Register Now",
     "learnMore": "Learn More",
     "days": "Days",
@@ -142,6 +142,10 @@
       "2025": {
         "theme": "Together for Tomorrow",
         "description": "The 2025 Mongolia Economic Forum took place on 8–9 July 2025 under the theme \"Together for Tomorrow.\" The Forum continued MEF's mission of convening high-level dialogue on Mongolia's future development path, focusing on collaboration across government, business, and civil society to address emerging challenges and opportunities.\n\nThe event was inaugurated by Prime Minister Gombojavyn Zandanshatar."
+      },
+      "2026": {
+        "theme": "Unlock Mongolian Economy",
+        "description": "The \"Unlock Mongolian Economy 2026\" Forum took place on 29–30 June 2026. Convened in a renewed format, advancing dialogue on Mongolia's economic development, investment, and public-private cooperation, bringing together senior government leaders, international investors, business executives, and representatives of global organizations to strengthen collaboration and unlock new opportunities for sustainable growth.\n\nThe centerpiece of the Forum was the Economic Development Board Session, which convened senior government leaders and private sector representatives to discuss Mongolia's economic reform agenda, investment priorities, and measures to enhance the country's competitiveness."
       }
     }
   },
@@ -380,7 +384,7 @@
   },
   "agenda": {
     "label": "Forum Agenda",
-    "title": "MEF 2026 Agenda",
+    "title": "\"Unlock Mongolian Economy\" 2026 Agenda",
     "description": "Explore the comprehensive program featuring plenary sessions, sub-sessions, and networking opportunities across two days of impactful discussions.",
     "day": "Day",
     "plenarySessions": "Plenary Sessions",

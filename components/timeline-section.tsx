@@ -8,7 +8,7 @@ interface TimelineSectionProps {
   fullHistory?: boolean
 }
 
-const timelineYears = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2022, 2023, 2024, 2025]
+const timelineYears = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2022, 2023, 2024, 2025, 2026]
 
 export function TimelineSection({ dict, fullHistory }: TimelineSectionProps) {
   const [expandedYear, setExpandedYear] = useState<number | null>(null)

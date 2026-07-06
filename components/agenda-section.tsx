@@ -14,13 +14,22 @@ interface AgendaSectionProps {
   locale?: string
 }
 
-const AGENDA_YEARS = ["2025", "2024", "2023"]
+const AGENDA_YEARS = ["2026", "2025", "2024", "2023"]
+
+// Large agenda PDFs are served from the public S3 prefix
+const S3_AGENDA_BASE =
+  "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/agenda"
 
 export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [year, setYear] = useState("2025")
+  const [year, setYear] = useState("2026")
 
   const getPdfUrl = (selectedYear: string, currentLocale: string) => {
+    if (selectedYear === "2026") {
+      return currentLocale === "mn"
+        ? `${S3_AGENDA_BASE}/unlock-2026-mng.pdf`
+        : `${S3_AGENDA_BASE}/unlock-2026-eng.pdf`
+    }
     if (selectedYear === "2025") {
       // The 2025 booklet is bilingual (MN + EN in one file)
       return "/booklet_mef2025.pdf"
@@ -32,7 +41,8 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
   }
 
   const pdfUrl = getPdfUrl(year, locale)
-  const title = `MEF ${year} Agenda`
+  const title =
+    year === "2026" ? '"Unlock Mongolian Economy" 2026 Agenda' : `MEF ${year} Agenda`
   const languageLabel =
     year === "2025" ? "Монгол / English" : locale === "mn" ? "Монгол хэл дээр" : "English version"
 
@@ -46,9 +56,14 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
               {title} - {languageLabel}
             </h3>
             <div className="flex items-center gap-2">
+              {/* target=_blank: the download attribute is ignored for the
+                  cross-origin S3 PDFs (2026), which would otherwise navigate
+                  this tab off-site */}
               <a
                 href={pdfUrl}
                 download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
               >
                 <Download className="w-4 h-4" />
@@ -127,6 +142,8 @@ export function AgendaSection({ dict, locale = "en" }: AgendaSectionProps) {
               <a
                 href={pdfUrl}
                 download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 bg-secondary/50 hover:bg-secondary text-foreground rounded-xl font-medium text-sm transition-colors"
               >
                 <Download className="w-4 h-4" />

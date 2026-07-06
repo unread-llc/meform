@@ -37,37 +37,32 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
     ],
   },
   {
-    key: "corporate",
-    partners: [
-      {
-        name: "StoneX",
-        logo: "/Logo/Partners/2025/Corporate partners/StoneX_Dark.png",
-        url: "https://www.stonex.com/en/",
-      },
-      {
-        name: "Emart",
-        logo: "/Logo/Partners/2025/Corporate partners/Emart logo.png",
-        url: "https://emartmall.mn/",
-      },
-      {
-        name: "ARD Holdings",
-        logo: "/ardcoin.png",
-        url: "https://ardholdings.com/mn/?home",
-      },
-    ],
-  },
-  {
     key: "partnerOrganization",
     partners: [
       {
-        name: "GTN",
-        logo: "/Logo/Partners/2025/Partner organization/GTN_Logo.jpg",
-        url: "https://gtngroup.com/europe/home/",
+        name: "EDB Business Friendly Mongolia",
+        logo: "/Logo/Partners/2026/edb.png",
+        url: "",
       },
       {
-        name: "Badrakh Energy",
-        logo: "/Logo/Partners/2025/Partner organization/Badrakh energy.png",
-        url: "https://badrakhenergy.com/en/home-en/",
+        name: "Ulaanbaatar Chamber of Commerce",
+        logo: "/Logo/Partners/2026/ubcc.png",
+        url: "",
+      },
+      {
+        name: "Ubcab Holding",
+        logo: "/Logo/Partners/2026/ubcab.png",
+        url: "",
+      },
+      {
+        name: "GR",
+        logo: "/Logo/Partners/2026/gr.png",
+        url: "",
+      },
+      {
+        name: "CEO Club",
+        logo: "/Logo/Partners/2026/ceo-club.png",
+        url: "",
       },
     ],
   },
@@ -173,6 +168,28 @@ const fallbackCategoryLabels: Record<PartnerCategoryKey, string> = {
 }
 
 const previousPartners: Partner[] = [
+  // Moved from the 2025/2026 corporate and partner-organization categories
+  {
+    name: "StoneX",
+    logo: "/Logo/Partners/2025/Corporate partners/StoneX_Dark.png",
+    url: "https://www.stonex.com/en/",
+  },
+  {
+    name: "Emart",
+    logo: "/Logo/Partners/2025/Corporate partners/Emart logo.png",
+    url: "https://emartmall.mn/",
+  },
+  {
+    name: "ARD Holdings",
+    logo: "/ardcoin.png",
+    url: "https://ardholdings.com/mn/?home",
+  },
+  // (GTN already appears below as "Global Trading Network (GTN)")
+  {
+    name: "Badrakh Energy",
+    logo: "/Logo/Partners/2025/Partner organization/Badrakh energy.png",
+    url: "https://badrakhenergy.com/en/home-en/",
+  },
   { name: "IDAX", logo: "/Logo/Previous%20years%20partners%20logo/IDAX.png", url: "https://www.idax.exchange/" },
   { name: "Ulaanbaatar Securities Exchange", logo: "/Logo/Previous%20years%20partners%20logo/UBX.svg", url: "https://www.ubx.mn/" },
   { name: "MCS Group", logo: "/Logo/Previous%20years%20partners%20logo/MCS%20Group_id9wPPwFOI_0.png", url: "https://mcs.mn/mn/" },
