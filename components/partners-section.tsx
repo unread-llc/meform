@@ -22,21 +22,6 @@ type PartnerCategoryKey =
 
 const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }> = [
   {
-    key: "strategic",
-    partners: [
-      {
-        name: "Breitling",
-        logo: "/Partners/strategic/breitling.png",
-        url: "https://www.breitling.com/us-en/",
-      },
-      {
-        name: "AIG",
-        logo: "/Partners/strategic/aig.png",
-        url: "",
-      },
-    ],
-  },
-  {
     key: "partnerOrganization",
     partners: [
       {
@@ -66,96 +51,6 @@ const partnerCategories: Array<{ key: PartnerCategoryKey; partners: Partner[] }>
       },
     ],
   },
-  {
-    key: "supporting",
-    partners: [
-      {
-        name: "EBRD",
-        logo: "/Logo/Partners/2025/Supporting organization/EBRD/EBRDlogo (004) (1).png",
-        url: "https://www.ebrd.com/home",
-      },
-      {
-        name: "ADB",
-        logo: "/Logo/Partners/2025/Supporting organization/ADB/ADB_logoBLUE_PNG (2).png",
-        url: "https://www.adb.org/",
-      },
-      {
-        name: "EU Global Gateway",
-        logo: "/Logo/Partners/2025/Supporting organization/EU/Global-Gateway-logo-EU-emblem-dark blue-1200x800.jpg",
-        url: "https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/stronger-europe-world/global-gateway_en",
-      },
-      {
-        name: "Pinut Amongolia",
-        logo: "/Logo/Partners/2025/Supporting organization/PINUTA/Logo/viber_image_2025-06-27_16-30-58-925.jpg",
-        url: "https://www.facebook.com/pinutamongolia/",
-      },
-      {
-        name: "Economic Journalism Club",
-        logo: "/Logo/Partners/2025/Supporting organization/МЭЗСК/photo_2025-07-05_13-23-51.jpg",
-        url: "https://www.facebook.com/profile.php?id=61574363563476",
-      },
-      {
-        name: "Unitel",
-        logo: "/Logo/Partners/2025/Supporting organization/unitel/Unitel_Logo.png",
-        url: "https://www.unitel.mn/unitel/",
-      },
-    ],
-  },
-  {
-    key: "media",
-    partners: [
-      {
-        name: "TikTok",
-        logo: "/Logo/Partners/2025/Supporting organization/Tik Tok/Tik.jpg",
-        url: "https://www.tiktok.com/",
-      },
-      {
-        name: "Economic Journalists Club",
-        logo: "/Logo/Partners/2025/Supporting organization/МЭЗСК/photo_2025-07-05_13-23-51.jpg",
-        url: "https://www.facebook.com/EconomicJournalistsClub",
-      },
-      {
-        name: "Lemonpress",
-        logo: "/Logo/Partners/2025/Supporting organization/Lemon Press/logo_har.png",
-        url: "https://lemonpress.mn/",
-      },
-      {
-        name: "Tsoilog Soz",
-        logo: "/Logo/Partners/2025/Supporting organization/TsoilogsoZ logo/TsoilogsoZ logo_black.png",
-        url: "https://www.facebook.com/tsoilogsoz/",
-      },
-      {
-        name: "Unread Today",
-        logo: "/Logo/Partners/2025/Supporting organization/Unread/photo_2025-07-05 13.00.31.jpeg",
-        url: "https://unread.today/category/english",
-      },
-      {
-        name: "Tngr",
-        logo: "/Logo/Partners/2025/Supporting organization/Tenger TV/photo_2025-07-05 13.00.22.jpeg",
-        url: "https://www.tngr.tv/",
-      },
-    ],
-  },
-  {
-    key: "logistics",
-    partners: [
-      {
-        name: "Mongol Post",
-        logo: "/logistic_partners/logo ENG1 PNG.png",
-        url: "https://mongolpost.mn/en",
-      },
-      {
-        name: "Royal Enfield",
-        logo: "/logistic_partners/royal_enfield.jpeg",
-        url: "https://www.royalenfield.com/in/en/home/",
-      },
-      {
-        name: "EMC Mongolia",
-        logo: "/logistic_partners/Copy of EMC Logo.png",
-        url: "https://www.emcmongolia.mn/",
-      },
-    ],
-  },
 ]
 
 const fallbackCategoryLabels: Record<PartnerCategoryKey, string> = {
@@ -168,6 +63,87 @@ const fallbackCategoryLabels: Record<PartnerCategoryKey, string> = {
 }
 
 const previousPartners: Partner[] = [
+  // 2025/2026 strategic, supporting, media and logistic partners
+  {
+    name: "Breitling",
+    logo: "/Partners/strategic/breitling.png",
+    url: "https://www.breitling.com/us-en/",
+  },
+  {
+    name: "AIG",
+    logo: "/Partners/strategic/aig.png",
+    url: "",
+  },
+  {
+    name: "EBRD",
+    logo: "/Logo/Partners/2025/Supporting organization/EBRD/EBRDlogo (004) (1).png",
+    url: "https://www.ebrd.com/home",
+  },
+  {
+    name: "ADB",
+    logo: "/Logo/Partners/2025/Supporting organization/ADB/ADB_logoBLUE_PNG (2).png",
+    url: "https://www.adb.org/",
+  },
+  {
+    name: "EU Global Gateway",
+    logo: "/Logo/Partners/2025/Supporting organization/EU/Global-Gateway-logo-EU-emblem-dark blue-1200x800.jpg",
+    url: "https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/stronger-europe-world/global-gateway_en",
+  },
+  {
+    name: "Pinut Amongolia",
+    logo: "/Logo/Partners/2025/Supporting organization/PINUTA/Logo/viber_image_2025-06-27_16-30-58-925.jpg",
+    url: "https://www.facebook.com/pinutamongolia/",
+  },
+  {
+    name: "Unitel",
+    logo: "/Logo/Partners/2025/Supporting organization/unitel/Unitel_Logo.png",
+    url: "https://www.unitel.mn/unitel/",
+  },
+  {
+    name: "TikTok",
+    logo: "/Logo/Partners/2025/Supporting organization/Tik Tok/Tik.jpg",
+    url: "https://www.tiktok.com/",
+  },
+  {
+    name: "Economic Journalists Club",
+    logo: "/Logo/Partners/2025/Supporting organization/МЭЗСК/photo_2025-07-05_13-23-51.jpg",
+    url: "https://www.facebook.com/EconomicJournalistsClub",
+  },
+  {
+    name: "Lemonpress",
+    logo: "/Logo/Partners/2025/Supporting organization/Lemon Press/logo_har.png",
+    url: "https://lemonpress.mn/",
+  },
+  {
+    name: "Tsoilog Soz",
+    logo: "/Logo/Partners/2025/Supporting organization/TsoilogsoZ logo/TsoilogsoZ logo_black.png",
+    url: "https://www.facebook.com/tsoilogsoz/",
+  },
+  {
+    name: "Unread Today",
+    logo: "/Logo/Partners/2025/Supporting organization/Unread/photo_2025-07-05 13.00.31.jpeg",
+    url: "https://unread.today/category/english",
+  },
+  {
+    name: "Tngr",
+    logo: "/Logo/Partners/2025/Supporting organization/Tenger TV/photo_2025-07-05 13.00.22.jpeg",
+    url: "https://www.tngr.tv/",
+  },
+  {
+    name: "Mongol Post",
+    logo: "/logistic_partners/logo ENG1 PNG.png",
+    url: "https://mongolpost.mn/en",
+  },
+  {
+    name: "Royal Enfield",
+    logo: "/logistic_partners/royal_enfield.jpeg",
+    url: "https://www.royalenfield.com/in/en/home/",
+  },
+  {
+    name: "EMC Mongolia",
+    logo: "/logistic_partners/Copy of EMC Logo.png",
+    url: "https://www.emcmongolia.mn/",
+  },
   // Moved from the 2025/2026 corporate and partner-organization categories
   {
     name: "StoneX",
