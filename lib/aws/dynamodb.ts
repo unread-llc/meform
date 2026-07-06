@@ -16,9 +16,9 @@ const client = new DynamoDBClient({
   maxAttempts: 3,
 })
 
-const docClient = DynamoDBDocumentClient.from(client)
+export const docClient = DynamoDBDocumentClient.from(client)
 
-const TABLE_NAME = process.env.MEF_DYNAMODB_TABLE || "mef-registrations"
+export const TABLE_NAME = process.env.MEF_DYNAMODB_TABLE || "mef-registrations"
 
 export interface RegistrationRecord {
   id: string
