@@ -26,6 +26,10 @@ export function SuccessContent({
   // transactionId may carry an -R{n} re-issue suffix (MEF2026-{uuid}-R2).
   // byl.mn callback uses ?registration_id={uuid}
   const invoiceParam = searchParams.get("invoice") || ""
+  // Golomt also reports the payment outcome in the callback, e.g.
+  // ?status_code=000 (success) or ?status_code=179&desc=Acquirer+/+Issuer+Host+Declined
+  const statusCode = searchParams.get("status_code")
+  const statusDesc = searchParams.get("desc")
   const registrationId =
     searchParams.get("registration_id") ||
     (invoiceParam.startsWith("MEF2026-")
@@ -89,6 +93,47 @@ export function SuccessContent({
   const qrData = `MEF2026:${registrationId}`
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`
   const isPaid = result.payment_status === "paid"
+
+  // The bank reported a decline in the callback and the server-side check
+  // confirms the payment is still unpaid: show a clear failure state with a
+  // retry link (mints a fresh payment session) instead of "pending".
+  if (!isPaid && statusCode && statusCode !== "000") {
+    return (
+      <Card className="rounded-3xl text-center">
+        <CardHeader className="pb-4">
+          <div className="mx-auto mb-4 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+            <XCircle className="w-8 h-8 text-red-600" />
+          </div>
+          <CardTitle className="text-2xl">
+            {dict.registration.success.declinedTitle}
+          </CardTitle>
+          <p className="text-muted-foreground">
+            {dict.registration.success.declinedSubtitle}
+          </p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <p className="text-sm text-muted-foreground">
+            {dict.registration.success.declinedDescription}
+          </p>
+          {statusDesc && (
+            <p className="font-mono text-xs bg-muted rounded-lg p-3 text-muted-foreground">
+              {statusDesc} ({statusCode})
+            </p>
+          )}
+          <Button asChild className="w-full">
+            <a href={`/${locale}/register/pay/${registrationId}`}>
+              {dict.registration.success.tryAgain}
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="w-full">
+            <Link href={`/${locale}`}>
+              {dict.registration.success.backToHome}
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
 
   return (
     <Card className="rounded-3xl text-center">

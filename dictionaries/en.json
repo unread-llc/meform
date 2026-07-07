@@ -533,7 +533,11 @@
       "invalidDescription": "This registration ID is invalid or does not exist.",
       "pendingTitle": "Payment Pending",
       "pendingSubtitle": "Your payment is being processed",
-      "pendingDescription": "Your registration has been received. The QR code will be available once payment is confirmed."
+      "pendingDescription": "Your registration has been received. The QR code will be available once payment is confirmed.",
+      "declinedTitle": "Payment Unsuccessful",
+      "declinedSubtitle": "Your bank declined this payment",
+      "declinedDescription": "No money was taken. This usually means your bank blocked the international charge — please contact your bank to authorize the payment (Golomt Bank, Mongolia), then try again. You can also pay by bank transfer using the invoice attached to your registration email.",
+      "tryAgain": "Try payment again"
     },
     "cancel": {
       "title": "Payment Cancelled",
