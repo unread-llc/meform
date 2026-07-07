@@ -108,8 +108,11 @@ export async function sendInvoiceEmail(
 ) {
   // VIP (YGL Learning Journey) registrations get the YGL payment-request
   // email with a durable payment link instead of the MEF invoice PDF.
+  // Manual resends (admin panel) go out without the stamped invoice PDF —
+  // its printed amount only matches registrations created at the old fixed
+  // exchange rate.
   if (registration.is_vip) {
-    return sendYglInvoiceEmail(registration)
+    return sendYglInvoiceEmail(registration, { attachPdf: false })
   }
 
   const name = `${registration.firstname} ${registration.lastname}`
@@ -139,7 +142,10 @@ export async function sendInvoiceEmail(
 //    /api/register/pay which re-issues a fresh invoice on demand)
 // ---------------------------------------------------------------------------
 
-export async function sendYglInvoiceEmail(registration: RegistrationRecord) {
+export async function sendYglInvoiceEmail(
+  registration: RegistrationRecord,
+  { attachPdf = true }: { attachPdf?: boolean } = {}
+) {
   const name = `${registration.firstname} ${registration.lastname}`
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
   // Link to the interstitial page (side-effect-free GET), not the invoice-
@@ -156,13 +162,17 @@ export async function sendYglInvoiceEmail(registration: RegistrationRecord) {
     subject:
       "YGL Learning Journey in Mongolia 2026 — Complete Your Registration",
     html,
-    // Official stamped invoice with bank-transfer details, for participants
-    // who wire the fee instead of paying by card
-    attachments: [
-      {
-        filename: "YGL_Learning_Journey_Invoice.pdf",
-        content: getAssetPdfBuffer("ygl_invoice.pdf"),
-      },
-    ],
+    ...(attachPdf
+      ? {
+          // Official stamped invoice with bank-transfer details, for
+          // participants who wire the fee instead of paying by card
+          attachments: [
+            {
+              filename: "YGL_Learning_Journey_Invoice.pdf",
+              content: getAssetPdfBuffer("ygl_invoice.pdf"),
+            },
+          ],
+        }
+      : {}),
   })
 }
