@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
-import { getUsdMntRate } from "@/lib/exchange-rate"
+import { getUsdMntRateInfo } from "@/lib/exchange-rate"
 
 export async function GET() {
   try {
-    const rate = await getUsdMntRate()
-    return NextResponse.json({ rate, currency: "USD/MNT" })
+    const { rate, source, fetchedAt } = await getUsdMntRateInfo()
+    return NextResponse.json({ rate, currency: "USD/MNT", source, fetchedAt })
   } catch (error: any) {
     return NextResponse.json(
       { error: "Failed to fetch exchange rate", details: error?.message },
