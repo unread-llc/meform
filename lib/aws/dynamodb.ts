@@ -49,6 +49,10 @@ export interface RegistrationRecord {
   payment_provider?: string
   is_invite?: boolean
   is_vip?: boolean
+  // VIP only: accompanying spouse of a Young Global Leader ("yes"/"no") and
+  // the full name of the YGL they accompany.
+  ygl_spouse?: string
+  ygl_spouse_of?: string
   locale?: string
   created_at: string
   paid_at?: string

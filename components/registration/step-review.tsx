@@ -79,6 +79,17 @@ export function StepReview({ dict, data, onChange, invite, priceUsd, vip }: Step
       <Card className="rounded-xl">
         <CardContent className="pt-4">
           <h3 className="font-semibold mb-3">{r.professionalInfo}</h3>
+          {vip && (
+            <>
+              <ReviewRow
+                label={f.yglSpouseShort}
+                value={f.yglSpouseOptions?.[data.ygl_spouse] || data.ygl_spouse}
+              />
+              {data.ygl_spouse === "yes" && (
+                <ReviewRow label={f.yglSpouseOf} value={data.ygl_spouse_of} />
+              )}
+            </>
+          )}
           <ReviewRow label={f.company} value={data.company} />
           {!vip && (
             <ReviewRow label={f.companyRegister} value={data.company_register} />

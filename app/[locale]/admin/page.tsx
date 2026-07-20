@@ -42,6 +42,8 @@ interface Registration {
   payment_status: string
   is_invite?: boolean
   is_vip?: boolean
+  ygl_spouse?: string
+  ygl_spouse_of?: string
   created_at: string
   fee_amount: number
   fee_currency: string
@@ -361,13 +363,13 @@ export default function AdminPage() {
       "ID", "First Name", "Last Name", "Email", "Phone", "Company",
       "Position", "Sector", "Nationality", "Residence", "Gender",
       "Date of Birth", "Passport No", "Visa Needed", "Payment Status",
-      "Type", "Fee", "Currency", "Registered At",
+      "Type", "YGL Spouse", "Accompanying YGL", "Fee", "Currency", "Registered At",
     ]
     const rows = filtered.map((r) => [
       r.id, r.firstname, r.lastname, r.email, r.phone, r.company,
       r.position, r.sector, r.nation, r.residence, r.gender,
       r.birth, r.passportno, r.visa, r.payment_status,
-      tierOf(r), r.fee_amount, r.fee_currency, r.created_at,
+      tierOf(r), r.ygl_spouse, r.ygl_spouse_of, r.fee_amount, r.fee_currency, r.created_at,
     ])
     const csv = [headers, ...rows].map((row) =>
       row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(",")
@@ -613,8 +615,11 @@ export default function AdminPage() {
                   </td>
                   <td className="p-3">
                     {r.is_vip ? (
-                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700">
-                        vip
+                      <span
+                        className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700 whitespace-nowrap"
+                        title={r.ygl_spouse === "yes" && r.ygl_spouse_of ? `Spouse of ${r.ygl_spouse_of}` : undefined}
+                      >
+                        {r.ygl_spouse === "yes" ? "vip spouse" : "vip"}
                       </span>
                     ) : r.is_invite ? (
                       <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">

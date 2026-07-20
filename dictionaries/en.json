@@ -462,6 +462,14 @@
       "nationPlaceholder": "e.g. Mongolia",
       "residence": "Country of Residence",
       "residencePlaceholder": "e.g. Mongolia",
+      "yglSpouse": "Are you registering as the accompanying spouse of a Young Global Leader?",
+      "yglSpouseOptions": {
+        "yes": "Yes (Participation Fee: USD 2,000)",
+        "no": "No"
+      },
+      "yglSpouseShort": "Accompanying spouse of a YGL",
+      "yglSpouseOf": "Accompanying Young Global Leader",
+      "yglSpouseOfHint": "Please enter the full name of the Young Global Leader you will be accompanying.",
       "company": "Organization / Company",
       "companyRegister": "Company Register Code",
       "position": "Position / Title",

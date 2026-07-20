@@ -459,6 +459,14 @@
       "nationPlaceholder": "жишээ нь Монгол",
       "residence": "Оршин суугаа улс",
       "residencePlaceholder": "жишээ нь Монгол",
+      "yglSpouse": "Та Young Global Leader-ийг дагалдан ирэх эхнэр/нөхрийнх нь хувиар бүртгүүлж байна уу?",
+      "yglSpouseOptions": {
+        "yes": "Тийм (Оролцооны хураамж: 2,000 ам.доллар)",
+        "no": "Үгүй"
+      },
+      "yglSpouseShort": "YGL-ийг дагалдан ирэх эхнэр/нөхөр",
+      "yglSpouseOf": "Хамт ирэх Young Global Leader",
+      "yglSpouseOfHint": "Таны хамт ирэх Young Global Leader-ийн бүтэн нэрийг бичнэ үү.",
       "company": "Байгууллага / Компани",
       "companyRegister": "Байгууллагын регистрийн дугаар",
       "position": "Албан тушаал",

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { getDictionary } from "@/lib/dictionary"
 import type { Locale } from "@/lib/i18n"
+import { VIP_PRICE_USD } from "@/lib/registration-schema"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { RegistrationForm } from "@/components/registration/registration-form"
@@ -58,7 +59,7 @@ export default async function VipRegisterPage({
               {PAGE_TITLE}
             </h1>
           </div>
-          <RegistrationForm dict={dict} locale={locale} priceUsd={3000} vip />
+          <RegistrationForm dict={dict} locale={locale} priceUsd={VIP_PRICE_USD} vip />
         </div>
       </section>
       <Footer dict={dict} locale={locale} />

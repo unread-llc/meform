@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { cn } from "@/lib/utils"
-import { registrationSchema, isValidMnRegisterNo } from "@/lib/registration-schema"
+import { registrationSchema, isValidMnRegisterNo, VIP_SPOUSE_PRICE_USD } from "@/lib/registration-schema"
 import { StepPersonalInfo } from "./step-personal-info"
 import { StepProfessional } from "./step-professional"
 import { StepDocuments } from "./step-documents"
@@ -18,7 +18,7 @@ type Step = (typeof STEPS)[number]
 
 const STEP_FIELDS: Record<Step, string[]> = {
   personal: ["registration_type", "sector", "lastname", "firstname", "gender", "birth", "nation", "residence"],
-  professional: ["company", "company_register", "position", "email", "phone"],
+  professional: ["ygl_spouse", "ygl_spouse_of", "company", "company_register", "position", "email", "phone"],
   documents: ["passportno", "visa", "passport_img", "img"],
   review: [],
 }
@@ -46,6 +46,10 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
   const step = STEPS[currentStep]
   const progress = ((currentStep + 1) / STEPS.length) * 100
 
+  // Accompanying spouses of a Young Global Leader pay the reduced VIP fee.
+  const effectivePriceUsd =
+    vip && priceUsd && formData.ygl_spouse === "yes" ? VIP_SPOUSE_PRICE_USD : priceUsd
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     setErrors((prev) => {
@@ -61,6 +65,12 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
 
     for (const field of fields) {
       if (formData.registration_type === "individual" && ["company", "company_register", "position"].includes(field)) continue
+      // The YGL-spouse questions only exist on the VIP form; the accompanying
+      // YGL name is only required when the spouse answer is "yes".
+      if (["ygl_spouse", "ygl_spouse_of"].includes(field)) {
+        if (!vip) continue
+        if (field === "ygl_spouse_of" && formData.ygl_spouse !== "yes") continue
+      }
       const value = formData[field]
       if (!value || value.trim() === "") {
         newErrors[field] = dict.registration.validation.required
@@ -117,7 +127,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, locale, ...(priceUsd ? { price_usd: priceUsd } : {}) }),
+        body: JSON.stringify({ ...formData, locale, ...(effectivePriceUsd ? { price_usd: effectivePriceUsd } : {}) }),
       })
 
       if (!res.ok) {
@@ -188,6 +198,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
               onChange={handleChange}
               errors={errors}
               registrationType={formData.registration_type}
+              vip={vip}
             />
           )}
           {step === "documents" && (
@@ -198,7 +209,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
               errors={errors}
             />
           )}
-          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={priceUsd} vip={vip} />}
+          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={effectivePriceUsd} vip={vip} />}
         </CardContent>
       </Card>
 

@@ -56,6 +56,12 @@ const allSectorOptions = [
 
 export const genderOptions = ["male", "female", "other"] as const
 export const visaOptions = ["yes", "no"] as const
+export const yglSpouseOptions = ["yes", "no"] as const
+
+// YGL Learning Journey (VIP) participation fees. Accompanying spouses of a
+// Young Global Leader pay the reduced fee.
+export const VIP_PRICE_USD = 3000
+export const VIP_SPOUSE_PRICE_USD = 2000
 
 export const registrationSchema = z.object({
   registration_type: z.enum(registrationTypeOptions),
@@ -69,6 +75,10 @@ export const registrationSchema = z.object({
   company: z.string().optional(),
   company_register: z.string().optional(),
   position: z.string().optional(),
+  // VIP (YGL Learning Journey) only: accompanying spouse of a Young Global
+  // Leader, and the full name of the YGL they accompany.
+  ygl_spouse: z.enum(yglSpouseOptions).optional(),
+  ygl_spouse_of: z.string().optional(),
   email: z.string().email(),
   phone: z.string().min(1),
   passportno: z.string().min(1),

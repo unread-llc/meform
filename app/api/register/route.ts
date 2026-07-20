@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import { v4 as uuidv4 } from "uuid"
-import { registrationSchema, calculateFee } from "@/lib/registration-schema"
+import {
+  registrationSchema,
+  calculateFee,
+  VIP_PRICE_USD,
+  VIP_SPOUSE_PRICE_USD,
+} from "@/lib/registration-schema"
 import { createRegistration, type RegistrationRecord } from "@/lib/aws/dynamodb"
 import { createCheckout } from "@/lib/byl"
 import { createGolomtInvoice } from "@/lib/golomt"
@@ -30,8 +35,8 @@ export async function POST(request: NextRequest) {
     const { locale = "en", payment_method, price_usd, ...formData } = body
 
     // Allowed fixed-price tiers (e.g. VIP page). Guard against arbitrary client pricing.
-    const ALLOWED_PRICES_USD = [3000]
-    const priceOverride = ALLOWED_PRICES_USD.includes(Number(price_usd))
+    const ALLOWED_PRICES_USD: number[] = [VIP_PRICE_USD, VIP_SPOUSE_PRICE_USD]
+    let priceOverride = ALLOWED_PRICES_USD.includes(Number(price_usd))
       ? Number(price_usd)
       : undefined
 
@@ -44,6 +49,13 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data
+
+    // The VIP fee is derived server-side from the spouse answer, not from the
+    // client-sent price: accompanying spouses of a Young Global Leader pay the
+    // reduced fee, everyone else the full one.
+    if (priceOverride) {
+      priceOverride = data.ygl_spouse === "yes" ? VIP_SPOUSE_PRICE_USD : VIP_PRICE_USD
+    }
     const fee = calculateFee(data.nation, priceOverride)
     const registrationId = uuidv4()
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
