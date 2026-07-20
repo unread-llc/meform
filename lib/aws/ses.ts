@@ -156,13 +156,18 @@ export async function sendYglInvoiceEmail(
     .replace(/\[Participant Name\]/g, () => name)
     .replace(/\{\{PAYMENT_URL\}\}/g, () => paymentUrl)
 
+  // The stamped invoice PDF states the full participation fee, which is wrong
+  // for accompanying spouses of a YGL (reduced fee) — they pay via the
+  // payment link, which uses the amount stored on the registration.
+  const withPdf = attachPdf && registration.ygl_spouse !== "yes"
+
   await resend.emails.send({
     from: FROM_EMAIL,
     to: [registration.email],
     subject:
       "YGL Learning Journey in Mongolia 2026 — Complete Your Registration",
     html,
-    ...(attachPdf
+    ...(withPdf
       ? {
           // Official stamped invoice with bank-transfer details, for
           // participants who wire the fee instead of paying by card
