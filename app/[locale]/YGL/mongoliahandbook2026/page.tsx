@@ -13,10 +13,10 @@ export async function generateMetadata({
   const { locale } = await params
   const isMn = locale === "mn"
   return {
-    title: "Mongolia Handbook 2026 — YGL Learning Journey",
+    title: "Participant Handbook 2026 — YGL Learning Journey",
     description: isMn
-      ? "Монголын гарын авлага 2026 — хуудас эргүүлдэг номын хэлбэрээр."
-      : "Read the Mongolia Handbook 2026 as an interactive page-turning book.",
+      ? "Оролцогчийн гарын авлага 2026 — хуудас эргүүлдэг номын хэлбэрээр."
+      : "Read the Participant Handbook 2026 as an interactive page-turning book.",
   }
 }
 

@@ -62,7 +62,7 @@ export default function HandbookClient({ locale }: { locale: string }) {
     }
   }, [isFullscreen])
 
-  const title = state?.title || "Mongolia Handbook 2026"
+  const title = state?.title || "Participant Handbook 2026"
   const pdfUrl = state?.url
   const downloadUrl = state?.downloadUrl || state?.url
 

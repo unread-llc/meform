@@ -4,7 +4,8 @@ import {
   getPresignedViewUrl,
 } from "@/lib/aws/s3"
 
-// Identifier for the "Mongolia Handbook 2026" book.
+// Identifier for the "Participant Handbook 2026" book. The id/URL slug stays
+// "mongoliahandbook2026" for stable links even though the display title changed.
 export const HANDBOOK_ID = "mongoliahandbook2026"
 
 // S3 prefix that holds uploaded handbook PDFs (versioned by uuid).
@@ -16,10 +17,10 @@ export const HANDBOOK_POINTER_KEY = `handbook/${HANDBOOK_ID}.pointer.json`
 // Bundled placeholder shown until a real handbook is uploaded.
 export const PLACEHOLDER_URL = "/handbook-placeholder.pdf"
 
-export const DEFAULT_TITLE = "Mongolia Handbook 2026"
+export const DEFAULT_TITLE = "Participant Handbook 2026"
 
 // Filename presented when a visitor downloads the handbook.
-export const DOWNLOAD_FILENAME = "Mongolia-Handbook-2026.pdf"
+export const DOWNLOAD_FILENAME = "Participant-Handbook-2026.pdf"
 
 // Max upload size for the handbook PDF (uploaded direct-to-S3 via presigned PUT).
 export const HANDBOOK_MAX_BYTES = 60 * 1024 * 1024 // 60 MB

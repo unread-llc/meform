@@ -82,7 +82,7 @@ export default function HandbookAdmin({ password }: { password: string }) {
         const data = await res.json()
         setPointer(data.pointer || null)
         if (!titleTouched) {
-          setTitle(data.pointer?.title || "Mongolia Handbook 2026")
+          setTitle(data.pointer?.title || "Participant Handbook 2026")
         }
       }
     } catch {
@@ -146,7 +146,7 @@ export default function HandbookAdmin({ password }: { password: string }) {
         },
         body: JSON.stringify({
           key,
-          title: title.trim() || "Mongolia Handbook 2026",
+          title: title.trim() || "Participant Handbook 2026",
           size: file.size,
           filename: file.name,
         }),
@@ -173,7 +173,7 @@ export default function HandbookAdmin({ password }: { password: string }) {
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg">
           <BookOpen className="w-5 h-5 text-primary" />
-          Mongolia Handbook 2026
+          Participant Handbook 2026
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -213,7 +213,7 @@ export default function HandbookAdmin({ password }: { password: string }) {
               setTitle(e.target.value)
               setTitleTouched(true)
             }}
-            placeholder="Mongolia Handbook 2026"
+            placeholder="Participant Handbook 2026"
             disabled={busy}
           />
         </div>
