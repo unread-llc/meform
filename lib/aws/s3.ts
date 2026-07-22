@@ -1,4 +1,10 @@
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3"
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+  HeadObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 // No explicit credentials — on Amplify, the SDK uses the IAM service role
@@ -35,10 +41,72 @@ export async function getPresignedUploadUrl(
   return { url, key }
 }
 
-export async function getPresignedViewUrl(key: string): Promise<string> {
+export async function getPresignedViewUrl(
+  key: string,
+  expiresIn: number = 3600,
+  downloadFilename?: string
+): Promise<string> {
   const command = new GetObjectCommand({
     Bucket: BUCKET,
     Key: key,
+    // When set, the browser downloads (rather than inline-renders) the object,
+    // which is the only way to force a download for a cross-origin S3 URL.
+    ...(downloadFilename
+      ? { ResponseContentDisposition: `attachment; filename="${downloadFilename}"` }
+      : {}),
   })
-  return getSignedUrl(s3Client, command, { expiresIn: 3600 })
+  return getSignedUrl(s3Client, command, { expiresIn })
+}
+
+// --- Small JSON object helpers (used for the handbook pointer) ---
+
+export async function putJsonObject(key: string, data: unknown): Promise<void> {
+  await s3Client.send(
+    new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: key,
+      Body: JSON.stringify(data),
+      ContentType: "application/json",
+      CacheControl: "no-store",
+    })
+  )
+}
+
+export async function getJsonObject<T = unknown>(key: string): Promise<T | null> {
+  try {
+    const res = await s3Client.send(
+      new GetObjectCommand({ Bucket: BUCKET, Key: key })
+    )
+    const body = await res.Body?.transformToString()
+    if (!body) return null
+    return JSON.parse(body) as T
+  } catch (err: any) {
+    if (
+      err?.name === "NoSuchKey" ||
+      err?.Code === "NoSuchKey" ||
+      err?.$metadata?.httpStatusCode === 404
+    ) {
+      return null
+    }
+    throw err
+  }
+}
+
+// Returns the object's size in bytes, or null if it does not exist.
+export async function getObjectContentLength(key: string): Promise<number | null> {
+  try {
+    const res = await s3Client.send(
+      new HeadObjectCommand({ Bucket: BUCKET, Key: key })
+    )
+    return typeof res.ContentLength === "number" ? res.ContentLength : null
+  } catch (err: any) {
+    if (err?.name === "NotFound" || err?.$metadata?.httpStatusCode === 404) {
+      return null
+    }
+    throw err
+  }
+}
+
+export async function deleteObject(key: string): Promise<void> {
+  await s3Client.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }))
 }

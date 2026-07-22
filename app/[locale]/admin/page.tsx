@@ -21,6 +21,7 @@ import {
   PaginationEllipsis,
 } from "@/components/ui/pagination"
 import { Lock, Download, Search, Eye, X, Trash2, Mail, LogOut, FilterX } from "lucide-react"
+import HandbookAdmin from "@/components/admin/handbook-admin"
 
 interface Registration {
   id: string
@@ -461,6 +462,9 @@ export default function AdminPage() {
             </Button>
           </div>
         </div>
+
+        {/* Handbook management */}
+        <HandbookAdmin password={password} />
 
         {/* Filters */}
         <div className="mb-4 space-y-3">
