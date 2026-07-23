@@ -7,7 +7,64 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 
+// Years whose photos are hosted on S3 (public gallery prefix) rather than
+// bundled under /public/Gallery. Keeps large recent galleries out of the repo.
+const S3_GALLERY_BASE =
+  "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/gallery"
+const s3GalleryYears = new Set(["2026"])
+
 const galleryImages: Record<string, string[]> = {
+  "2026": [
+    "DSC01007.jpg",
+    "DSC01011.jpg",
+    "DSC01019-1.jpg",
+    "DSC01020.jpg",
+    "DSC01022.jpg",
+    "DSC01069.jpg",
+    "DSC01098.jpg",
+    "DSC01100.jpg",
+    "DSC01104.jpg",
+    "DSC01110.jpg",
+    "DSC01112.jpg",
+    "DSC01145.jpg",
+    "DSC01155.jpg",
+    "DSC01183.jpg",
+    "DSC01187.jpg",
+    "DSC01189.jpg",
+    "DSC01206.jpg",
+    "DSC01219.jpg",
+    "DSC01225.jpg",
+    "DSC01229.jpg",
+    "DSC01234.jpg",
+    "DSC01241.jpg",
+    "DSC01257.jpg",
+    "DSC01275.jpg",
+    "DSC01288.jpg",
+    "DSC01289.jpg",
+    "DSC01297.jpg",
+    "DSC01298.jpg",
+    "DSC01300.jpg",
+    "DSC01304.jpg",
+    "DSC01308.jpg",
+    "DSC01316.jpg",
+    "DSC01319.jpg",
+    "DSC01322.jpg",
+    "DSC01325.jpg",
+    "DSC01336.jpg",
+    "DSC01343.jpg",
+    "DSC01348.jpg",
+    "DSC01353.jpg",
+    "DSC01357.jpg",
+    "DSC01365.jpg",
+    "DSC01368.jpg",
+    "DSC01387.jpg",
+    "DSC01389.jpg",
+    "DSC01414.jpg",
+    "DSC01417.jpg",
+    "DSC01422.jpg",
+    "DSC01426.jpg",
+    "DSC01502.jpg",
+  ],
   "2010": [
     "php05DDdY-1703235766.jpeg",
     "phpeAeQ9n-1703235750.jpeg",
@@ -267,7 +324,7 @@ const galleryImages: Record<string, string[]> = {
   ],
 }
 
-const validYears = ["2010", "2011", "2012", "2016", "2018", "2022", "2023", "2024", "2025"]
+const validYears = ["2026", "2025", "2024", "2023", "2022", "2018", "2016", "2012", "2011", "2010"]
 
 export function generateStaticParams() {
   return validYears.flatMap((year) =>
@@ -313,7 +370,11 @@ export default async function GalleryYearPage({
             </p>
           </div>
 
-          <GalleryGrid images={images} year={year} />
+          <GalleryGrid
+            images={images}
+            year={year}
+            baseUrl={s3GalleryYears.has(year) ? `${S3_GALLERY_BASE}/${year}` : undefined}
+          />
         </div>
       </div>
       <Footer dict={dict} locale={locale} />

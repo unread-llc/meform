@@ -78,7 +78,7 @@ export function Header({ locale, dict }: HeaderProps) {
     return () => observer.disconnect()
   }, [])
 
-  const galleryYears = [2025, 2024, 2023, 2022, 2018, 2016, 2012, 2011, 2010]
+  const galleryYears = [2026, 2025, 2024, 2023, 2022, 2018, 2016, 2012, 2011, 2010]
   const videoYears = [2025, 2024, 2023, 2022, 2019, 2018, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
 
   const navItems: NavItem[] = [

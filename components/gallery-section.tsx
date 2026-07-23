@@ -9,7 +9,35 @@ interface GallerySectionProps {
   locale?: string
 }
 
+const S3_GALLERY_2026 =
+  "https://mef-registrations.s3.ap-southeast-1.amazonaws.com/gallery/2026"
+
 const galleryYears = [
+  {
+    year: 2026,
+    images: [
+      `${S3_GALLERY_2026}/DSC01007.jpg`,
+      `${S3_GALLERY_2026}/DSC01011.jpg`,
+      `${S3_GALLERY_2026}/DSC01022.jpg`,
+      `${S3_GALLERY_2026}/DSC01069.jpg`,
+      `${S3_GALLERY_2026}/DSC01098.jpg`,
+      `${S3_GALLERY_2026}/DSC01104.jpg`,
+      `${S3_GALLERY_2026}/DSC01110.jpg`,
+      `${S3_GALLERY_2026}/DSC01145.jpg`,
+      `${S3_GALLERY_2026}/DSC01183.jpg`,
+      `${S3_GALLERY_2026}/DSC01206.jpg`,
+      `${S3_GALLERY_2026}/DSC01225.jpg`,
+      `${S3_GALLERY_2026}/DSC01234.jpg`,
+      `${S3_GALLERY_2026}/DSC01257.jpg`,
+      `${S3_GALLERY_2026}/DSC01288.jpg`,
+      `${S3_GALLERY_2026}/DSC01300.jpg`,
+      `${S3_GALLERY_2026}/DSC01316.jpg`,
+      `${S3_GALLERY_2026}/DSC01336.jpg`,
+      `${S3_GALLERY_2026}/DSC01357.jpg`,
+      `${S3_GALLERY_2026}/DSC01387.jpg`,
+      `${S3_GALLERY_2026}/DSC01414.jpg`,
+    ],
+  },
   {
     year: 2025,
     images: [

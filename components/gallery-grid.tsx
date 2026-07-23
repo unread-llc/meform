@@ -6,9 +6,13 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react"
 interface GalleryGridProps {
   images: string[]
   year: string
+  /** Base URL for images. Defaults to the bundled /Gallery/<year> path;
+   *  pass an S3 prefix for years hosted on S3 (e.g. 2026). */
+  baseUrl?: string
 }
 
-export function GalleryGrid({ images, year }: GalleryGridProps) {
+export function GalleryGrid({ images, year, baseUrl }: GalleryGridProps) {
+  const base = baseUrl ?? `/Gallery/${year}`
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
   const openLightbox = (index: number) => setSelectedIndex(index)
@@ -59,7 +63,7 @@ export function GalleryGrid({ images, year }: GalleryGridProps) {
             className="group relative aspect-square overflow-hidden rounded-lg bg-muted cursor-pointer"
           >
             <img
-              src={`/Gallery/${year}/${image}`}
+              src={`${base}/${image}`}
               alt={`MEF ${year} - Photo ${index + 1}`}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
@@ -109,7 +113,7 @@ export function GalleryGrid({ images, year }: GalleryGridProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={`/Gallery/${year}/${images[selectedIndex]}`}
+              src={`${base}/${images[selectedIndex]}`}
               alt={`MEF ${year} - Photo ${selectedIndex + 1}`}
               className="max-w-full max-h-[90vh] object-contain"
             />
