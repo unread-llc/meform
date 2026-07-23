@@ -368,10 +368,10 @@ export default function FlipbookViewer({
         <div className="flex items-center gap-2">
           <FlipButton dark={isDark} disabled={!canPrev || !!flip} onClick={goPrev} ariaLabel={isMn ? "Өмнөх" : "Previous"}>
             <ChevronLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">{isMn ? "Өмнөх" : "Prev"}</span>
+            <span className="inline">{isMn ? "Өмнөх" : "Prev"}</span>
           </FlipButton>
           <FlipButton dark={isDark} primary disabled={!canNext || !!flip} onClick={goNext} ariaLabel={isMn ? "Дараах" : "Next"}>
-            <span className="hidden sm:inline">{isMn ? "Дараах" : "Next"}</span>
+            <span className="inline">{isMn ? "Дараах" : "Next"}</span>
             <ChevronRight className="w-4 h-4" />
           </FlipButton>
         </div>

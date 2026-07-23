@@ -85,7 +85,7 @@ export default function HandbookClient({ locale }: { locale: string }) {
                 className="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
               >
                 <Download className="w-4 h-4" />
-                <span className="hidden sm:inline">{isMn ? "Татах" : "Download"}</span>
+                <span className="inline">{isMn ? "Татах" : "Download"}</span>
               </a>
               <button
                 onClick={() => setIsFullscreen(false)}
@@ -138,14 +138,14 @@ export default function HandbookClient({ locale }: { locale: string }) {
                   className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl font-medium text-sm transition-colors border border-white/10"
                 >
                   <Download className="w-4 h-4" />
-                  <span className="hidden sm:inline">{isMn ? "Татах" : "Download"}</span>
+                  <span className="inline">{isMn ? "Татах" : "Download"}</span>
                 </a>
                 <button
                   onClick={() => setIsFullscreen(true)}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-[#0b1220] rounded-xl font-medium text-sm transition-colors"
                 >
                   <Maximize2 className="w-4 h-4" />
-                  <span className="hidden sm:inline">{isMn ? "Бүтэн дэлгэц" : "Fullscreen"}</span>
+                  <span className="inline">{isMn ? "Бүтэн дэлгэц" : "Fullscreen"}</span>
                 </button>
               </>
             )}
