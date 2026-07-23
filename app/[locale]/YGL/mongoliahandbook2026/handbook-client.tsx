@@ -70,13 +70,13 @@ export default function HandbookClient({ locale }: { locale: string }) {
     <div className="min-h-screen bg-gradient-to-b from-[#0b1220] via-[#0e1a33] to-[#0b1220]">
       {/* Fullscreen reader */}
       {isFullscreen && pdfUrl && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col">
-          <div className="flex items-center justify-between px-4 py-3 bg-black/40">
-            <h3 className="text-white font-medium flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-amber-300" />
-              {title}
+        <div className="fixed inset-0 z-[100] bg-black flex flex-col">
+          <div className="flex items-center justify-between gap-3 px-4 py-3 bg-black border-b border-white/10">
+            <h3 className="text-white font-medium flex items-center gap-2 min-w-0">
+              <BookOpen className="w-4 h-4 text-amber-300 shrink-0" />
+              <span className="truncate">{title}</span>
             </h3>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <a
                 href={downloadUrl}
                 download
