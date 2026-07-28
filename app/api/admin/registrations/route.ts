@@ -20,9 +20,13 @@ export async function GET(request: NextRequest) {
   try {
     // Single scan — fine for <2000 registrations.
     // Do NOT add pagination/recursive scanning.
+    // The table also holds non-registration items (VIP guest invitations,
+    // tagged with item_type); registrations have no item_type, so filtering on
+    // its absence keeps them out of the list, stats and CSV export.
     const result = await docClient.send(
       new ScanCommand({
         TableName: TABLE_NAME,
+        FilterExpression: "attribute_not_exists(item_type)",
         Limit: 5000,
       })
     )

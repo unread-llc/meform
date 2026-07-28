@@ -150,11 +150,13 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip, free, in
         const e = dict.registration.errors || {}
         // Surface why it failed — retrying is pointless for a dead invite link.
         const message =
-          res.status === 403
-            ? e.invalidInvite || "This invitation link is no longer valid."
-            : res.status === 429
-              ? e.tooManyRequests || "Too many attempts. Please try again later."
-              : err.error || e.generic || "Failed to process registration. Please try again."
+          err.reason === "used" || err.reason === "redeemed"
+            ? e.inviteUsed || "This invitation link has already been used."
+            : res.status === 403
+              ? e.invalidInvite || "This invitation link is no longer valid."
+              : res.status === 429
+                ? e.tooManyRequests || "Too many attempts. Please try again later."
+                : err.error || e.generic || "Failed to process registration. Please try again."
         setErrors({ _form: message })
         setSubmitting(false)
         return
