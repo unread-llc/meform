@@ -30,9 +30,13 @@ interface RegistrationFormProps {
   priceUsd?: number
   /** YGL Learning Journey variant: no registration type / company register, custom sectors. */
   vip?: boolean
+  /** Complimentary registration: no payment, submits to the free-registration API. */
+  free?: boolean
+  /** Secret guest code (validated server-side for free VIP registrations). */
+  inviteCode?: string
 }
 
-export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: RegistrationFormProps) {
+export function RegistrationForm({ dict, locale, invite, priceUsd, vip, free, inviteCode }: RegistrationFormProps) {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(0)
   // In VIP mode there's no "registration type" question; everyone is treated as an
@@ -47,8 +51,12 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
   const progress = ((currentStep + 1) / STEPS.length) * 100
 
   // Accompanying spouses of a Young Global Leader pay the reduced VIP fee.
-  const effectivePriceUsd =
-    vip && priceUsd && formData.ygl_spouse === "yes" ? VIP_SPOUSE_PRICE_USD : priceUsd
+  // Complimentary (free) registrations have no price at all.
+  const effectivePriceUsd = free
+    ? undefined
+    : vip && priceUsd && formData.ygl_spouse === "yes"
+      ? VIP_SPOUSE_PRICE_USD
+      : priceUsd
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -123,27 +131,48 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
 
     setSubmitting(true)
     try {
-      const endpoint = invite ? "/api/register/invite" : "/api/register"
+      const endpoint = invite || free ? "/api/register/invite" : "/api/register"
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, locale, ...(effectivePriceUsd ? { price_usd: effectivePriceUsd } : {}) }),
+        body: JSON.stringify({
+          ...formData,
+          locale,
+          ...(effectivePriceUsd ? { price_usd: effectivePriceUsd } : {}),
+          // Free VIP (YGL guest) registrations carry the guest code so the
+          // server can verify it before creating a complimentary record.
+          ...(free && vip ? { vip: true, code: inviteCode } : {}),
+        }),
       })
 
       if (!res.ok) {
-        const err = await res.json()
-        throw new Error(err.error || "Registration failed")
+        const err = await res.json().catch(() => ({}))
+        const e = dict.registration.errors || {}
+        // Surface why it failed — retrying is pointless for a dead invite link.
+        const message =
+          res.status === 403
+            ? e.invalidInvite || "This invitation link is no longer valid."
+            : res.status === 429
+              ? e.tooManyRequests || "Too many attempts. Please try again later."
+              : err.error || e.generic || "Failed to process registration. Please try again."
+        setErrors({ _form: message })
+        setSubmitting(false)
+        return
       }
 
       const result = await res.json()
-      if (invite) {
+      if (invite || free) {
         router.push(`/${locale}/register/success?registration_id=${result.registrationId}`)
       } else if (result.checkoutUrl) {
         window.location.href = result.checkoutUrl
       }
     } catch (error) {
       console.error("Submit error:", error)
-      setErrors({ _form: "Failed to process registration. Please try again." })
+      setErrors({
+        _form:
+          dict.registration.errors?.generic ||
+          "Failed to process registration. Please try again.",
+      })
       setSubmitting(false)
     }
   }
@@ -199,6 +228,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
               errors={errors}
               registrationType={formData.registration_type}
               vip={vip}
+              free={free}
             />
           )}
           {step === "documents" && (
@@ -209,7 +239,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
               errors={errors}
             />
           )}
-          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={effectivePriceUsd} vip={vip} />}
+          {step === "review" && <StepReview dict={dict} data={formData} onChange={handleChange} invite={invite} priceUsd={effectivePriceUsd} vip={vip} free={free} />}
         </CardContent>
       </Card>
 
@@ -237,7 +267,7 @@ export function RegistrationForm({ dict, locale, invite, priceUsd, vip }: Regist
           >
             {submitting
               ? dict.registration.processing
-              : invite
+              : invite || free
                 ? dict.registration.navigation.submitInvite
                 : dict.registration.navigation.submit}
           </Button>

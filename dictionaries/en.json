@@ -507,7 +507,10 @@
       "golomt": "Card Payment (Golomt)",
       "byl": "QPay",
       "uploaded": "Uploaded",
-      "notUploaded": "Not uploaded"
+      "notUploaded": "Not uploaded",
+      "complimentary": "Complimentary invitation",
+      "freeLabel": "Free",
+      "complimentaryNote": "Your participation fee is covered by the organizers. No payment is required."
     },
     "validation": {
       "required": "This field is required",
@@ -553,7 +556,12 @@
       "tryAgain": "Try Again",
       "backToHome": "Back to Home"
     },
-    "processing": "Processing your registration..."
+    "processing": "Processing your registration...",
+    "errors": {
+      "invalidInvite": "This invitation link is no longer valid. Please contact the organizers.",
+      "tooManyRequests": "Too many attempts. Please try again in a few minutes.",
+      "generic": "Failed to process registration. Please try again."
+    }
   },
   "footer": {
     "description": "The premier platform for dialogue on Mongolia's economic development, bringing together leaders from government, business, and civil society since 2010.",

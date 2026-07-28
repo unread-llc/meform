@@ -13,6 +13,8 @@ interface StepProfessionalProps {
   errors: Record<string, string>
   registrationType?: string
   vip?: boolean
+  /** Complimentary registration: hide fee amounts in option labels. */
+  free?: boolean
 }
 
 export function StepProfessional({
@@ -22,6 +24,7 @@ export function StepProfessional({
   errors,
   registrationType,
   vip,
+  free,
 }: StepProfessionalProps) {
   const t = dict.registration.fields
   const isIndividual = registrationType === "individual"
@@ -44,7 +47,11 @@ export function StepProfessional({
                 <div key={opt} className="flex items-center gap-2">
                   <RadioGroupItem value={opt} id={`ygl-spouse-${opt}`} />
                   <Label htmlFor={`ygl-spouse-${opt}`} className="font-normal cursor-pointer">
-                    {t.yglSpouseOptions[opt]}
+                    {free
+                      ? // Complimentary guests never pay, so strip any fee
+                        // parenthetical from the option label.
+                        (t.yglSpouseOptions[opt] || "").replace(/\s*\(.*\)\s*$/, "")
+                      : t.yglSpouseOptions[opt]}
                   </Label>
                 </div>
               ))}

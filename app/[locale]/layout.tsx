@@ -53,7 +53,15 @@ export default async function LocaleLayout({
                         window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
-                        gtag('config', 'G-Q8V5P4TYZH');
+                        // Invite and guest links carry a secret code in the path.
+                        // Mask it so the code is never reported to analytics.
+                        var mefPath = location.pathname
+                            .replace(/(\\/register\\/vip\\/guest\\/)[^/]+/, '$1[code]')
+                            .replace(/(\\/invite\\/)[^/]+/, '$1[code]');
+                        gtag('config', 'G-Q8V5P4TYZH', {
+                            page_path: mefPath,
+                            page_location: location.origin + mefPath
+                        });
                     `}
                 </Script>
             </head>

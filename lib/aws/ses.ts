@@ -106,6 +106,14 @@ export async function sendInvoiceEmail(
   registration: RegistrationRecord,
   locale: string = "en"
 ) {
+  // Complimentary registrations (invited guests) have nothing to pay — never
+  // mail them a payment request, even if an admin clicks "Send Invoice".
+  if (!registration.fee_amount) {
+    throw new Error(
+      "This registration is complimentary (no fee) — there is no invoice to send."
+    )
+  }
+
   // VIP (YGL Learning Journey) registrations get the YGL payment-request
   // email with a durable payment link instead of the MEF invoice PDF.
   // Manual resends (admin panel) go out without the stamped invoice PDF —

@@ -599,11 +599,20 @@ export default function AdminPage() {
                   <td className="p-3 capitalize">{r.sector}</td>
                   <td className="p-3">{r.nation}</td>
                   <td className="p-3 whitespace-nowrap">
-                    ₮{r.fee_amount?.toLocaleString()}
-                    {r.fee_usd_amount && (
-                      <span className="block text-xs text-muted-foreground">
-                        (${r.fee_usd_amount} × {r.fee_exchange_rate?.toLocaleString()})
+                    {!r.fee_amount ? (
+                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                        free
                       </span>
+                    ) : (
+                      <>
+                        {r.fee_currency === "USD" ? "$" : "₮"}
+                        {r.fee_amount?.toLocaleString()}
+                        {r.fee_usd_amount && (
+                          <span className="block text-xs text-muted-foreground">
+                            (${r.fee_usd_amount} × {r.fee_exchange_rate?.toLocaleString()})
+                          </span>
+                        )}
+                      </>
                     )}
                   </td>
                   <td className="p-3">

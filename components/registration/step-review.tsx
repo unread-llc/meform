@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { calculateFee } from "@/lib/registration-schema"
+import {
+  calculateFee,
+  VIP_PRICE_USD,
+  VIP_SPOUSE_PRICE_USD,
+} from "@/lib/registration-schema"
 
 interface StepReviewProps {
   dict: any
@@ -12,6 +16,8 @@ interface StepReviewProps {
   invite?: boolean
   priceUsd?: number
   vip?: boolean
+  /** Complimentary registration: show the waived fee instead of a payment card. */
+  free?: boolean
 }
 
 function ReviewRow({ label, value }: { label: string; value: string }) {
@@ -23,7 +29,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
   )
 }
 
-export function StepReview({ dict, data, onChange, invite, priceUsd, vip }: StepReviewProps) {
+export function StepReview({ dict, data, onChange, invite, priceUsd, vip, free }: StepReviewProps) {
   const t = dict.registration
   const f = t.fields
   const r = t.review
@@ -34,7 +40,7 @@ export function StepReview({ dict, data, onChange, invite, priceUsd, vip }: Step
   const [exchangeRate, setExchangeRate] = useState<number | null>(null)
 
   useEffect(() => {
-    if (!isMongolian) {
+    if (!isMongolian && !free) {
       fetch("/api/exchange-rate")
         .then((res) => res.json())
         .then((data) => {
@@ -42,14 +48,15 @@ export function StepReview({ dict, data, onChange, invite, priceUsd, vip }: Step
         })
         .catch(() => {})
     }
-  }, [isMongolian])
+  }, [isMongolian, free])
 
-  // Default payment method: golomt for all, but set it if not already chosen
+  // Default payment method: golomt for all, but set it if not already chosen.
+  // Free (complimentary) registrations never reach a payment step.
   useEffect(() => {
-    if (!invite && !data.payment_method) {
+    if (!invite && !free && !data.payment_method) {
       onChange?.("payment_method", "golomt")
     }
-  }, [invite, data.payment_method, onChange])
+  }, [invite, free, data.payment_method, onChange])
 
   const mntEquivalent =
     !isMongolian && exchangeRate
@@ -119,7 +126,34 @@ export function StepReview({ dict, data, onChange, invite, priceUsd, vip }: Step
         </CardContent>
       </Card>
 
-      {!invite && (
+      {free && (
+        <Card className="rounded-xl border-green-200 bg-green-50">
+          <CardContent className="pt-4">
+            <h3 className="font-semibold mb-3">{r.fee}</h3>
+            <Separator className="mb-3" />
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">
+                {r.complimentary || "Complimentary invitation"}
+              </span>
+              <span className="text-lg font-bold text-green-700">
+                <span className="text-muted-foreground line-through font-medium text-sm mr-2">
+                  $
+                  {(data.ygl_spouse === "yes"
+                    ? VIP_SPOUSE_PRICE_USD
+                    : VIP_PRICE_USD
+                  ).toLocaleString()}
+                </span>
+                {r.freeLabel || "Free"}
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground">
+              {r.complimentaryNote || "Your participation fee is covered. No payment is required."}
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
+      {!invite && !free && (
         <Card className="rounded-xl border-primary/20 bg-primary/5">
           <CardContent className="pt-4">
             <h3 className="font-semibold mb-3">{r.fee}</h3>
