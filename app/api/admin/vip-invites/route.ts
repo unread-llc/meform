@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
       guest_name: str(body.guest_name),
       guest_email: str(body.guest_email),
       note: str(body.note),
+      reusable: body.reusable === true,
     })
 
     return NextResponse.json({ invite: { ...invite, state: "active" } })

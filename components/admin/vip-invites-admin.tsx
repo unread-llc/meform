@@ -21,6 +21,8 @@ interface Invite {
   guest_name?: string
   guest_email?: string
   note?: string
+  reusable?: boolean
+  use_count?: number
   created_at: string
   revoked_at?: string
   redeemed_at?: string
@@ -40,6 +42,7 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [reusable, setReusable] = useState(false)
   const [creating, setCreating] = useState(false)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState<string | null>(null)
@@ -76,7 +79,7 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
           "Content-Type": "application/json",
           "x-admin-password": password,
         },
-        body: JSON.stringify({ guest_name: name, guest_email: email }),
+        body: JSON.stringify({ guest_name: name, guest_email: email, reusable }),
       })
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
@@ -131,7 +134,10 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
   }
 
   const activeCount = invites.filter((i) => i.state === "active").length
-  const usedCount = invites.filter((i) => i.state === "redeemed").length
+  const usedCount = invites.reduce(
+    (n, i) => n + (i.reusable ? i.use_count || 0 : i.state === "redeemed" ? 1 : 0),
+    0
+  )
 
   return (
     <Card className="rounded-2xl mb-6">
@@ -143,7 +149,7 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
             <span className="text-sm font-normal text-muted-foreground">
               {loading
                 ? ""
-                : `— ${invites.length} total, ${activeCount} unused, ${usedCount} registered`}
+                : `— ${invites.length} link${invites.length === 1 ? "" : "s"}, ${activeCount} active, ${usedCount} registered`}
             </span>
           </span>
           <Button variant="ghost" size="sm" onClick={() => setOpen((o) => !o)}>
@@ -155,8 +161,10 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
       {open && (
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Each invitation is a single-use link for one guest to register free for the
-            YGL Learning Journey. Revoke one at any time — it stops working immediately.
+            Invitation links let a guest register free for the YGL Learning Journey.
+            By default a link works once, for one guest. Tick <em>shared link</em> to
+            make one link that any number of guests can use. Revoke any link at any
+            time — it stops working immediately.
           </p>
 
           {/* Create */}
@@ -192,6 +200,23 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
             </Button>
           </div>
 
+          <label className="flex items-center gap-2 text-sm cursor-pointer w-fit">
+            <input
+              type="checkbox"
+              checked={reusable}
+              onChange={(e) => setReusable(e.target.checked)}
+              disabled={creating}
+              className="h-4 w-4 rounded border-input accent-primary"
+            />
+            <span>
+              Shared link — any number of guests can register with it
+              <span className="text-muted-foreground">
+                {" "}
+                (otherwise the link works once)
+              </span>
+            </span>
+          </label>
+
           {error && (
             <p className="text-sm text-destructive flex items-start gap-1.5">
               <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" /> {error}
@@ -223,10 +248,17 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
                   {invites.map((i) => (
                     <tr key={i.code} className="border-b last:border-0 hover:bg-muted/30">
                       <td className="p-2.5">
-                        <span className="font-medium">{i.guest_name || "—"}</span>
+                        <span className="font-medium">
+                          {i.guest_name || (i.reusable ? "Shared link" : "—")}
+                        </span>
                         {i.guest_email && (
                           <span className="block text-xs text-muted-foreground">
                             {i.guest_email}
+                          </span>
+                        )}
+                        {i.reusable && (
+                          <span className="inline-block mt-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-700">
+                            shared
                           </span>
                         )}
                       </td>
@@ -241,10 +273,16 @@ export default function VipInvitesAdmin({ password }: { password: string }) {
                         >
                           {i.state === "redeemed" ? "registered" : i.state}
                         </span>
-                        {i.redeemed_at && (
+                        {i.reusable ? (
                           <span className="block text-xs text-muted-foreground">
-                            {new Date(i.redeemed_at).toLocaleDateString()}
+                            {i.use_count || 0} registered
                           </span>
+                        ) : (
+                          i.redeemed_at && (
+                            <span className="block text-xs text-muted-foreground">
+                              {new Date(i.redeemed_at).toLocaleDateString()}
+                            </span>
+                          )
                         )}
                       </td>
                       <td className="p-2.5 whitespace-nowrap text-muted-foreground">
