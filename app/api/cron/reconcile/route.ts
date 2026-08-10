@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
         ":since": since,
       },
       ProjectionExpression:
-        "id, firstname, lastname, email, checkout_id, locale, is_vip, created_at",
+        "id, firstname, lastname, email, checkout_id, locale, is_vip, item_type, created_at",
     })
   )
   const registrations = (result.Items || []) as RegistrationRecord[]
@@ -70,9 +70,13 @@ export async function GET(request: NextRequest) {
         if (txn.errorCode === GOLOMT_SUCCESS_CODE) {
           await markRegistrationPaid(registration.id)
           console.log("Reconcile: marked as paid:", registration.id, transactionId)
-          await sendRegistrationEmail(registration, registration.locale).catch(
-            (err) => console.error("Reconcile: confirmation email failed:", err)
-          )
+          // Standalone (form-less) payments carry item_type and have no
+          // registrant behind them — nothing to confirm by email.
+          if (!registration.item_type) {
+            await sendRegistrationEmail(registration, registration.locale).catch(
+              (err) => console.error("Reconcile: confirmation email failed:", err)
+            )
+          }
           paid.push(registration.id)
           break
         }

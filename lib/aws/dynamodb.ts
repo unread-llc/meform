@@ -49,6 +49,10 @@ export interface RegistrationRecord {
   payment_provider?: string
   is_invite?: boolean
   is_vip?: boolean
+  /** Set on non-registration items sharing this table (VIP invites,
+   *  standalone payments). Registrations never carry it — see
+   *  app/api/admin/registrations/route.ts. */
+  item_type?: string
   /** Guest code redeemed for a complimentary registration, for attribution. */
   invite_code?: string
   // VIP only: accompanying spouse of a Young Global Leader ("yes"/"no") and

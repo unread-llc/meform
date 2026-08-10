@@ -53,9 +53,13 @@ export async function POST(request: NextRequest) {
       try {
         await markRegistrationPaid(registration.id)
         console.log("Registration marked as paid via Golomt:", registration.id)
-        await sendRegistrationEmail(registration, registration.locale).catch(
-          (err) => console.error("Failed to send registration email:", err)
-        )
+        // Standalone (form-less) payments carry item_type and have no
+        // registrant behind them — nothing to confirm by email.
+        if (!registration.item_type) {
+          await sendRegistrationEmail(registration, registration.locale).catch(
+            (err) => console.error("Failed to send registration email:", err)
+          )
+        }
       } catch (err: any) {
         if (err.name !== "ConditionalCheckFailedException") {
           throw err
